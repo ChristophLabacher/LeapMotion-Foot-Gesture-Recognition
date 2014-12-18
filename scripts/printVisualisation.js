@@ -25,7 +25,7 @@ function printVisualisation()	{
 
 	// Draw the current position
 	if (leapHandIsSet)	{
-		ctx.fillStyle = 'rgb(255, 0, 0)';
+		ctx.fillStyle = '#ED5565';
 		ctx.beginPath();
 		ctx.arc(dataset.position.x, dataset.position.y, 4, 0, Math.PI*2, false);
 		ctx.fill();

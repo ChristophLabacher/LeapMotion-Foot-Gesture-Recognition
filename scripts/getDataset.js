@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////
-// readData
+// getDataset
 // Read the data from the Hand object and put it into a Dataset
 ////////////////////////////////////////////////////////////////////
 
-function readData()	{
+function getDataset()	{
 	var posX = 0, posY = 0, posZ = 0;
 
 	if (leapHandIsSet)	{

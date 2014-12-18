@@ -17,6 +17,7 @@ var showText = true;
 // General vars
 var frameCount = 0;
 var time = 0;
+var lastFrameTime = 0;
 var width;
 var height;
 
@@ -26,6 +27,13 @@ var datasetPrev;
 var datasetHistory = [];
 var datasetCounter = 0;
 
+// Movements
+var movementX;
+var movementXHistory = [];
+var movementXCounter = 0;
+var movementXNoneCounter = 0;
+
+// Start the rundown
 $(document).ready( function()	{
 	setup();
 	loop();
@@ -48,7 +56,9 @@ function loop()	{
 	getLeapData();
 	
 	// Read the data from the Hand object and put it into a Dataset
-	readData();
+	getDataset();
+	
+	getMovementX();
 
 	// Display the collected information	
 	printVisualisation();
@@ -59,6 +69,8 @@ function loop()	{
 	
 	// When the browser is ready start the new run
 	queue();
+	
+	lastFrameTime = time;
 };
 
 // Setup the canvas
@@ -85,4 +97,4 @@ function queue()	{
 }
 
 // Setup the timer
-setInterval(function () {time++}, 1);
+setInterval(function () {	time += 5	}, 5);
