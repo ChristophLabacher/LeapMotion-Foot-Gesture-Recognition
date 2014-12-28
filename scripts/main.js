@@ -33,6 +33,12 @@ var movementXHistory = [];
 var movementXCounter = 0;
 var movementXNoneCounter = 0;
 
+// Movements
+var movementY;
+var movementYHistory = [];
+var movementYCounter = 0;
+var movementYNoneCounter = 0;
+
 // Start the rundown
 $(document).ready( function()	{
 	setup();
@@ -58,7 +64,9 @@ function loop()	{
 	// Read the data from the Hand object and put it into a Dataset
 	getDataset();
 	
+	// Get the current movement in both dimensions
 	getMovementX();
+	getMovementY();
 
 	// Display the collected information	
 	printVisualisation();

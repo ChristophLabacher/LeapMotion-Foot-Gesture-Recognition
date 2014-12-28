@@ -30,23 +30,41 @@ function printText()	{
 	text.append("<p>length: " + datasetHistory.length + "</p>");
 	text.append("<p>first.time: " + datasetHistory[0].time + "</p>");
 	text.append("<p>last.time: " + datasetHistory[datasetHistory.length - 1].time + "</p>");
-	text.append("<p>difference.time: " + (datasetHistory[datasetHistory.length - 1].time - datasetHistory[0].time)  + "</p>");
+	text.append("<p>time.delta: " + (datasetHistory[datasetHistory.length - 1].time - datasetHistory[0].time)  + "</p>");
 	
-	text.append("<h2>Current Movement</2>");
+	text.append("<h2>Current MovementX</2>");
 	text.append("<p>id: " + movementX.id + "</p>");
 	text.append("<p>direction: " + movementX.direction + "</p>");
 	text.append("<p>distance: " + movementX.distance + "</p>");
 	text.append("<p>duration: " + movementX.duration + "</p>");
 	text.append("<p>velocity: " + movementX.velocity + "</p>");
 
-	var historyLength = movementXHistory.length;
+	var historyXLength = movementXHistory.length;
 
-	if (historyLength > 1)	{
-		text.append("<h2>Last Movement</2>");
-		text.append("<p>id: " + movementXHistory[historyLength - 2].id + "</p>");
-		text.append("<p>direction: " + movementXHistory[historyLength - 2].direction + "</p>");
-		text.append("<p>distance: " + movementXHistory[historyLength - 2].distance + "</p>");
-		text.append("<p>duration: " + movementXHistory[historyLength - 2].duration + "</p>");
-		text.append("<p>velocity: " + movementXHistory[historyLength - 2].velocity + "</p>");	
+	if (historyXLength > 1)	{
+		text.append("<h2>Last MovementX</2>");
+		text.append("<p>id: " + movementXHistory[historyXLength - 2].id + "</p>");
+		text.append("<p>direction: " + movementXHistory[historyXLength - 2].direction + "</p>");
+		text.append("<p>distance: " + movementXHistory[historyXLength - 2].distance + "</p>");
+		text.append("<p>duration: " + movementXHistory[historyXLength - 2].duration + "</p>");
+		text.append("<p>velocity: " + movementXHistory[historyXLength - 2].velocity + "</p>");	
+	}
+	
+	text.append("<h2>Current MovementY</2>");
+	text.append("<p>id: " + movementY.id + "</p>");
+	text.append("<p>direction: " + movementY.direction + "</p>");
+	text.append("<p>distance: " + movementY.distance + "</p>");
+	text.append("<p>duration: " + movementY.duration + "</p>");
+	text.append("<p>velocity: " + movementY.velocity + "</p>");
+
+	var historyYLength = movementYHistory.length;
+
+	if (historyYLength > 1)	{
+		text.append("<h2>Last MovementY</2>");
+		text.append("<p>id: " + movementYHistory[historyYLength - 2].id + "</p>");
+		text.append("<p>direction: " + movementYHistory[historyYLength - 2].direction + "</p>");
+		text.append("<p>distance: " + movementYHistory[historyYLength - 2].distance + "</p>");
+		text.append("<p>duration: " + movementYHistory[historyYLength - 2].duration + "</p>");
+		text.append("<p>velocity: " + movementYHistory[historyYLength - 2].velocity + "</p>");	
 	}
 }
