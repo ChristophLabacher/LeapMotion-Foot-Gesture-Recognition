@@ -1,13 +1,18 @@
+////////////////////////////////////////////////////////////////////
+// MOVEMNET
+// Information about a continius movement within varius Datasets
+////////////////////////////////////////////////////////////////////
+
 function Movement(_id, _direction, _startPosition)	{
 	this.id = _id;
 	this.direction = _direction;
 	
 	this.startTime = time;
-	this.endTime;
+	this.endTime = time;
 	this.duration;
 	
 	this.startPosition = _startPosition;
-	this.endPosition;
+	this.endPosition = _startPosition;
 	this.distance;
 	
 	this.velocity;

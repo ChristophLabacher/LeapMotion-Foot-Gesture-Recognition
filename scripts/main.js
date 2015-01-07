@@ -13,6 +13,14 @@ var visualisationCtx;
 
 // Debugging vars
 var showText = true;
+var showFrames = false;
+var showCurrent = true;
+var showDatasets = false;
+var showCurrentMovementX = true;
+var showLastMovementX = false;
+var showCurrentMovementY = true;
+var showLastMovementY = false;
+var showGesture = true;
 
 // General vars
 var frameCount = 0;
@@ -27,17 +35,22 @@ var datasetPrev;
 var datasetHistory = [];
 var datasetCounter = 0;
 
-// Movements
+// MovementsX
 var movementX;
 var movementXHistory = [];
 var movementXCounter = 0;
 var movementXNoneCounter = 0;
 
-// Movements
+// MovementsY
 var movementY;
 var movementYHistory = [];
 var movementYCounter = 0;
 var movementYNoneCounter = 0;
+
+// Gesutres
+var gesture;
+var gestureHistory = [];
+var gestureCounter = 0;
 
 // Start the rundown
 $(document).ready( function()	{
@@ -67,6 +80,8 @@ function loop()	{
 	// Get the current movement in both dimensions
 	getMovementX();
 	getMovementY();
+	
+	getGesture();
 
 	// Display the collected information	
 	printVisualisation();
