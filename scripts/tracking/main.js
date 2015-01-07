@@ -12,7 +12,7 @@ var visualisation;
 var visualisationCtx;
 
 // Debugging vars
-var showText = true;
+var showText = false;
 var showFrames = false;
 var showCurrent = true;
 var showDatasets = false;
