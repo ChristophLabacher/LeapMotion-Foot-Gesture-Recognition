@@ -16,13 +16,13 @@ $(document).ready(function()	{
 		var w = $(window).width();
 		var l = $(".img-container").offset().left;
 		
-		if (l != (count - 1) * w)	{
+		if (l != (count - 2) * w)	{
 			if (gesture == "swipe right" && leapHandIsSet)	{
 				l -= w;
 				$(".img-container").offset({left: l});			
 			}
 		}
-		if (l != 0)	{
+		if (l > 0)	{
 			if (gesture == "swipe left" && leapHandIsSet)	{
 				l += w;
 				$(".img-container").offset({left: l});			
