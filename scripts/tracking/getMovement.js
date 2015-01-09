@@ -25,6 +25,7 @@ function getMovementX()	{
 				movementXCounter++;
 			// If the last movement had the same direction update it's end
 			} else	{
+				movementX.setEnd(dataset.position.x);
 				movementXHistory[historyLength - 1].setEnd(dataset.position.x);
 			}
 			
@@ -39,6 +40,7 @@ function getMovementX()	{
 		
 		// If the direction of the last movement was none update it's end, too.
 		if (movementXHistory[historyLength - 1] == "none")	{
+			movementX.setEnd(dataset.position.x);
 			movementXHistory[historyLength - 1].setEnd(dataset.position.x);
 		}
 	}
@@ -66,6 +68,7 @@ function getMovementY()	{
 				movementYCounter++;
 			// If the last movment had the same direction update it's end
 			} else	{
+				movementY
 				movementYHistory[historyLength - 1].setEnd(dataset.position.y);
 			}
 			
@@ -79,7 +82,8 @@ function getMovementY()	{
 		
 		// If the direction of the last movement was none update it's end, too.
 		if (movementYHistory[historyLength - 1] == "none")	{
-			movementYHistory[historyLength - 1].setEnd(dataset.position.x);
+			movementY.setEnd(dataset.position.y);
+			movementYHistory[historyLength - 1].setEnd(dataset.position.y);
 		}
 	}
 }
