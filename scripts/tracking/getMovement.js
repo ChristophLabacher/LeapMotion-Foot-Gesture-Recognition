@@ -39,7 +39,7 @@ function getMovementX()	{
 		}
 		
 		// If the direction of the last movement was none update it's end, too.
-		if (movementXHistory[historyLength - 1] == "none")	{
+		if (dataset.movementXDirection == "none")	{
 			movementX.setEnd(dataset.position.x);
 			movementXHistory[historyLength - 1].setEnd(dataset.position.x);
 		}
@@ -81,7 +81,7 @@ function getMovementY()	{
 		}
 		
 		// If the direction of the last movement was none update it's end, too.
-		if (movementYHistory[historyLength - 1] == "none")	{
+		if (dataset.movementYDirection == "none")	{
 			movementY.setEnd(dataset.position.y);
 			movementYHistory[historyLength - 1].setEnd(dataset.position.y);
 		}

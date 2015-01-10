@@ -89,6 +89,7 @@ function printText()	{
 			text.append("<p>direction: " + gesture.gesture + "</p>");
 			text.append("<p>distance: " + gesture.distance + "</p>");
 			text.append("<p>duration: " + gesture.duration + "</p>");
+			text.append("<p>Velocity: " + gesture.velocity + "</p>");
 			text.append("<p>movementIds: " + gesture.movementIds + "</p>");
 		}
 	}

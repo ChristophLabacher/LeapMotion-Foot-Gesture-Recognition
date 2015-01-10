@@ -23,12 +23,13 @@ function getSwipeX()	{
 		if (movementXHistory[movementXHistoryLength - 1].direction == "none" && movementXHistory[movementXHistoryLength - 2].direction == "left" && movementXHistory[movementXHistoryLength - 3].direction == "right" && movementXHistory[movementXHistoryLength - 4].direction == "left")	{
 			
 			// Get the ids of those movements
-			var movementIds = [movementXHistory[movementXHistoryLength - 4].id, movementXHistory[movementXHistoryLength - 3].id, movementXHistory[movementXHistoryLength - 2].id];
+			var movementIds = [movementXHistory[movementXHistoryLength - 4].id, movementXHistory[movementXHistoryLength - 3].id, movementXHistory[movementXHistoryLength - 1].id];
+			var movementVelocities = [movementXHistory[movementXHistoryLength - 4].velocity, movementXHistory[movementXHistoryLength - 3].velocity];
 			
 			// If there has been a gesture before make sure it's not made up by the same movements as this one
 			if ((gesture && movementIds[2] != gesture.movementIds[2]) || historyLength == 0)	{	
 				// Create a new gesture, add it to history and count up.
-				gesture = new Gesture(gestureCounter, "swipe left", movementXHistory[movementXHistoryLength - 4].startTime, movementXHistory[movementXHistoryLength - 1].endTime, movementXHistory[movementXHistoryLength - 4].startPosition, movementXHistory[movementXHistoryLength - 1].endPosition, movementIds)
+				gesture = new Gesture(gestureCounter, "swipe left", movementXHistory[movementXHistoryLength - 4].startTime, movementXHistory[movementXHistoryLength - 1].endTime, movementXHistory[movementXHistoryLength - 4].startPosition, movementXHistory[movementXHistoryLength - 1].endPosition, movementIds, movementVelocities)
 				gestureHistory.push(gesture);			
 				gestureCounter++;
 				
@@ -41,11 +42,12 @@ function getSwipeX()	{
 			
 			// Get the ids of those movements
 			var movementIds = [movementXHistory[movementXHistoryLength - 3].id, movementXHistory[movementXHistoryLength - 2].id, movementXHistory[movementXHistoryLength - 1].id];
+			var movementVelocities = [movementXHistory[movementXHistoryLength - 3].velocity, movementXHistory[movementXHistoryLength - 2].velocity];
 			
 			// If there has been a gesture before make sure it's not made up by the same movements as this one
 			if ((gesture && movementIds[2] != gesture.movementIds[2]) || historyLength == 0)	{	
 				// Create a new gesture, add it to history and count up.
-				gesture = new Gesture(gestureCounter, "swipe right", movementXHistory[movementXHistoryLength - 3].startTime, movementXHistory[movementXHistoryLength - 1].endTime, movementXHistory[movementXHistoryLength - 3].startPosition, movementXHistory[movementXHistoryLength - 1].endPosition, movementIds)
+				gesture = new Gesture(gestureCounter, "swipe right", movementXHistory[movementXHistoryLength - 3].startTime, movementXHistory[movementXHistoryLength - 1].endTime, movementXHistory[movementXHistoryLength - 3].startPosition, movementXHistory[movementXHistoryLength - 1].endPosition, movementIds, movementVelocities)
 				gestureHistory.push(gesture);			
 				gestureCounter++;
 				
@@ -58,12 +60,13 @@ function getSwipeX()	{
 		if (movementXHistory[movementXHistoryLength - 1].direction == "none" && movementXHistory[movementXHistoryLength - 2].direction == "right" && movementXHistory[movementXHistoryLength - 3].direction == "left" && movementXHistory[movementXHistoryLength - 4].direction == "right")	{
 			
 			// Get the ids of those movements
-			var movementIds = [movementXHistory[movementXHistoryLength - 4].id, movementXHistory[movementXHistoryLength - 3].id, movementXHistory[movementXHistoryLength - 2].id];
-			
+			var movementIds = [movementXHistory[movementXHistoryLength - 4].id, movementXHistory[movementXHistoryLength - 3].id, movementXHistory[movementXHistoryLength - 1].id];
+			var movementVelocities = [movementXHistory[movementXHistoryLength - 4].velocity, movementXHistory[movementXHistoryLength - 3].velocity];
+
 			// If there has been a gesture before make sure it's not made up by the same movements as this one
 			if ((gesture && movementIds[2] != gesture.movementIds[2]) || historyLength == 0)	{	
 				// Create a new gesture, add it to history and count up.
-				gesture = new Gesture(gestureCounter, "swipe right", movementXHistory[movementXHistoryLength - 4].startTime, movementXHistory[movementXHistoryLength - 1].endTime, movementXHistory[movementXHistoryLength - 4].startPosition, movementXHistory[movementXHistoryLength - 1].endPosition, movementIds)
+				gesture = new Gesture(gestureCounter, "swipe right", movementXHistory[movementXHistoryLength - 4].startTime, movementXHistory[movementXHistoryLength - 1].endTime, movementXHistory[movementXHistoryLength - 4].startPosition, movementXHistory[movementXHistoryLength - 1].endPosition, movementIds, movementVelocities)
 				gestureHistory.push(gesture);			
 				gestureCounter++;
 				
@@ -75,11 +78,12 @@ function getSwipeX()	{
 			
 			// Get the ids of those movements
 			var movementIds = [movementXHistory[movementXHistoryLength - 3].id, movementXHistory[movementXHistoryLength - 2].id, movementXHistory[movementXHistoryLength - 1].id];
+			var movementVelocities = [movementXHistory[movementXHistoryLength - 3].velocity, movementXHistory[movementXHistoryLength - 2].velocity];
 			
 			// If there has been a gesture before make sure it's not made up by the same movements as this one
 			if ((gesture && movementIds[2] != gesture.movementIds[2]) || historyLength == 0)	{	
 				// Create a new gesture, add it to history and count up.
-				gesture = new Gesture(gestureCounter, "swipe left", movementXHistory[movementXHistoryLength - 3].startTime, movementXHistory[movementXHistoryLength - 1].endTime, movementXHistory[movementXHistoryLength - 3].startPosition, movementXHistory[movementXHistoryLength - 1].endPosition, movementIds)
+				gesture = new Gesture(gestureCounter, "swipe left", movementXHistory[movementXHistoryLength - 3].startTime, movementXHistory[movementXHistoryLength - 1].endTime, movementXHistory[movementXHistoryLength - 3].startPosition, movementXHistory[movementXHistoryLength - 1].endPosition, movementIds, movementVelocities)
 				gestureHistory.push(gesture);			
 				gestureCounter++;
 				
