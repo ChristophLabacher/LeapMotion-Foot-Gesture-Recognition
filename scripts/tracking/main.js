@@ -95,7 +95,7 @@ function loop()	{
 	checkSelection();
 
 	// Display the collected information	
-	printVisualisation();
+	//printVisualisation();
 	printText();
 	
 	

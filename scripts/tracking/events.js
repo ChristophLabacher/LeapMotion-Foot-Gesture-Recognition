@@ -11,10 +11,12 @@ $(document).ready(function()	{
 	}
 	
 
+/*  // disabled the code because of the swipe-before-hover bug
 	$("#gesture").on("gesture", function (e, gesture)	{
 		if (hover == true && gesture == "tap")	{
 			$("#demo").trigger("selectionTap", hoverId);
 		}
 	});
+*/
 
 })

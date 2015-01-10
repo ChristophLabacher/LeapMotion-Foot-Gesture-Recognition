@@ -1,0 +1,56 @@
+.ball{
+    border-radius: 9999em;
+    z-index: 1;
+    background-color: rgba(54, 54, 54, 0.68);
+    width: 50px;
+    height: 50px;
+    display: block;
+    position: absolute;
+    top: -100px;
+    left: -100px;
+}
+
+.slow{
+    transition: top 0.2s, left 0.2s;
+}
+
+.klein{
+    width: 10px;
+    height: 10px;
+}
+
+.word{
+    display: block;
+    position: absolute;
+    padding: 1em 0em;
+    height: 2em;
+    font-weight: 800;
+    text-align: center;
+    z-index: 1;
+    top: 0px;
+    width: 50%;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+.left{
+    left: 0px;
+}
+
+.right{
+    right: 0px;
+}
+
+.word.active{
+    opacity: 1;
+}
+
+.indicator{
+    border-bottom: 1px solid grey;
+    display: block;
+    position: absolute;
+    top: 3.5em;
+    width: 50%;
+    left: 0px;
+    transition: left 0.2s ease-in;
+}
