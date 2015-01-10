@@ -56,6 +56,8 @@ var gestureHistory = [];
 var gestureCounter = 0;
 
 var selectionSize = 0;
+var selectionHeight = 0;
+
 createSelection(4, 270);
 
 // Start the rundown

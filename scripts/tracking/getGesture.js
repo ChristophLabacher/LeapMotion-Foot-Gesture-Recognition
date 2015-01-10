@@ -4,6 +4,7 @@
 ////////////////////////////////////////////////////////////////////
 function getGesture()	{
 	getSwipeX();
+	getTapY();
 }
 
 function triggerEvent(_gesture)	{
@@ -92,5 +93,32 @@ function getSwipeX()	{
 		}
 		
 
+	}
+}
+
+function getTapY()	{
+	var historyLength = gestureHistory.length;
+	var movementYHistoryLength = movementYHistory.length;
+	
+	// If there have been at least 2 different movements
+	if (movementYHistoryLength > 1)	{
+		// If the last movement were down, none
+		if (movementYHistory[movementYHistoryLength - 1].direction == "none" && movementYHistory[movementYHistoryLength - 2].direction == "down")	{
+			// if the veloctiy and disctance of the down movement were big enough
+			if (movementYHistory[movementYHistoryLength - 2].velocity > 0.3 && movementYHistory[movementYHistoryLength - 2].distance > 200)	{
+					var movementIds = [movementYHistory[movementYHistoryLength - 2].id, movementYHistory[movementYHistoryLength - 1].id];
+					var movementVelocities = [movementYHistory[movementYHistoryLength - 2].velocity];
+					
+				// If there has been a gesture before make sure it's not made up by the same movements as this one
+				if ((gesture && movementIds[2] != gesture.movementIds[2]) || historyLength == 0)	{	
+					// Create a new gesture, add it to history and count up.
+					gesture = new Gesture(gestureCounter, "tap", movementYHistory[movementYHistoryLength - 2].startTime, movementYHistory[movementYHistoryLength - 1].endTime, movementYHistory[movementXHistoryLength - 2].startPosition, movementYHistory[movementYHistoryLength - 1].endPosition, movementIds, movementVelocities)
+					gestureHistory.push(gesture);			
+					gestureCounter++;
+				
+					triggerEvent("tap");
+				}
+			}
+		}
 	}
 }

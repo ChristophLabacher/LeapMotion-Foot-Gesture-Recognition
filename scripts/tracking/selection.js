@@ -25,7 +25,10 @@ function checkSelection()	{
 					if (i != (selectionSize/2))	{
 						$("#demo").trigger("selectionHover", [i]);
 						console.log("Hover: " + i);
-					}
+						hover = true; 
+						hoverId = i;
+						
+					} else (hover = false)
 					
 				}
 			}
