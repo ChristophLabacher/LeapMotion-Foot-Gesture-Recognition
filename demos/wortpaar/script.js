@@ -18,7 +18,7 @@ $(document).ready(function()	{
     
     
     
-	
+	//frame should be "hover" — something like "lift your foot to do something"
     $("#demo").on("frame", function (e){
 
         
