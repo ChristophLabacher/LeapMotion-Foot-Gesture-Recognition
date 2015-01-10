@@ -50,10 +50,13 @@ var movementYHistory = [];
 var movementYCounter = 0;
 var movementYNoneCounter = 0;
 
-// Gesutres
+// Gestures
 var gesture;
 var gestureHistory = [];
 var gestureCounter = 0;
+
+var selectionSize = 0;
+createSelection(4, 270);
 
 // Start the rundown
 $(document).ready( function()	{
@@ -86,19 +89,22 @@ function loop()	{
 	
 	// Find gestures in the movements
 	getGesture();
+	
+	checkSelection();
 
 	// Display the collected information	
 	printVisualisation();
 	printText();
 	
-	// Replace the previous dataset with this frames dataset for the next frame
-	datasetPrev = dataset;
 	
 	if (leapHandIsSet)	{
 		$("#demo").trigger("handIsSet");
 	}
 	
-	$("#demo").trigger("frame");
+	$("#demo").trigger("frame");	
+	
+	// Replace the previous dataset with this frames dataset for the next frame
+	datasetPrev = dataset;
 
 	// When the browser is ready start the new run
 	queue();
