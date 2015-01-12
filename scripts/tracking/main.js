@@ -55,8 +55,10 @@ var gesture;
 var gestureHistory = [];
 var gestureCounter = 0;
 
+// Selections
 var selectionSize = 0;
 var selectionHeight = 0;
+var hover = false;
 
 createSelection(4, 270);
 
