@@ -6,7 +6,8 @@ $(document).ready(function()	{
     
     var activeSide;
     //wortpaar: schnellLangsam
-    var wortpaar = "großklein";
+    //          großklein
+    var wortpaar = "lautleise";
 
 
     // Initializing the HTML-Structure
@@ -73,6 +74,18 @@ $(document).ready(function()	{
                     $(".ball").removeClass("klein");
                 }else if(activeSide == "right"){
                     $(".ball").addClass("klein");
+                }
+                break;
+            
+            case "lautleise":
+                $(".ball").removeClass("slow");
+
+                $(".word.left").html("laut");
+                $(".word.right").html("leise");
+                if(activeSide == "left"){
+                    $(".ball").removeClass("laut");
+                }else if(activeSide == "right"){
+                    $(".ball").addClass("laut");
                 }
                 break;
         }
