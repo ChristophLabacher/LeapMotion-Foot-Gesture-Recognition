@@ -1,4 +1,4 @@
-.ball{
+#ball{
     border-radius: 9999em;
     z-index: 1;
     background-color: rgba(54, 54, 54, 0.68);
@@ -11,7 +11,7 @@
 }
 
 .slow{
-    transition: top 0.2s, left 0.2s;
+    transition: transform 4s;
 }
 
 .klein{
@@ -23,7 +23,7 @@
     display: block;
     position: absolute;
     padding: 1em 0em;
-    height: 2em;
+    height: 100vh;
     font-weight: 800;
     text-align: center;
     z-index: 1;
@@ -35,6 +35,7 @@
 
 .left{
     left: 0px;
+    border-right: 1px solid #ccc;
 }
 
 .right{
@@ -45,12 +46,6 @@
     opacity: 1;
 }
 
-.indicator{
-    border-bottom: 1px solid grey;
-    display: block;
-    position: absolute;
-    top: 3.5em;
-    width: 50%;
-    left: 0px;
-    transition: left 0.2s ease-in;
+#text{
+    display: none !important;
 }

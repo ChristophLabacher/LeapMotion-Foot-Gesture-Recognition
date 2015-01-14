@@ -2,7 +2,8 @@ $(document).ready(function()	{
 	width = $(window).width();
 	height = $(window).height();
 	
-	var ballsize = 50;
+	var ballsizeDefault = 50;
+	var ballsizeX, ballsizeY;
     
     var activeSide;
     // wortpaare:
@@ -21,9 +22,8 @@ $(document).ready(function()	{
 
     // Initializing the HTML-Structure
     $("body").append(  
-        "<div class='ball'></div>" + 
-        "<div class='word left'></div><div class='word right'></div>" +
-        "<div class='indicator'></div>"
+        "<div id='ball'></div>" + 
+        "<div class='word left'></div><div class='word right'></div>"
     );
     
     $(document).keyup(function(e) {
@@ -62,20 +62,22 @@ $(document).ready(function()	{
         if(dataset.position.x < width/2){
             $(".word.right").removeClass("active");
             activeSide = "left";
-            $(".indicator").css({"left": "0px"});
             $(".word.left").addClass("active");
         }else{
             $(".word.left").removeClass("active");
             activeSide = "right";
-            $(".indicator").css({"left": width/2 + "px"});
             $(".word.right").addClass("active");
         }
         
-        $(".ball").css({"top":dataset.position.y-ballsize/2 + "px", "left":dataset.position.x-ballsize/2 + "px"});
         
         
-        
-        
+        //these values can be modified in the switchcase wortpaar script
+        var newPositionX = dataset.position.x;
+        var newPositionY = dataset.position.y;        
+
+        var ballsizeX = ballsizeDefault;
+        var ballsizeY = ballsizeDefault;
+
         
         // here the different pairs start
         // ## todo:
@@ -86,46 +88,61 @@ $(document).ready(function()	{
         switch(wortpaar){
             
             case 0:
-                $(".ball").removeClass();
+                $("#ball").removeClass();
 
                 $(".word.left").html("groß");
                 $(".word.right").html("klein");
-                if(activeSide == "left"){
-                    $(".ball").removeClass("klein");
-                }else if(activeSide == "right"){
-                    $(".ball").addClass("klein");
+                
+                if(activeSide == "right"){
+                    ballsizeX = 20;
+                    ballsizeY = 20;
                 }
+                
                 break;
 
 
             case 1:    
-                $(".ball").removeClass();            
+                $("#ball").removeClass();            
             
                 $(".word.left").html("schnell");
                 $(".word.right").html("langsam");
-                if(activeSide == "left"){
-                    $(".ball").removeClass("slow");
-                }else if(activeSide == "right"){
-                    $(".ball").addClass("slow");
+                
+                if(activeSide == "right"){
+                    $("#ball").addClass("slow");
                 }
+                
                 break;
 
             
             case 2:
-                $(".ball").removeClass();
+                $("#ball").removeClass();
 
                 $(".word.left").html("laut");
                 $(".word.right").html("leise");
                 if(activeSide == "left"){
-                    $(".ball").removeClass("laut");
+                    $("#ball").removeClass("laut");
                 }else if(activeSide == "right"){
-                    $(".ball").addClass("laut");
+                    $("#ball").addClass("laut");
                 }
                 break;
         }
 
 
-        
+
+
+
+        //showing the ball - veränderung muss über transform geschehn - prefixed!
+        $("#ball").css({
+            "left" : -ballsizeY/2 + "px",
+            "top" : -ballsizeX/2 + "px",
+            "-webkit-transform" : "translate(" + newPositionX + "px, " + newPositionY + "px)",
+            "transform" : "translate(" + newPositionX + "px, " + newPositionY + "px)",
+            "width" : ballsizeX + "px",
+            "height" : ballsizeY + "px",
+        });
+
+
+        //set the ballsize
         
     });
 
