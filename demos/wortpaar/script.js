@@ -23,6 +23,7 @@ $(document).ready(function()	{
     // Initializing the HTML-Structure
     $("body").append(  
         "<div id='ball'></div>" + 
+        "<div id='indicator'></div>" +
         "<div class='word left'></div><div class='word right'></div>"
     );
     
@@ -77,6 +78,12 @@ $(document).ready(function()	{
 
         var ballsizeX = ballsizeDefault;
         var ballsizeY = ballsizeDefault;
+        
+        $("#indicator").css({
+            "-webkit-transform" : "translate(" + newPositionX + "px, " + newPositionY + "px)",
+            "transform" : "translate(" + newPositionX + "px, " + newPositionY + "px)"
+        });
+        
 
         
         // here the different pairs start
@@ -140,9 +147,8 @@ $(document).ready(function()	{
             "width" : ballsizeX + "px",
             "height" : ballsizeY + "px",
         });
+    
 
-
-        //set the ballsize
         
     });
 

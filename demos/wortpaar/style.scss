@@ -1,7 +1,7 @@
 #ball{
     border-radius: 9999em;
     z-index: 1;
-    background-color: rgba(54, 54, 54, 0.68);
+    background-color:#515151;
     width: 50px;
     height: 50px;
     display: block;
@@ -10,8 +10,20 @@
     left: -100px;
 }
 
+#indicator{
+    border-radius: 99em;
+    z-index: 0;
+    border: 1px solid rgba(54, 54, 54, 0.8);
+    width: 4px;
+    height: 4px;
+    display: block;
+    position: absolute;
+    top: -2px;
+    left: -2px;
+}
+
 .slow{
-    transition: transform 4s;
+    transition: transform 0.3s;
 }
 
 .klein{
@@ -30,21 +42,33 @@
     top: 0px;
     width: 50%;
     opacity: 0.5;
-    transition: opacity 0.2s;
-}
-
-.left{
-    left: 0px;
-    border-right: 1px solid #ccc;
-}
-
-.right{
-    right: 0px;
+    transition: opacity 0.2s, border 0.2s;
 }
 
 .word.active{
     opacity: 1;
 }
+
+
+.left{
+    left: 0px;
+    border-right: 1px solid #f1f1f1;
+}
+
+.left.active{
+    border-right: 1px solid #b2b2b2;
+}
+
+
+.right{
+    right: 0px;
+    border-left: 1px solid #f1f1f1;
+}
+
+.right.active{
+    border-left: 1px solid #b2b2b2;
+}
+
 
 #text{
     display: none !important;
