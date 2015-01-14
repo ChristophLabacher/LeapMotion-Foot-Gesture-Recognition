@@ -5,9 +5,18 @@ $(document).ready(function()	{
 	var ballsize = 50;
     
     var activeSide;
-    //wortpaar: schnellLangsam
-    //          großklein
-    var wortpaar = "lautleise";
+    // wortpaare:
+    // großKlein — 0
+    // schnellLangsam — 1
+    // hektischRuhig — 2
+    // lautLeise — 3
+    // fernNah — 4
+    // weichHart — 5
+    // sandEis — 6
+    
+    
+    var wortpaar = 0;
+    var wortpaarMax = 2;
 
 
     // Initializing the HTML-Structure
@@ -17,7 +26,25 @@ $(document).ready(function()	{
         "<div class='indicator'></div>"
     );
     
-    
+    $(document).keyup(function(e) {
+        if ( event.which == 37 ){ //left
+
+            if(wortpaar==0){
+                wortpaar = wortpaarMax;
+            }else{
+                wortpaar--;
+            }
+
+        }else if (event.which == 39){ //right
+
+            if(wortpaar == wortpaarMax){
+                wortpaar = 0;
+            }else{
+                wortpaar++;
+            }
+
+        }
+    });
     
 	//frame should be "hover" — something like "lift your foot to do something"
     $("#demo").on("frame", function (e){
@@ -53,20 +80,13 @@ $(document).ready(function()	{
         // here the different pairs start
         // ## todo:
         // - how to change between the pairs
+        // eventuell muss man auch die anzeige der ball position da noch reinbringen, damit das dann noch dazu anpassen kann
+    
         
         switch(wortpaar){
-            case "schnellLangsam":
-                $(".word.left").html("schnell");
-                $(".word.right").html("langsam");
-                if(activeSide == "left"){
-                    $(".ball").removeClass("slow");
-                }else if(activeSide == "right"){
-                    $(".ball").addClass("slow");
-                }
-                break;
             
-            case "großklein":
-                $(".ball").removeClass("slow");
+            case 0:
+                $(".ball").removeClass();
 
                 $(".word.left").html("groß");
                 $(".word.right").html("klein");
@@ -76,9 +96,23 @@ $(document).ready(function()	{
                     $(".ball").addClass("klein");
                 }
                 break;
+
+
+            case 1:    
+                $(".ball").removeClass();            
             
-            case "lautleise":
-                $(".ball").removeClass("slow");
+                $(".word.left").html("schnell");
+                $(".word.right").html("langsam");
+                if(activeSide == "left"){
+                    $(".ball").removeClass("slow");
+                }else if(activeSide == "right"){
+                    $(".ball").addClass("slow");
+                }
+                break;
+
+            
+            case 2:
+                $(".ball").removeClass();
 
                 $(".word.left").html("laut");
                 $(".word.right").html("leise");
