@@ -17,7 +17,7 @@ $(document).ready(function()	{
     
     
     var wortpaar = 0;
-    var wortpaarMax = 2;
+    var wortpaarMax = 6;
 
 
     // Initializing the HTML-Structure
@@ -124,12 +124,64 @@ $(document).ready(function()	{
             case 2:
                 $("#ball").removeClass();
 
+                $(".word.left").html("hektisch");
+                $(".word.right").html("ruhig");
+                if(activeSide == "left"){
+                    
+                }else if(activeSide == "right"){
+
+                }
+                break;
+
+            
+            case 3:
+                $("#ball").removeClass();
+
                 $(".word.left").html("laut");
                 $(".word.right").html("leise");
                 if(activeSide == "left"){
                     $("#ball").removeClass("laut");
                 }else if(activeSide == "right"){
                     $("#ball").addClass("laut");
+                }
+                break;
+
+            
+            case 4:
+                $("#ball").removeClass();
+
+                $(".word.left").html("fern");
+                $(".word.right").html("nah");
+                if(activeSide == "left"){
+
+                }else if(activeSide == "right"){
+
+                }
+                break;
+
+            
+            case 5:
+                $("#ball").removeClass();
+
+                $(".word.left").html("weich");
+                $(".word.right").html("hart");
+                if(activeSide == "left"){
+
+                }else if(activeSide == "right"){
+
+                }
+                break;
+
+            
+            case 6:
+                $("#ball").removeClass();
+
+                $(".word.left").html("Sand");
+                $(".word.right").html("Eis");
+                if(activeSide == "left"){
+
+                }else if(activeSide == "right"){
+
                 }
                 break;
         }
