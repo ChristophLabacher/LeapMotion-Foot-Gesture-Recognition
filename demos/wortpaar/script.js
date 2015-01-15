@@ -4,6 +4,8 @@ $(document).ready(function()	{
 	
 	var ballsizeDefault = 50;
 	var ballsizeX, ballsizeY;
+	
+	showGestureVis = false;
     
     var activeSide;
     // wortpaare:
@@ -47,6 +49,10 @@ $(document).ready(function()	{
         }
     });
     
+
+    //variables needed for the visualisations
+
+    
 	//frame should be "hover" — something like "lift your foot to do something"
     $("#demo").on("frame", function (e){
 
@@ -58,9 +64,14 @@ $(document).ready(function()	{
     	} else	{
     		$("#not-tracking").removeClass("active");
     	}
+        // basic-mapping for better usability
+        var newPositionX = map(dataset.position.x, 200, 1200, 0, width);
+        var newPositionY = map(dataset.position.y, 200, 600, 0, height);
 
 
-        if(dataset.position.x < width/2){
+
+        //later choose here which modification should happen with the values - as well as forward and go, etc …
+        if(newPositionX < width/2){
             $(".word.right").removeClass("active");
             activeSide = "left";
             $(".word.left").addClass("active");
@@ -72,9 +83,11 @@ $(document).ready(function()	{
         
         
         
+
+
         //these values can be modified in the switchcase wortpaar script
-        var newPositionX = dataset.position.x;
-        var newPositionY = dataset.position.y;        
+
+
 
         var ballsizeX = ballsizeDefault;
         var ballsizeY = ballsizeDefault;
@@ -103,6 +116,9 @@ $(document).ready(function()	{
                 if(activeSide == "right"){
                     ballsizeX = 20;
                     ballsizeY = 20;
+                }else if(activeSide == "left"){
+                    ballsizeX = 70;
+                    ballsizeY = 70;
                 }
                 
                 break;
@@ -116,6 +132,7 @@ $(document).ready(function()	{
                 
                 if(activeSide == "right"){
                     $("#ball").addClass("slow");
+                    // funktioniert im prinzip, ist jedoch noch ungenau, da css-easings immer neustarten
                 }
                 
                 break;
@@ -126,8 +143,18 @@ $(document).ready(function()	{
 
                 $(".word.left").html("hektisch");
                 $(".word.right").html("ruhig");
+
                 if(activeSide == "left"){
+
+                    var posAdd = Math.random()*10+1;
                     
+                    var plusOrMinus = Math.random() < 0.5 ? -1 : 1;                    
+                    newPositionX += posAdd*plusOrMinus;
+                    
+                    plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+                    newPositionY += posAdd*plusOrMinus;
+                    
+
                 }else if(activeSide == "right"){
 
                 }
@@ -140,9 +167,36 @@ $(document).ready(function()	{
                 $(".word.left").html("laut");
                 $(".word.right").html("leise");
                 if(activeSide == "left"){
-                    $("#ball").removeClass("laut");
+                    var frameCut = Math.random()*30+50; //duration
+                    var addMax = 50; //how much to add
+
+                    var sizeAdd = frameCount % frameCut;                    
+                    if(sizeAdd <= frameCut/2){
+                        sizeAdd = map(sizeAdd, 0, frameCut/2, 0, addMax);
+                    }else{
+                        sizeAdd = map(sizeAdd, frameCut/2+1, frameCut-1, addMax, 0);                        
+                    }
+
+                    
+                    ballsizeX += sizeAdd;
+                    ballsizeY += sizeAdd;
                 }else if(activeSide == "right"){
-                    $("#ball").addClass("laut");
+                    ballsizeX = 20;
+                    ballsizeY = 20;
+
+                    var frameCut = 150; //duration
+                    var addMax = 20; //how much to add
+
+                    var sizeAdd = frameCount % frameCut;                    
+                    if(sizeAdd <= frameCut/2){
+                        sizeAdd = map(sizeAdd, 0, frameCut/2, 0, addMax);
+                    }else{
+                        sizeAdd = map(sizeAdd, frameCut/2+1, frameCut-1, addMax, 0);                        
+                    }
+
+                    
+                    ballsizeX += sizeAdd;
+                    ballsizeY += sizeAdd;
                 }
                 break;
 
