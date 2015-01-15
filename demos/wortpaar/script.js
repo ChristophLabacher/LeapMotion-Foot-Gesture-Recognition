@@ -6,6 +6,7 @@ $(document).ready(function()	{
 	var ballsizeX, ballsizeY;
 	
 	showGestureVis = false;
+	showText = false;
     
     var activeSide;
     // wortpaare:
@@ -20,36 +21,29 @@ $(document).ready(function()	{
     
     var wortpaar = 0;
     var wortpaarMax = 6;
+    
+    
+    var marginOffset = 0;
 
 
     // Initializing the HTML-Structure
     $("body").append(  
         "<div id='ball'></div>" + 
         "<div id='indicator'></div>" +
-        "<div class='word left'></div><div class='word right'></div>"
+        "<div id='wordwrapper'>" + 
+            "<div class='word' id='introduction'>bewege deinen fuß an den rechten rand um zu starten.</div>" + 
+            "<div class='word' id='normal'>normal</div>" + 
+            "<div class='word' id='langsam'>langsam</div>" +
+            "<div class='word' id='nah'>nah</div>" +
+            "<div class='word' id='fern'>fern</div>" +
+            "<div class='word' id='hektisch'>hektisch</div>" +
+            "<div class='word' id='ruhig'>ruhig</div>" +
+            "<div class='word' id='laut'>laut</div>" +
+            "<div class='word' id='leise'>leise</div>" +
+            "<div class='word' id='ende'>ende</div>" + 
+        "</div>"
     );
     
-    $(document).keyup(function(e) {
-        if ( event.which == 37 ){ //left
-
-            if(wortpaar==0){
-                wortpaar = wortpaarMax;
-            }else{
-                wortpaar--;
-            }
-
-        }else if (event.which == 39){ //right
-
-            if(wortpaar == wortpaarMax){
-                wortpaar = 0;
-            }else{
-                wortpaar++;
-            }
-
-        }
-    });
-    
-
     //variables needed for the visualisations
 
     
@@ -64,13 +58,52 @@ $(document).ready(function()	{
     	} else	{
     		$("#not-tracking").removeClass("active");
     	}
+
+
+
+
         // basic-mapping for better usability
-        var newPositionX = map(dataset.position.x, 200, 1200, 0, width);
+        var newPositionX = map(dataset.position.x, 300, 1100, 0, width);
         var newPositionY = map(dataset.position.y, 200, 600, 0, height);
 
 
+        $("#indicator").css({
+            "-webkit-transform" : "translate(" + newPositionX + "px, " + newPositionY + "px)",
+            "transform" : "translate(" + newPositionX + "px, " + newPositionY + "px)"
+        });
 
-        //later choose here which modification should happen with the values - as well as forward and go, etc …
+
+
+        //controls on the right and the left
+        
+        if(newPositionX > width-width/5 && leapHandIsSet){
+    
+    
+            if(newPositionX < width-width/10){
+                marginOffset+= 10;
+            }else{
+                marginOffset+= 20;                
+            }
+
+            
+        }else if(newPositionX < width/5  && leapHandIsSet){
+
+            if(newPositionX < width/10){
+                marginOffset-= 20;
+            }else{
+                marginOffset-= 10;                
+            }
+            if(marginOffset<=0){
+                marginOffset = 0;
+            }
+        }
+
+        $("#introduction").css({"margin-left" : "-" + marginOffset + "px"});
+
+
+
+        //later choose here which modification should happen with the values
+        //needs to be a very long offset-checking stuff
         if(newPositionX < width/2){
             $(".word.right").removeClass("active");
             activeSide = "left";
@@ -92,10 +125,6 @@ $(document).ready(function()	{
         var ballsizeX = ballsizeDefault;
         var ballsizeY = ballsizeDefault;
         
-        $("#indicator").css({
-            "-webkit-transform" : "translate(" + newPositionX + "px, " + newPositionY + "px)",
-            "transform" : "translate(" + newPositionX + "px, " + newPositionY + "px)"
-        });
         
 
         
