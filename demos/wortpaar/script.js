@@ -20,11 +20,9 @@ $(document).ready(function()	{
         "<div id='ball'></div>" + 
         "<div id='indicator'></div>" +
         "<div id='wordwrapper'>" + 
-            "<div class='word' id='introduction'><div class='wordText'>neige deinen fuß zum rechten rand um zu starten.</div></div>" + 
+            "<div class='word' id='introduction'><div class='wordText'>Neige deinen Fuß zum rechten Rand um zu starten.</div></div>" + 
             "<div class='word' id='normal'><div class='wordText'>normal</div></div>" + 
             "<div class='word' id='langsam'><div class='wordText'>langsam</div></div>" +
-            "<div class='word' id='nah'><div class='wordText'>nah</div></div>" +
-            "<div class='word' id='fern'><div class='wordText'>fern</div></div>" +
             "<div class='word' id='hektisch'><div class='wordText'>hektisch</div></div>" +
             "<div class='word' id='ruhig'><div class='wordText'>ruhig</div></div>" +
             "<div class='word' id='laut'><div class='wordText'>laut</div></div>" +
@@ -112,27 +110,13 @@ $(document).ready(function()	{
             $("#normal").addClass("active");
             activeWord = 1;
 
-        }else if(newPositionX < $("#langsam").offset().left+$("#langsam").outerWidth()){
+        }/*
+else if(newPositionX < $("#langsam").offset().left+$("#langsam").outerWidth()){
             if(activeWord != 2){
                 $(".active").removeClass("active");
             }
             $("#langsam").addClass("active");
             activeWord = 2;
-            
-        }else if(newPositionX < $("#nah").offset().left+$("#nah").outerWidth()){
-            if(activeWord != 3){
-                $(".active").removeClass("active");
-            }
-            $("#nah").addClass("active");
-            activeWord = 3;
-            
-        }/*
-else if(newPositionX < $("#fern").offset().left+$("#fern").outerWidth()){
-            if(activeWord != 4){
-                $(".active").removeClass("active");
-            }
-            $("#fern").addClass("active");
-            activeWord = 4;
             
         }
 */else if(newPositionX < $("#hektisch").offset().left+$("#hektisch").outerWidth()){
