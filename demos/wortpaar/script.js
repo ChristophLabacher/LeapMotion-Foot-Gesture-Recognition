@@ -237,18 +237,21 @@ else if(newPositionX < $("#langsam").offset().left+$("#langsam").outerWidth()){
             
             case 6:
                 $("#ball").removeClass();
-                //ruhig ist noch unklar
+                //bei ruhig noch einen damper einbauen
+                //dadurch auch z.B. langsam abdecken
                 break;
 
             
             case 7:
                 $("#ball").removeClass();
 
-                var frameCut = Math.random()*30+50; //duration
-                var addMax = 50; //how much to add
+                var frameCut = 20; //Math.random()*30+50; //duration
+                var addMax = Math.random()*50; //how much to add
 
-                var sizeAdd = frameCount % frameCut;                    
-                if(sizeAdd <= frameCut/2){
+                var sizeAdd = frameCount % frameCut;
+                if(sizeAdd == 0){
+                    console.log("yeah");
+                }else if(sizeAdd <= frameCut/2){
                     sizeAdd = map(sizeAdd, 0, frameCut/2, 0, addMax);
                 }else{
                     sizeAdd = map(sizeAdd, frameCut/2+1, frameCut-1, addMax, 0);                        
@@ -263,11 +266,13 @@ else if(newPositionX < $("#langsam").offset().left+$("#langsam").outerWidth()){
             case 8:
                 $("#ball").removeClass();
 
+                $("#ball").addClass("hiddenOpacity");                
+
                 ballsizeX = 17;
                 ballsizeY = 17;
 
-                var frameCut = Math.random()*100+60; //duration
-                var addMax = 5; //how much to add
+                var frameCut = 10; //duration
+                var addMax = Math.random()*15; //how much to add
 
                 var sizeAdd = frameCount % frameCut;                    
                 if(sizeAdd <= frameCut/2){

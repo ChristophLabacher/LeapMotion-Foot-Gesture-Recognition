@@ -14,6 +14,10 @@ body{
     left: -100px;
 }
 
+#ball.hiddenOpacity{
+    opacity: 0.6;
+}
+
 #indicator{
     border-radius: 99em;
     z-index: 50;
