@@ -4,7 +4,7 @@ body{
 
 #ball{
     border-radius: 9999em;
-    z-index: 1;
+    z-index: 55;
     background-color:#515151;
     width: 50px;
     height: 50px;
@@ -16,7 +16,7 @@ body{
 
 #indicator{
     border-radius: 99em;
-    z-index: 0;
+    z-index: 50;
     border: 1px solid rgba(54, 54, 54, 0.8);
     width: 4px;
     height: 4px;
@@ -24,10 +24,6 @@ body{
     position: absolute;
     top: -2px;
     left: -2px;
-}
-
-.slow{
-    transition: transform 0.3s;
 }
 
 
@@ -49,7 +45,7 @@ body{
     padding: 5em;
     height: 100vh;
     font-weight: 800;
-    z-index: 1;
+    z-index: 15;
     box-sizing: border-box;
     width: 50%;
     opacity: 1;
@@ -60,17 +56,43 @@ body{
 }
 
 .word.active{
-    opacity: 1;
+    background-color: #f3f3f3;
+}
+
+.wordText{
+    display: inline-block;
 }
 
 #introduction{
     width: 80%;
-    background-color: #f3f3f3;
 }
 
+#nah{
+     width: 65%
+ }
+
+#ball.back{
+    z-index: 10;
+}
+#fern.active{
+    z-index: 1;
+}
+
+.thin{
+    margin-bottom: 1em;
+    font-weight: 300;
+    width: 10em; 
+}
+
+.slow{
+    transition: transform 0.3s;
+}
 
 .klein{
     width: 10px;
     height: 10px;
 }
 
+#fern{
+    display: none;
+}

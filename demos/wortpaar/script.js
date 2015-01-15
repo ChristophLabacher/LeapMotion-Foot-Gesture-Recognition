@@ -8,39 +8,28 @@ $(document).ready(function()	{
 	showGestureVis = false;
 	showText = false;
     
-    var activeSide;
-    // wortpaare:
-    // großKlein — 0
-    // schnellLangsam — 1
-    // hektischRuhig — 2
-    // lautLeise — 3
-    // fernNah — 4
-    // weichHart — 5
-    // sandEis — 6
-    
-    
-    var wortpaar = 0;
-    var wortpaarMax = 6;
+    var activeWord;
     
     
     var marginOffset = 0;
 
 
     // Initializing the HTML-Structure
+    //<div class='thin'>hier lernst du ein bisschen die steuerung und die feedbackmöglichkeiten kennen</div>
     $("body").append(  
         "<div id='ball'></div>" + 
         "<div id='indicator'></div>" +
         "<div id='wordwrapper'>" + 
-            "<div class='word' id='introduction'>bewege deinen fuß an den rechten rand um zu starten.</div>" + 
-            "<div class='word' id='normal'>normal</div>" + 
-            "<div class='word' id='langsam'>langsam</div>" +
-            "<div class='word' id='nah'>nah</div>" +
-            "<div class='word' id='fern'>fern</div>" +
-            "<div class='word' id='hektisch'>hektisch</div>" +
-            "<div class='word' id='ruhig'>ruhig</div>" +
-            "<div class='word' id='laut'>laut</div>" +
-            "<div class='word' id='leise'>leise</div>" +
-            "<div class='word' id='ende'>ende</div>" + 
+            "<div class='word' id='introduction'><div class='wordText'>neige deinen fuß zum rechten rand um zu starten.</div></div>" + 
+            "<div class='word' id='normal'><div class='wordText'>normal</div></div>" + 
+            "<div class='word' id='langsam'><div class='wordText'>langsam</div></div>" +
+            "<div class='word' id='nah'><div class='wordText'>nah</div></div>" +
+            "<div class='word' id='fern'><div class='wordText'>fern</div></div>" +
+            "<div class='word' id='hektisch'><div class='wordText'>hektisch</div></div>" +
+            "<div class='word' id='ruhig'><div class='wordText'>ruhig</div></div>" +
+            "<div class='word' id='laut'><div class='wordText'>laut</div></div>" +
+            "<div class='word' id='leise'><div class='wordText'>leise</div></div>" +
+            "<div class='word' id='ende'><div class='wordText'>ende</div></div>" + 
         "</div>"
     );
     
@@ -77,22 +66,26 @@ $(document).ready(function()	{
         //controls on the right and the left
         
         if(newPositionX > width-width/5 && leapHandIsSet){
-    
-    
-            if(newPositionX < width-width/10){
-                marginOffset+= 10;
-            }else{
-                marginOffset+= 20;                
+            
+            if($("#ende").offset().left+$("#ende").outerWidth()-20 > width){
+
+                if(newPositionX > width-width/15){
+                    marginOffset += 40;
+                }else{
+                    marginOffset += map(newPositionX, width-width/5, width, 1, 25);
+                }
+            
             }
 
             
         }else if(newPositionX < width/5  && leapHandIsSet){
-
-            if(newPositionX < width/10){
-                marginOffset-= 20;
+            
+            if(newPositionX < width/15){
+                marginOffset -= 40;
             }else{
-                marginOffset-= 10;                
+                marginOffset -= map(newPositionX, width/5, 0, 1, 30);
             }
+            
             if(marginOffset<=0){
                 marginOffset = 0;
             }
@@ -104,14 +97,79 @@ $(document).ready(function()	{
 
         //later choose here which modification should happen with the values
         //needs to be a very long offset-checking stuff
-        if(newPositionX < width/2){
-            $(".word.right").removeClass("active");
-            activeSide = "left";
-            $(".word.left").addClass("active");
-        }else{
-            $(".word.left").removeClass("active");
-            activeSide = "right";
-            $(".word.right").addClass("active");
+        
+        if(newPositionX < $("#introduction").offset().left+$("#introduction").outerWidth()){
+            if(activeWord != 0){
+                $(".active").removeClass("active");
+            }
+            $("#introduction").addClass("active");
+            activeWord = 0;
+                        
+        }else if(newPositionX < $("#normal").offset().left+$("#normal").outerWidth()){
+            if(activeWord != 1){
+                $(".active").removeClass("active");
+            }
+            $("#normal").addClass("active");
+            activeWord = 1;
+
+        }else if(newPositionX < $("#langsam").offset().left+$("#langsam").outerWidth()){
+            if(activeWord != 2){
+                $(".active").removeClass("active");
+            }
+            $("#langsam").addClass("active");
+            activeWord = 2;
+            
+        }else if(newPositionX < $("#nah").offset().left+$("#nah").outerWidth()){
+            if(activeWord != 3){
+                $(".active").removeClass("active");
+            }
+            $("#nah").addClass("active");
+            activeWord = 3;
+            
+        }/*
+else if(newPositionX < $("#fern").offset().left+$("#fern").outerWidth()){
+            if(activeWord != 4){
+                $(".active").removeClass("active");
+            }
+            $("#fern").addClass("active");
+            activeWord = 4;
+            
+        }
+*/else if(newPositionX < $("#hektisch").offset().left+$("#hektisch").outerWidth()){
+            if(activeWord != 5){
+                $(".active").removeClass("active");
+            }
+            $("#hektisch").addClass("active");
+            activeWord = 5;
+            
+        }else if(newPositionX < $("#ruhig").offset().left+$("#ruhig").outerWidth()){
+            if(activeWord != 6){
+                $(".active").removeClass("active");
+            }
+            $("#ruhig").addClass("active");
+            activeWord = 6;
+            
+        }else if(newPositionX < $("#laut").offset().left+$("#laut").outerWidth()){
+            if(activeWord != 7){
+                $(".active").removeClass("active");
+            }
+            $("#laut").addClass("active");
+            activeWord = 7;
+            
+        }else if(newPositionX < $("#leise").offset().left+$("#leise").outerWidth()){
+            if(activeWord != 8){
+                $(".active").removeClass("active");
+            }
+            $("#leise").addClass("active");
+            activeWord = 8;
+            
+        }else if(newPositionX < $("#ende").offset().left+$("#ende").outerWidth()){
+            if(activeWord != 9){
+                $(".active").removeClass("active");
+            }
+            $("#ende").addClass("active");
+            activeWord = 9;
+                        
         }
         
         
@@ -134,139 +192,123 @@ $(document).ready(function()	{
         // eventuell muss man auch die anzeige der ball position da noch reinbringen, damit das dann noch dazu anpassen kann
     
         
-        switch(wortpaar){
-            
+        switch(activeWord){
             case 0:
                 $("#ball").removeClass();
-
-                $(".word.left").html("groß");
-                $(".word.right").html("klein");
-                
-                if(activeSide == "right"){
-                    ballsizeX = 20;
-                    ballsizeY = 20;
-                }else if(activeSide == "left"){
-                    ballsizeX = 70;
-                    ballsizeY = 70;
-                }
-                
                 break;
-
-
-            case 1:    
-                $("#ball").removeClass();            
             
-                $(".word.left").html("schnell");
-                $(".word.right").html("langsam");
-                
-                if(activeSide == "right"){
-                    $("#ball").addClass("slow");
-                    // funktioniert im prinzip, ist jedoch noch ungenau, da css-easings immer neustarten
-                }
-                
-                break;
-
-            
-            case 2:
+            case 1:
                 $("#ball").removeClass();
-
-                $(".word.left").html("hektisch");
-                $(".word.right").html("ruhig");
-
-                if(activeSide == "left"){
-
-                    var posAdd = Math.random()*10+1;
-                    
-                    var plusOrMinus = Math.random() < 0.5 ? -1 : 1;                    
-                    newPositionX += posAdd*plusOrMinus;
-                    
-                    plusOrMinus = Math.random() < 0.5 ? -1 : 1;
-                    newPositionY += posAdd*plusOrMinus;
-                    
-
-                }else if(activeSide == "right"){
-
+                break;
+            
+            case 2:    
+                if(!$("#ball").hasClass("slow")){
+                    $("#ball").removeClass();
                 }
+
+                $("#ball").addClass("slow");
+                // funktioniert im prinzip, ist jedoch noch ungenau, da css-easings immer neustarten
+                
                 break;
 
-            
             case 3:
                 $("#ball").removeClass();
 
-                $(".word.left").html("laut");
-                $(".word.right").html("leise");
-                if(activeSide == "left"){
-                    var frameCut = Math.random()*30+50; //duration
-                    var addMax = 50; //how much to add
+                ballsizeX = 800;
+                ballsizeY = 800;
 
-                    var sizeAdd = frameCount % frameCut;                    
-                    if(sizeAdd <= frameCut/2){
-                        sizeAdd = map(sizeAdd, 0, frameCut/2, 0, addMax);
-                    }else{
-                        sizeAdd = map(sizeAdd, frameCut/2+1, frameCut-1, addMax, 0);                        
-                    }
+                newPositionX = map(dataset.position.x, 300, 1100, -600, width+600);
+                newPositionY = map(dataset.position.y, 200, 600, 0, height);
 
-                    
-                    ballsizeX += sizeAdd;
-                    ballsizeY += sizeAdd;
-                }else if(activeSide == "right"){
-                    ballsizeX = 20;
-                    ballsizeY = 20;
-
-                    var frameCut = 150; //duration
-                    var addMax = 20; //how much to add
-
-                    var sizeAdd = frameCount % frameCut;                    
-                    if(sizeAdd <= frameCut/2){
-                        sizeAdd = map(sizeAdd, 0, frameCut/2, 0, addMax);
-                    }else{
-                        sizeAdd = map(sizeAdd, frameCut/2+1, frameCut-1, addMax, 0);                        
-                    }
-
-                    
-                    ballsizeX += sizeAdd;
-                    ballsizeY += sizeAdd;
-                }
                 break;
 
-            
+
             case 4:
                 $("#ball").removeClass();
+                $("#ball").addClass("back");
+                ballsizeX = 15; //fern funktioniert irgendwie nicht so gut.
+                ballsizeY = 15;
 
-                $(".word.left").html("fern");
-                $(".word.right").html("nah");
-                if(activeSide == "left"){
+                newPositionX = map(dataset.position.x, 300, 1100, 0+300, width-300);
+                newPositionY = map(dataset.position.y, 200, 600, 400, 500);
 
-                }else if(activeSide == "right"){
-
-                }
                 break;
 
-            
+
+
             case 5:
                 $("#ball").removeClass();
 
-                $(".word.left").html("weich");
-                $(".word.right").html("hart");
-                if(activeSide == "left"){
 
-                }else if(activeSide == "right"){
-
-                }
+                var posAdd = Math.random()*10+1;
+                
+                var plusOrMinus = Math.random() < 0.5 ? -1 : 1;                    
+                newPositionX += posAdd*plusOrMinus;
+                
+                plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+                newPositionY += posAdd*plusOrMinus;
+                    
                 break;
 
             
             case 6:
                 $("#ball").removeClass();
-
-                $(".word.left").html("Sand");
-                $(".word.right").html("Eis");
-                if(activeSide == "left"){
-
-                }else if(activeSide == "right"){
-
-                }
+                //ruhig ist noch unklar
                 break;
+
+            
+            case 7:
+                $("#ball").removeClass();
+
+                var frameCut = Math.random()*30+50; //duration
+                var addMax = 50; //how much to add
+
+                var sizeAdd = frameCount % frameCut;                    
+                if(sizeAdd <= frameCut/2){
+                    sizeAdd = map(sizeAdd, 0, frameCut/2, 0, addMax);
+                }else{
+                    sizeAdd = map(sizeAdd, frameCut/2+1, frameCut-1, addMax, 0);                        
+                }
+
+                
+                ballsizeX += sizeAdd;
+                ballsizeY += sizeAdd;
+
+                break;
+
+            case 8:
+                $("#ball").removeClass();
+
+                ballsizeX = 17;
+                ballsizeY = 17;
+
+                var frameCut = Math.random()*100+60; //duration
+                var addMax = 5; //how much to add
+
+                var sizeAdd = frameCount % frameCut;                    
+                if(sizeAdd <= frameCut/2){
+                    sizeAdd = map(sizeAdd, 0, frameCut/2, 0, addMax);
+                }else{
+                    sizeAdd = map(sizeAdd, frameCut/2+1, frameCut-1, addMax, 0);                        
+                }
+
+                
+                ballsizeX += sizeAdd;
+                ballsizeY += sizeAdd;
+
+                break;
+                
+                
+            case 9:
+                $("#ball").removeClass();
+                
+                
+                
+                ballsizeX = map($("#ende").offset().left+$("#ende").outerWidth()-newPositionX, 200, 40, 50, 0);
+                ballsizeY = map($("#ende").offset().left+$("#ende").outerWidth()-newPositionX, 200, 40, 50, 0);
+
+                break;
+
         }
 
 
