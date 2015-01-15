@@ -52,7 +52,7 @@ $(document).ready(function()	{
 
 
         // basic-mapping for better usability
-        var newPositionX = map(dataset.position.x, 300, 1100, 0, width);
+        var newPositionX = map(dataset.position.x, 400, 1000, 0, width);
         var newPositionY = map(dataset.position.y, 200, 600, 0, height);
 
 
@@ -65,25 +65,25 @@ $(document).ready(function()	{
 
         //controls on the right and the left
         
-        if(newPositionX > width-width/5 && leapHandIsSet){
+        if(newPositionX > width-width/4 && leapHandIsSet){
             
             if($("#ende").offset().left+$("#ende").outerWidth()-20 > width){
 
                 if(newPositionX > width-width/15){
                     marginOffset += 40;
                 }else{
-                    marginOffset += map(newPositionX, width-width/5, width, 1, 25);
+                    marginOffset += map(newPositionX, width-width/4, width, 1, 25);
                 }
             
             }
 
             
-        }else if(newPositionX < width/5  && leapHandIsSet){
+        }else if(newPositionX < width/4  && leapHandIsSet){
             
             if(newPositionX < width/15){
                 marginOffset -= 40;
             }else{
-                marginOffset -= map(newPositionX, width/5, 0, 1, 30);
+                marginOffset -= map(newPositionX, width/4, 0, 1, 30);
             }
             
             if(marginOffset<=0){
@@ -240,7 +240,7 @@ else if(newPositionX < $("#fern").offset().left+$("#fern").outerWidth()){
                 $("#ball").removeClass();
 
 
-                var posAdd = Math.random()*10+1;
+                var posAdd = Math.random()*14+1;
                 
                 var plusOrMinus = Math.random() < 0.5 ? -1 : 1;                    
                 newPositionX += posAdd*plusOrMinus;
