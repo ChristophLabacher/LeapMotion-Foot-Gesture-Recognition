@@ -101,42 +101,17 @@ $(document).ready(function()	{
 
         //TODO: have to do something to make that less code!
         
-        if(newPositionX < $("#introduction").offset().left+$("#introduction").outerWidth()){
-            if(activeWord != 0){
-                $(".active").removeClass("active");
+        $(".word").each(function(){
+            if(newPositionX < $(this).offset().left+$(this).outerWidth() && newPositionX > $(this).offset().left){
+                var newActiveWord = $(this).attr("id");
+                if(activeWord != newActiveWord){
+                    $(".active").removeClass("active");
+                }
+                $(this).addClass("active");
+                activeWord = newActiveWord;
             }
-            $("#introduction").addClass("active");
-            activeWord = 0;
-                        
-        }else if(newPositionX < $("#simpleHover").offset().left+$("#simpleHover").outerWidth()){
-            if(activeWord != 1){
-                $(".active").removeClass("active");
-            }
-            $("#simpleHover").addClass("active");
-            activeWord = 1;
-
-        }else if(newPositionX < $("#highHover").offset().left+$("#highHover").outerWidth()){
-            if(activeWord != 2){
-                $(".active").removeClass("active");
-            }
-            $("#highHover").addClass("active");
-            activeWord = 2;
-            
-        }else if(newPositionX < $("#highHoverHide").offset().left+$("#highHoverHide").outerWidth()){
-            if(activeWord != 3){
-                $(".active").removeClass("active");
-            }
-            $("#highHoverHide").addClass("active");
-            activeWord = 3;
-            
-        }else if(newPositionX < $("#ende").offset().left+$("#ende").outerWidth()){
-            if(activeWord != 4){
-                $(".active").removeClass("active");
-            }
-            $("#ende").addClass("active");
-            activeWord = 4;
-                        
-        }
+        });
+        
         
         
         
@@ -163,7 +138,7 @@ $(document).ready(function()	{
 
 
             
-            case 3:
+            case "highHoverHide":
 
                 if(!$(".active .selection").hasClass("dropDown") && newPositionY < 330){
                     $(".active .selection").addClass("dropDown");
