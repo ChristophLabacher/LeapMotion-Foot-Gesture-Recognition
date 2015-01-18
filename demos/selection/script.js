@@ -20,7 +20,7 @@ $(document).ready(function()	{
         "<div id='ball'></div>" + 
         "<div id='indicator'></div>" +
         "<div id='wordwrapper'>" + 
-            "<div class='word' id='introduction'><div class='wordText'>Neige deinen Fuß zum rechten Rand um zu starten.</div></div>" + 
+            "<div class='word' id='introduction'><div class='wordText'>Erlebe verschiedene Auswahlmöglichkeiten</div></div>" + 
             "<div class='word' id='normal'><div class='wordText'>normal</div></div>" + 
             "<div class='word' id='langsam'><div class='wordText'>langsam</div></div>" +
             "<div class='word' id='hektisch'><div class='wordText'>hektisch</div></div>" +
@@ -50,7 +50,7 @@ $(document).ready(function()	{
 
 
         // basic-mapping for better usability
-        var newPositionX = map(dataset.position.x, 400, 1000, 0, width);
+        var newPositionX = map(dataset.position.x, 475, 925, 0, width);
         var newPositionY = map(dataset.position.y, 200, 600, 0, height);
 
 
