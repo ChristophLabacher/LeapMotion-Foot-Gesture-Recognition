@@ -21,7 +21,7 @@ $(document).ready(function()	{
         "<div id='indicator'></div>" +
         "<div id='wordwrapper'>" + 
             "<div class='word' id='introduction'><div class='wordText'>Erlebe verschiedene Auswahlmöglichkeiten</div></div>" + 
-            "<div class='word' id='normal'><div class='wordText'>normal</div></div>" + 
+            "<div class='word' id='normal'><div class='selection'>1</div><div class='selection'>2</div><div class='selection'>3</div><div class='selection'>4</div></div>" + 
             "<div class='word' id='langsam'><div class='wordText'>langsam</div></div>" +
             "<div class='word' id='hektisch'><div class='wordText'>hektisch</div></div>" +
             "<div class='word' id='ruhig'><div class='wordText'>ruhig</div></div>" +
@@ -89,7 +89,10 @@ $(document).ready(function()	{
             }
         }
 
-        $("#introduction").css({"margin-left" : "-" + marginOffset + "px"});
+        $("#wordwrapper").css({            
+            "-webkit-transform" : "translate(" + -marginOffset + "px, 0px)",
+            "transform" : "translate(" + -marginOffset + "px, 0px)"
+        });
 
 
 

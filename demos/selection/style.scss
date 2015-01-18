@@ -2,6 +2,10 @@ body{
     overflow: hidden;
 }
 
+#not-tracking{
+    z-index: 200;
+}
+
 #ball{
     border-radius: 9999em;
     z-index: 55;
@@ -36,7 +40,7 @@ body{
     top: 0px;
     left: 0px;
     display: block;
-    width: 100%;
+    width: 1000000%;
     height: 100%;
     white-space: nowrap;
     overflow: hidden;
@@ -46,17 +50,26 @@ body{
 .word{
     display: inline-block;
     text-align: left;
+    float: left;
     padding: 5em;
     height: 100vh;
     font-weight: 800;
     z-index: 15;
     box-sizing: border-box;
-    width: 50%;
+    width: 50vw;
     opacity: 1;
     color: #555555;
     background-color: #eeeeee;
     transition: background 0.2s, border 0.2s;
     border-right: 1px solid #ccc;
+}
+
+.word:after{
+    content: ".";
+    clear: both;
+    display: block;
+    visibility: hidden;
+    height: 0px;
 }
 
 .word.active{
@@ -67,8 +80,16 @@ body{
     display: inline-block;
 }
 
+.selection{
+    display: block;
+    width: 25%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+}
+
 #introduction{
-    width: 80%;
+    width: 80vw;
 }
 
 #nah{
