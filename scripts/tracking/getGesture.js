@@ -136,8 +136,8 @@ function getSwipeVel()	{
 		if (movementXHistory[movementXHistoryLength - 1].direction == "left" && movementXHistory[movementXHistoryLength - 1].velocity > .3 && movementXHistory[movementXHistoryLength - 1].distance > 200)	{
 			
 			// Get the ids of those movements
-			var movementIds = [movementXHistory[movementXHistoryLength - 1].id;
-			var movementVelocities = [movementXHistory[movementXHistoryLength - 1].velocity;
+			var movementIds = movementXHistory[movementXHistoryLength - 1].id;
+			var movementVelocities = movementXHistory[movementXHistoryLength - 1].velocity;
 			
 			// If there has been a gesture before make sure it's not made up by the same movements as this one
 			if ((gesture && movementIds[0] != gesture.movementIds[0]) || historyLength == 0)	{	
@@ -154,8 +154,8 @@ function getSwipeVel()	{
 		} else if (movementXHistory[movementXHistoryLength - 1].direction == "right" && movementXHistory[movementXHistoryLength - 1].velocity > .3 && movementXHistory[movementXHistoryLength - 1].distance > 200)	{
 			
 			// Get the ids of those movements
-			var movementIds = [movementXHistory[movementXHistoryLength - 1].id;
-			var movementVelocities = [movementXHistory[movementXHistoryLength - 1].velocity;
+			var movementIds = movementXHistory[movementXHistoryLength - 1].id;
+			var movementVelocities = movementXHistory[movementXHistoryLength - 1].velocity;
 			
 			// If there has been a gesture before make sure it's not made up by the same movements as this one
 			if ((gesture && movementIds[0] != gesture.movementIds[0]) || historyLength == 0)	{	
