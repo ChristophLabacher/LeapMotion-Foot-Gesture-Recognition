@@ -24,8 +24,8 @@ $(document).ready(function()	{
         "<div id='wordwrapper'>" + 
             "<div class='word' id='introduction'><div class='wordText'>Erlebe verschiedene Auswahlmöglichkeiten</div></div>" + 
                 "<div class='word' id='simpleHover'><div class='selection'>1</div><div class='selection'>2</div><div class='selection'>3</div><div class='selection'>4</div></div>" + 
-                "<div class='word' id='highHover'><div class='selection'>1</div><div class='selection'>2</div><div class='selection spacer'>&nbsp;</div><div class='selection'>3</div><div class='selection'>4</div></div>" + 
-                "<div class='word' id='highHoverHide'><div class='selection'>1</div><div class='selection'>2</div><div class='selection spacer'>&nbsp;</div><div class='selection'>3</div><div class='selection'>4</div></div>" + 
+                "<div class='word' id='highHover'><div class='selection'>3</div><div class='selection'>1</div><div class='selection spacer'>&nbsp;</div><div class='selection'>2</div><div class='selection'>4</div></div>" + 
+                "<div class='word' id='highHoverHide'><div class='selection'>3</div><div class='selection'>1</div><div class='selection spacer'>&nbsp;</div><div class='selection'>2</div><div class='selection'>4</div></div>" + 
             "<div class='word' id='ende'><div class='wordText'>ende</div></div>" + 
         "</div>"
     );
@@ -67,7 +67,7 @@ $(document).ready(function()	{
             if($("#ende").offset().left+$("#ende").outerWidth()-20 > width){
 
                 if(newPositionX > width-width/15){
-                    marginOffset += 40;
+                    marginOffset += 25;
                 }else{
                     marginOffset += map(newPositionX, width-width/4, width, 1, 25);
                 }
@@ -78,7 +78,7 @@ $(document).ready(function()	{
         }else if(newPositionX < width/4  && leapHandIsSet){
             
             if(newPositionX < width/15){
-                marginOffset -= 40;
+                marginOffset -= 25;
             }else{
                 marginOffset -= map(newPositionX, width/4, 0, 1, 30);
             }
@@ -191,7 +191,7 @@ $(document).ready(function()	{
         });
         
         if(!anywhere){
-            $(".mouseOver").removeClass("mouseOver");            
+            //$(".mouseOver").removeClass("mouseOver");            
         }
 
 
