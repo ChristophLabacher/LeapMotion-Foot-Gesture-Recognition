@@ -1,3 +1,5 @@
+var newPositionX, newPositionY;
+
 $(document).ready(function()	{
 	width = $(window).width();
 	height = $(window).height();
@@ -21,9 +23,9 @@ $(document).ready(function()	{
         "<div id='indicator'></div>" +
         "<div id='wordwrapper'>" + 
             "<div class='word' id='introduction'><div class='wordText'>Erlebe verschiedene Auswahlmöglichkeiten</div></div>" + 
-            "<div class='word' id='normal'><div class='selection'>1</div><div class='selection'>2</div><div class='selection'>3</div><div class='selection'>4</div></div>" + 
-            "<div class='word' id='langsam'><div class='wordText'>langsam</div></div>" +
-            "<div class='word' id='hektisch'><div class='wordText'>hektisch</div></div>" +
+                "<div class='word' id='simpleHover'><div class='selection'>1</div><div class='selection'>2</div><div class='selection'>3</div><div class='selection'>4</div></div>" + 
+                "<div class='word' id='highHover'><div class='selection'>1</div><div class='selection'>2</div><div class='selection spacer'>&nbsp;</div><div class='selection'>3</div><div class='selection'>4</div></div>" + 
+                "<div class='word' id='highHoverHide'><div class='selection'>1</div><div class='selection'>2</div><div class='selection spacer'>&nbsp;</div><div class='selection'>3</div><div class='selection'>4</div></div>" + 
             "<div class='word' id='ruhig'><div class='wordText'>ruhig</div></div>" +
             "<div class='word' id='laut'><div class='wordText'>laut</div></div>" +
             "<div class='word' id='leise'><div class='wordText'>leise</div></div>" +
@@ -50,8 +52,8 @@ $(document).ready(function()	{
 
 
         // basic-mapping for better usability
-        var newPositionX = map(dataset.position.x, 475, 925, 0, width);
-        var newPositionY = map(dataset.position.y, 200, 600, 0, height);
+        newPositionX = map(dataset.position.x, 475, 925, 0, width);
+        newPositionY = map(dataset.position.y, 200, 600, 0, height);
 
 
         $("#indicator").css({
@@ -98,6 +100,9 @@ $(document).ready(function()	{
 
         //later choose here which modification should happen with the values
         //needs to be a very long offset-checking stuff
+
+
+        //TODO: have to do something to make that less code!
         
         if(newPositionX < $("#introduction").offset().left+$("#introduction").outerWidth()){
             if(activeWord != 0){
@@ -106,34 +111,25 @@ $(document).ready(function()	{
             $("#introduction").addClass("active");
             activeWord = 0;
                         
-        }else if(newPositionX < $("#normal").offset().left+$("#normal").outerWidth()){
+        }else if(newPositionX < $("#simpleHover").offset().left+$("#simpleHover").outerWidth()){
             if(activeWord != 1){
                 $(".active").removeClass("active");
             }
-            $("#normal").addClass("active");
+            $("#simpleHover").addClass("active");
             activeWord = 1;
 
-        }/*
-else if(newPositionX < $("#langsam").offset().left+$("#langsam").outerWidth()){
-            if(activeWord != 2){
-                $(".active").removeClass("active");
-            }
-            $("#langsam").addClass("active");
-            activeWord = 2;
-            
-        }
-*/else if(newPositionX < $("#hektisch").offset().left+$("#hektisch").outerWidth()){
+        }else if(newPositionX < $("#highHover").offset().left+$("#highHover").outerWidth()){
             if(activeWord != 5){
                 $(".active").removeClass("active");
             }
-            $("#hektisch").addClass("active");
+            $("#highHover").addClass("active");
             activeWord = 5;
             
-        }else if(newPositionX < $("#ruhig").offset().left+$("#ruhig").outerWidth()){
+        }else if(newPositionX < $("#highHoverHide").offset().left+$("#highHoverHide").outerWidth()){
             if(activeWord != 6){
                 $(".active").removeClass("active");
             }
-            $("#ruhig").addClass("active");
+            $("#highHoverHide").addClass("active");
             activeWord = 6;
             
         }else if(newPositionX < $("#laut").offset().left+$("#laut").outerWidth()){
@@ -171,6 +167,7 @@ else if(newPositionX < $("#langsam").offset().left+$("#langsam").outerWidth()){
         var ballsizeY = ballsizeDefault;
         
         
+        
 
         
         // here the different pairs start
@@ -189,59 +186,33 @@ else if(newPositionX < $("#langsam").offset().left+$("#langsam").outerWidth()){
                 break;
             
             case 2:    
-                if(!$("#ball").hasClass("slow")){
-                    $("#ball").removeClass();
-                }
-
-                $("#ball").addClass("slow");
-                // funktioniert im prinzip, ist jedoch noch ungenau, da css-easings immer neustarten
-                
+                $("#ball").removeClass();
                 break;
 
             case 3:
                 $("#ball").removeClass();
-
-                ballsizeX = 800;
-                ballsizeY = 800;
-
-                newPositionX = map(dataset.position.x, 300, 1100, -600, width+600);
-                newPositionY = map(dataset.position.y, 200, 600, 0, height);
-
                 break;
 
 
             case 4:
                 $("#ball").removeClass();
-                $("#ball").addClass("back");
-                ballsizeX = 15; //fern funktioniert irgendwie nicht so gut.
-                ballsizeY = 15;
-
-                newPositionX = map(dataset.position.x, 300, 1100, 0+300, width-300);
-                newPositionY = map(dataset.position.y, 200, 600, 400, 500);
-
                 break;
-
 
 
             case 5:
                 $("#ball").removeClass();
-
-
-                var posAdd = Math.random()*14+1;
-                
-                var plusOrMinus = Math.random() < 0.5 ? -1 : 1;                    
-                newPositionX += posAdd*plusOrMinus;
-                
-                plusOrMinus = Math.random() < 0.5 ? -1 : 1;
-                newPositionY += posAdd*plusOrMinus;
-                    
                 break;
 
             
             case 6:
-                $("#ball").removeClass();
-                //bei ruhig noch einen damper einbauen
-                //dadurch auch z.B. langsam abdecken
+
+                if(!$(".active .selection").hasClass("dropDown") && newPositionY < 330){
+                    $(".active .selection").addClass("dropDown");
+                }else if($(".active .selection").hasClass("dropDown") && newPositionY > 450){
+                    $(".active .selection").removeClass("dropDown");
+                }
+                
+
                 break;
 
             
@@ -303,10 +274,6 @@ else if(newPositionX < $("#langsam").offset().left+$("#langsam").outerWidth()){
 
         }
 
-
-
-
-
         //showing the ball - veränderung muss über transform geschehn - prefixed!
         $("#ball").css({
             "left" : -ballsizeY/2 + "px",
@@ -318,9 +285,36 @@ else if(newPositionX < $("#langsam").offset().left+$("#langsam").outerWidth()){
         });
     
 
+
+        var anyone = false;
+        
+        $(".active .selection").each(function( index ) {
+
+        
+            var borders = $(this).offset();
+            var thisWidth = $(this).outerWidth();
+            var thisHeight = $(this).outerHeight();
+
+            if(newPositionX > borders.left && newPositionX < borders.left+thisWidth && newPositionY > borders.top && newPositionY < borders.top+thisHeight){
+                if(!$(this).hasClass("mouseOver")){
+                    $(".active .mouseOver").removeClass("mouseOver");
+                    $(this).addClass("mouseOver");
+                }
+                
+                anyone = true;                
+            }
+            
+            
+        });
+        
+        if(!anyone){
+            $(".mouseOver").removeClass("mouseOver");            
+        }
+
+
+
         
     });
-
 
 	
 /*
@@ -343,3 +337,19 @@ else if(newPositionX < $("#langsam").offset().left+$("#langsam").outerWidth()){
 	})
 */
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

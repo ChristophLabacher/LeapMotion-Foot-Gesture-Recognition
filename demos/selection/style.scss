@@ -80,16 +80,47 @@ body{
     display: inline-block;
 }
 
-.selection{
-    display: block;
-    width: 25%;
-    height: 100%;
-    position: absolute;
-    top: 0px;
+#simpleHover{
+    width: 80vw;
 }
 
-#introduction{
+.selection{
+    display: inline-block;
+    width: 25%;
+    height: 100%;
+    padding-top: 3em;
+    text-align: center;
+    border-bottom: 1px solid #b3b3b3;
+    transition: background 0.1s;
+}
+
+.selection.mouseOver{
+    background-color: #b3b3b3;
+}
+
+.spacer{
+    border-bottom: none;
+    background-color: transparent !important;
+}
+
+#introduction, #highHover, #highHoverHide{
     width: 80vw;
+}
+
+#highHover .selection{
+    width: 20%;
+    height: 55%;
+}
+
+#highHoverHide .selection{
+    width: 20%;
+    height: 55%;
+    transform: translate(0px, -300px);
+    transition: transform 0.2s cubic-bezier(.97,.45,.91,1.5);
+}
+
+#highHoverHide .selection.dropDown{
+    transform: translate(0px, 0px);
 }
 
 #nah{
