@@ -12,7 +12,7 @@ function Movement(_id, _direction, _startPosition)	{
 	this.duration;
 	
 	this.startPosition = _startPosition;
-	this.endPosition = _startPosition;
+	this.endPosition = _startPosition + 1;
 	this.distance;
 	
 	this.velocity;
@@ -24,7 +24,7 @@ function Movement(_id, _direction, _startPosition)	{
 
 Movement.prototype.setEnd = function(_endPosition)	{
 	this.endTime = time;
-	this.endPositon = _endPosition;
+	this.endPosition = _endPosition;
 			
 	this.setDuration();
 	this.setDistance();
@@ -36,10 +36,9 @@ Movement.prototype.setDuration = function()	{
 }
 
 Movement.prototype.setDistance = function()	{
-	this.distance = Math.abs(this.endPositon - this.startPosition);
+	this.distance = Math.abs(this.endPosition - this.startPosition);
 }
 
 Movement.prototype.setVelocity= function()	{
 	this.velocity = this.distance / this.duration;
-	this.velocity = Math.round(this.velocity * 100) / 100;
 }

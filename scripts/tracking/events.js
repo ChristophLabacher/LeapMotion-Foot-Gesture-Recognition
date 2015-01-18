@@ -10,4 +10,10 @@ $(document).ready(function()	{
 			}, 500);
 		});
 	}
+	
+	$("#gesture").on("gesture", function (e, gesture)	{
+		if (hover == true && gesture == "tap")	{
+			$("#demo").trigger("selectionTap", hoverId);
+		}
+	});
 })

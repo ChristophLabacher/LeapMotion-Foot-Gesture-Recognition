@@ -12,14 +12,14 @@ var visualisation;
 var visualisationCtx;
 
 // Debugging vars
-var showText = false;
+var showText = true;
 
 var showFrames = false;
 var showCurrent = true;
 var showDatasets = true;
 var showCurrentMovementX = true;
-var showLastMovementX = false;
-var showCurrentMovementY = true;
+var showLastMovementX = true;
+var showCurrentMovementY = false;
 var showLastMovementY = false;
 var showGesture = true;
 
@@ -50,10 +50,17 @@ var movementYHistory = [];
 var movementYCounter = 0;
 var movementYNoneCounter = 0;
 
-// Gesutres
+// Gestures
 var gesture;
 var gestureHistory = [];
 var gestureCounter = 0;
+
+// Selections
+var selectionSize = 0;
+var selectionHeight = 0;
+var hover = false;
+
+createSelection(4, 270);
 
 // Start the rundown
 $(document).ready( function()	{
@@ -86,19 +93,22 @@ function loop()	{
 	
 	// Find gestures in the movements
 	getGesture();
+	
+	checkSelection();
 
 	// Display the collected information	
 	printVisualisation();
 	printText();
 	
-	// Replace the previous dataset with this frames dataset for the next frame
-	datasetPrev = dataset;
 	
 	if (leapHandIsSet)	{
 		$("#demo").trigger("handIsSet");
 	}
 	
-	$("#demo").trigger("frame");
+	$("#demo").trigger("frame");	
+	
+	// Replace the previous dataset with this frames dataset for the next frame
+	datasetPrev = dataset;
 
 	// When the browser is ready start the new run
 	queue();
