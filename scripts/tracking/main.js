@@ -18,8 +18,8 @@ var showFrames = false;
 var showCurrent = true;
 var showDatasets = true;
 var showCurrentMovementX = true;
-var showLastMovementX = false;
-var showCurrentMovementY = true;
+var showLastMovementX = true;
+var showCurrentMovementY = false;
 var showLastMovementY = false;
 var showGesture = true;
 
