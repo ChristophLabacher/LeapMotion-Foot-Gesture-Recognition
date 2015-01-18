@@ -26,9 +26,6 @@ $(document).ready(function()	{
                 "<div class='word' id='simpleHover'><div class='selection'>1</div><div class='selection'>2</div><div class='selection'>3</div><div class='selection'>4</div></div>" + 
                 "<div class='word' id='highHover'><div class='selection'>1</div><div class='selection'>2</div><div class='selection spacer'>&nbsp;</div><div class='selection'>3</div><div class='selection'>4</div></div>" + 
                 "<div class='word' id='highHoverHide'><div class='selection'>1</div><div class='selection'>2</div><div class='selection spacer'>&nbsp;</div><div class='selection'>3</div><div class='selection'>4</div></div>" + 
-            "<div class='word' id='ruhig'><div class='wordText'>ruhig</div></div>" +
-            "<div class='word' id='laut'><div class='wordText'>laut</div></div>" +
-            "<div class='word' id='leise'><div class='wordText'>leise</div></div>" +
             "<div class='word' id='ende'><div class='wordText'>ende</div></div>" + 
         "</div>"
     );
@@ -119,39 +116,25 @@ $(document).ready(function()	{
             activeWord = 1;
 
         }else if(newPositionX < $("#highHover").offset().left+$("#highHover").outerWidth()){
-            if(activeWord != 5){
+            if(activeWord != 2){
                 $(".active").removeClass("active");
             }
             $("#highHover").addClass("active");
-            activeWord = 5;
+            activeWord = 2;
             
         }else if(newPositionX < $("#highHoverHide").offset().left+$("#highHoverHide").outerWidth()){
-            if(activeWord != 6){
+            if(activeWord != 3){
                 $(".active").removeClass("active");
             }
             $("#highHoverHide").addClass("active");
-            activeWord = 6;
-            
-        }else if(newPositionX < $("#laut").offset().left+$("#laut").outerWidth()){
-            if(activeWord != 7){
-                $(".active").removeClass("active");
-            }
-            $("#laut").addClass("active");
-            activeWord = 7;
-            
-        }else if(newPositionX < $("#leise").offset().left+$("#leise").outerWidth()){
-            if(activeWord != 8){
-                $(".active").removeClass("active");
-            }
-            $("#leise").addClass("active");
-            activeWord = 8;
+            activeWord = 3;
             
         }else if(newPositionX < $("#ende").offset().left+$("#ende").outerWidth()){
-            if(activeWord != 9){
+            if(activeWord != 4){
                 $(".active").removeClass("active");
             }
             $("#ende").addClass("active");
-            activeWord = 9;
+            activeWord = 4;
                         
         }
         
@@ -177,34 +160,10 @@ $(document).ready(function()	{
     
         
         switch(activeWord){
-            case 0:
-                $("#ball").removeClass();
-                break;
-            
-            case 1:
-                $("#ball").removeClass();
-                break;
-            
-            case 2:    
-                $("#ball").removeClass();
-                break;
 
+
+            
             case 3:
-                $("#ball").removeClass();
-                break;
-
-
-            case 4:
-                $("#ball").removeClass();
-                break;
-
-
-            case 5:
-                $("#ball").removeClass();
-                break;
-
-            
-            case 6:
 
                 if(!$(".active .selection").hasClass("dropDown") && newPositionY < 330){
                     $(".active .selection").addClass("dropDown");
@@ -216,61 +175,6 @@ $(document).ready(function()	{
                 break;
 
             
-            case 7:
-                $("#ball").removeClass();
-
-                var frameCut = 20; //Math.random()*30+50; //duration
-                var addMax = Math.random()*50; //how much to add
-
-                var sizeAdd = frameCount % frameCut;
-                if(sizeAdd == 0){
-                    console.log("yeah");
-                }else if(sizeAdd <= frameCut/2){
-                    sizeAdd = map(sizeAdd, 0, frameCut/2, 0, addMax);
-                }else{
-                    sizeAdd = map(sizeAdd, frameCut/2+1, frameCut-1, addMax, 0);                        
-                }
-
-                
-                ballsizeX += sizeAdd;
-                ballsizeY += sizeAdd;
-
-                break;
-
-            case 8:
-                $("#ball").removeClass();
-
-                $("#ball").addClass("hiddenOpacity");                
-
-                ballsizeX = 17;
-                ballsizeY = 17;
-
-                var frameCut = 10; //duration
-                var addMax = Math.random()*15; //how much to add
-
-                var sizeAdd = frameCount % frameCut;                    
-                if(sizeAdd <= frameCut/2){
-                    sizeAdd = map(sizeAdd, 0, frameCut/2, 0, addMax);
-                }else{
-                    sizeAdd = map(sizeAdd, frameCut/2+1, frameCut-1, addMax, 0);                        
-                }
-
-                
-                ballsizeX += sizeAdd;
-                ballsizeY += sizeAdd;
-
-                break;
-                
-                
-            case 9:
-                $("#ball").removeClass();
-                
-                
-                
-                ballsizeX = map($("#ende").offset().left+$("#ende").outerWidth()-newPositionX, 200, 40, 50, 0);
-                ballsizeY = map($("#ende").offset().left+$("#ende").outerWidth()-newPositionX, 200, 40, 50, 0);
-
-                break;
 
         }
 
@@ -286,7 +190,11 @@ $(document).ready(function()	{
     
 
 
-        var anyone = false;
+        var anywhere = false;
+        //anywhere trackt ob es noch irgendwo draufliegt
+        //müsste ein exit feuern und dann überprüfen ob es von oben nach unten durchging, und nicht irgendwo an der seite raus.
+        // >> wenn es dann unten raus ist muss dieses dann aktiviert werden.
+        //dazu muss dann aber auch die animationen passen.
         
         $(".active .selection").each(function( index ) {
 
@@ -301,13 +209,13 @@ $(document).ready(function()	{
                     $(this).addClass("mouseOver");
                 }
                 
-                anyone = true;                
+                anywhere = true;                
             }
             
             
         });
         
-        if(!anyone){
+        if(!anywhere){
             $(".mouseOver").removeClass("mouseOver");            
         }
 
