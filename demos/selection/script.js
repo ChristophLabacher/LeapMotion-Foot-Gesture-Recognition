@@ -1,10 +1,11 @@
-var newPositionX, newPositionY;
+var newPositionX, newPositionY; //they are globally declared, each frame set to the x and y pos of the leapMotion and then maybe manipulated to create the effects (dont know if I will use them in the selection-banner script. 
+
 
 $(document).ready(function()	{
 	width = $(window).width();
 	height = $(window).height();
 	
-	var ballsizeDefault = 50;
+	var ballsizeDefault = 10;
 	var ballsizeX, ballsizeY;
 	
 	showGestureVis = false;
@@ -16,6 +17,10 @@ $(document).ready(function()	{
     var marginOffset = 0;
 
 
+    var translateCount = 0;
+    //um zu zählen wie viele pixel das schon runtergeschoben wurde
+
+
     // Initializing the HTML-Structure
     //<div class='thin'>hier lernst du ein bisschen die steuerung und die feedbackmöglichkeiten kennen</div>
     $("body").append(  
@@ -24,9 +29,8 @@ $(document).ready(function()	{
         "<div id='wordwrapper'>" + 
             "<div class='word' id='introduction'><div class='wordText'>Erlebe verschiedene Auswahlmöglichkeiten</div></div>" + 
                 "<div class='word' id='simpleHover'><div class='selection'>1</div><div class='selection'>2</div><div class='selection'>3</div><div class='selection'>4</div></div>" + 
-                "<div class='word' id='highHover'><div class='selection'>3</div><div class='selection'>1</div><div class='selection spacer'>&nbsp;</div><div class='selection'>2</div><div class='selection'>4</div></div>" + 
-                "<div class='word' id='highHoverHide'><div class='selection'>3</div><div class='selection'>1</div><div class='selection spacer'>&nbsp;</div><div class='selection'>2</div><div class='selection'>4</div></div>" + 
-            "<div class='word' id='ende'><div class='wordText'>ende</div></div>" + 
+                "<div class='word' id='highHover'><div class='selectionWrapper switchTrigger'><div class='selection switchTrigger'>3</div><div class='selection switchTrigger'>1</div><div class='selection spacer'>&nbsp;</div><div class='selection switchTrigger'>2</div><div class='selection switchTrigger'>4</div></div></div>" +                 "<div class='word' id='highHoverHide'><div class='selectionWrapper switchTrigger'><div class='selection switchTrigger'>3</div><div class='selection switchTrigger'>1</div><div class='selection spacer'>&nbsp;</div><div class='selection switchTrigger'>2</div><div class='selection switchTrigger'>4</div></div></div>" + 
+            "<div class='word' id='ende'><div class='wordText'>ende</div></div></div>" + 
         "</div>"
     );
     
@@ -99,7 +103,6 @@ $(document).ready(function()	{
         //needs to be a very long offset-checking stuff
 
 
-        //TODO: have to do something to make that less code!
         
         $(".word").each(function(){
             if(newPositionX < $(this).offset().left+$(this).outerWidth() && newPositionX > $(this).offset().left){
@@ -117,7 +120,7 @@ $(document).ready(function()	{
         
 
 
-        //these values can be modified in the switchcase wortpaar script
+        //these values can be modified in the switchcase activeWord script
 
 
 
@@ -135,21 +138,17 @@ $(document).ready(function()	{
     
         
         switch(activeWord){
-
-
             
             case "highHoverHide":
 
-                if(!$(".active .selection").hasClass("dropDown") && newPositionY < 330){
-                    $(".active .selection").addClass("dropDown");
-                }else if($(".active .selection").hasClass("dropDown") && newPositionY > 450){
-                    $(".active .selection").removeClass("dropDown");
+                if(!$(".active .selectionWrapper").hasClass("dropDown") && newPositionY < 330){
+                    $(".active .selectionWrapper").addClass("dropDown");
+                }else if($(".active .selectionWrapper").hasClass("dropDown") && newPositionY > 450){
+                    $(".active .selectionWrapper").removeClass("dropDown");
                 }
                 
 
                 break;
-
-            
 
         }
 
@@ -167,9 +166,10 @@ $(document).ready(function()	{
 
         var anywhere = false;
         //anywhere trackt ob es noch irgendwo draufliegt
-        //müsste ein exit feuern und dann überprüfen ob es von oben nach unten durchging, und nicht irgendwo an der seite raus.
-        // >> wenn es dann unten raus ist muss dieses dann aktiviert werden.
-        //dazu muss dann aber auch die animationen passen.
+
+        var correctEnter = false;
+        //correctEnter ist dazu da, um zu checken, dass man von oben ziehen will und nicht das man von unten gerade reingeht
+
         
         $(".active .selection").each(function( index ) {
 
@@ -179,53 +179,108 @@ $(document).ready(function()	{
             var thisHeight = $(this).outerHeight();
 
             if(newPositionX > borders.left && newPositionX < borders.left+thisWidth && newPositionY > borders.top && newPositionY < borders.top+thisHeight){
+                // this checks if the leapCoordinates are inside the selection
+
                 if(!$(this).hasClass("mouseOver")){
                     $(".active .mouseOver").removeClass("mouseOver");
                     $(this).addClass("mouseOver");
+                    translateCount = 0;
+                }
+                anywhere = true;
+                
+                
+                
+                // somehow I have to create a function that checks it in the correct order
+                // I somewhere need to start a function that triggers the "now it is able to enter correctly"
+                // it has to come down from the top
+                // enter the second stage
+                
+                var distanceFromBottom = getDistanceFromBottom($(this));
+                
+                if($(this).hasClass("switchTrigger") && distanceFromBottom != false){
+                    //switchTrigger are the classes that have the possibility to be pulled down and toggled
+                    
+                    if(distanceFromBottom > 10){
+                        $(this).addClass("enteredCorrectly");
+                    }
+                    
+                    if(distanceFromBottom <= 10){
+                        $(this).addClass("activatedHold");                        
+                    }
+                    
                 }
                 
-                anywhere = true;                
+                
+
+/*
+                if(activeWord == "highHover" || activeWord == "highHoverHide" && !$(this).hasClass("spacer")){
+
+                    if(newPositionY - ballsizeDefault+10 < borders.top+thisHeight){
+                        correctEnter = true;
+                        $(this).addClass("activatedHold");
+                        $(this).removeClass("activated");
+                    }
+
+                    if(newPositionY + ballsizeDefault+10 > borders.top+thisHeight && correctEnter && translateCount < 30){
+                        console.log(translateCount);
+                        translateCount++;
+                        $(this).css({"transform" : "translate(0px, " + translateCount + "px)", "-webkit-transform" : "translate(0px, " + translateCount + "px)", });
+                    }
+                    
+                    if(translateCount>=30){
+                        $(this).toggleClass("activated");
+                        //sinnvolle animationen!! #todo
+                    }
+
+                }
+*/
+
+                
             }
             
             
         });
         
         if(!anywhere){
-            //$(".mouseOver").removeClass("mouseOver");            
+            $("#simpleHover .mouseOver").removeClass("mouseOver");       
+            
+            // check if there is an element with entercorrectly and then if getDistance to that has a negativeValue (that means under the border)
+            // then fire the fast animation
         }
-
-
-
-        
+ 
     });
 
 	
-/*
-	$("#demo").on("gesture", function (e, gesture)	{
-		var w = $(window).width();
-		var l = $(".img-container").offset().left;
-		
-		if (l != (count - 2) * w)	{
-			if (gesture == "swipe right" && leapHandIsSet)	{
-				l -= w;
-				$(".img-container").offset({left: l});			
-			}
-		}
-		if (l != 0)	{
-			if (gesture == "swipe left" && leapHandIsSet)	{
-				l += w;
-				$(".img-container").offset({left: l});			
-			}
-		}
-	})
-*/
 });
 
 
 
+function getDistanceFromBottom(borderElement){
+    // this one checks the distance from a specific element
+    // it uses the global variables newPositionX and -Y   
+    // returns false if the element is not inbetween the x-borders
+    //                  x returns 10
+    //  x false         x returns 5
+    //           ________________________________ # element
+    //
+    //                  x returns -10
+    //
+    //                  …
+    //
+    
+    var checkBorder = borderElement.offset();
+    var checkWidth = borderElement.outerWidth();
+    var checkHeight = borderElement.outerHeight();
 
+    if(newPositionX > checkBorder.left && newPositionY < checkBorder.left+checkWidth){
+        
+        var returnDistance = checkBorder.top + checkHeight - newPositionY;
+        return returnDistance;
 
-
+    }else{
+        return false;
+    }
+}
 
 
 

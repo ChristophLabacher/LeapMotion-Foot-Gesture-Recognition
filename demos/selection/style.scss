@@ -84,6 +84,11 @@ body{
     width: 80vw;
 }
 
+.selectionWrapper{
+    width: 100%;
+    height: 100%;
+}
+
 .selection{
     display: inline-block;
     width: 25%;
@@ -108,6 +113,18 @@ body{
     width: 80vw;
 }
 
+#highHoverHide .selectionWrapper{
+    transform: translate(0px, -300px);
+    transition: transform 0.2s cubic-bezier(.97,.45,.91,1.5);
+}
+
+#highHoverHide .selectionWrapper.dropDown{
+    transform: translate(0px, 0px);
+}
+
+
+
+
 #highHover .selection{
     width: 20%;
     height: 55%;
@@ -116,17 +133,29 @@ body{
 #highHoverHide .selection{
     width: 20%;
     height: 55%;
-    transform: translate(0px, -300px);
-    transition: transform 0.2s cubic-bezier(.97,.45,.91,1.5);
 }
 
-#highHoverHide .selection.dropDown{
-    transform: translate(0px, 0px);
+
+.selection.enteredCorrectly{
+    background-color: blue;
 }
 
-#nah{
-     width: 65%
- }
+
+.selection.activatedHold{
+    background-color: red;
+    color: black;
+}
+
+
+
+.selection.activated{
+    transform: translate(0px, 0px) !important;
+    background-color: white;
+    color: black;
+}
+
+
+
 
 #ball.back{
     z-index: 10;
@@ -136,18 +165,4 @@ body{
     margin-bottom: 1em;
     font-weight: 300;
     width: 10em; 
-}
-
-.slow{
-    transition: transform 0.3s;
-}
-
-.klein{
-    width: 10px;
-    height: 10px;
-}
-
-
-#langsam{
-    display: none;
 }
