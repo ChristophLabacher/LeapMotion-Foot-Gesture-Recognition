@@ -29,7 +29,7 @@ $(document).ready(function()	{
         "<div id='wordwrapper'>" + 
             "<div class='word' id='introduction'><div class='wordText'>Erlebe verschiedene Auswahlmöglichkeiten</div></div>" + 
                 "<div class='word' id='simpleHover'><div class='selection'>1</div><div class='selection'>2</div><div class='selection'>3</div><div class='selection'>4</div></div>" + 
-                "<div class='word' id='highHover'><div class='selectionWrapper switchTrigger'><div class='selection switchTrigger'>3</div><div class='selection switchTrigger'>1</div><div class='selection spacer'>&nbsp;</div><div class='selection switchTrigger'>2</div><div class='selection switchTrigger'>4</div></div></div>" +                 "<div class='word' id='highHoverHide'><div class='selectionWrapper switchTrigger'><div class='selection switchTrigger'>3</div><div class='selection switchTrigger'>1</div><div class='selection spacer'>&nbsp;</div><div class='selection switchTrigger'>2</div><div class='selection switchTrigger'>4</div></div></div>" + 
+                "<div class='word' id='highHover'><div class='selectionWrapper switchTrigger multiSelect'><div class='selection switchTrigger'>3</div><div class='selection switchTrigger'>1</div><div class='selection spacer'>&nbsp;</div><div class='selection switchTrigger'>2</div><div class='selection switchTrigger'>4</div></div></div>" +                 "<div class='word' id='highHoverHide'><div class='selectionWrapper switchTrigger'><div class='selection switchTrigger'>3</div><div class='selection switchTrigger'>1</div><div class='selection spacer'>&nbsp;</div><div class='selection switchTrigger'>2</div><div class='selection switchTrigger'>4</div></div></div>" + 
             "<div class='word' id='ende'><div class='wordText'>ende</div></div></div>" + 
         "</div>"
     );
@@ -184,7 +184,6 @@ $(document).ready(function()	{
                 if(!$(this).hasClass("mouseOver")){
                     $(".active .mouseOver").removeClass("mouseOver");
                     $(this).addClass("mouseOver");
-                    translateCount = 0;
                 }
                 anywhere = true;
                 
@@ -204,8 +203,21 @@ $(document).ready(function()	{
                         $(this).addClass("enteredCorrectly");
                     }
                     
-                    if(distanceFromBottom <= 10){
-                        $(this).addClass("activatedHold");                        
+                    if(distanceFromBottom <= 30){
+                        $(this).addClass("activatedHold");
+
+                        translateCount++;
+                        $(this).css({"transform" : "translate(0px, " + translateCount + "px)", "-webkit-transform" : "translate(0px, " + translateCount + "px)", });
+
+                    }else if(distanceFromBottom > 30){
+                        
+                        if(translateCount > 0 && distanceFromBottom > 40){
+                            translateCount--;
+                            $(this).css({"transform" : "translate(0px, " + translateCount + "px)", "-webkit-transform" : "translate(0px, " + translateCount + "px)", });
+                        }else {
+                            $(this).removeClass("activatedHold");
+                        }                            
+                        
                     }
                     
                 }
@@ -236,16 +248,53 @@ $(document).ready(function()	{
 */
 
                 
+            }else{
+                // check if there is an element with entercorrectly and then if getDistance to that has a negativeValue (that means under the border)
+                // then fire the fast animation
+                
+                if($(this).hasClass("enteredCorrectly") && getDistanceFromBottom($(this)) < 0){
+                    $(this).removeClass("enteredCorrectly");
+                    $(this).removeClass("activatedHold");
+    
+                    
+                    //removes if the parent-element (the selectionwrapper) does not hav multiselect as a class
+                    if(!$(this).parent().hasClass("multiSelect")){
+
+                        // the next one checks if the element is already activated and then (because of the !multiselect) clears all and sets the right, if it wasnt selected already
+                        if($(this).hasClass("activated")){
+                            $(this).parent().children(".activated").removeClass("activated");
+                        }else{
+                            $(this).parent().children(".activated").removeClass("activated");
+                            $(this).addClass("activated");
+                        }
+                    }else{
+                        $(this).toggleClass("activated");                        
+                    }
+
+                    translateCount=0;
+                    $(this).css({"transform" : "translate(0px, " + translateCount + "px)", "-webkit-transform" : "translate(0px, " + translateCount + "px)", });                            
+                    
+                        
+                }else{
+                    if($(this).hasClass("enteredCorrectly")){
+                        $(this).removeClass("enteredCorrectly");
+                        $(this).removeClass("activatedHold");
+
+                        translateCount=0;
+                        $(this).css({"transform" : "translate(0px, " + translateCount + "px)", "-webkit-transform" : "translate(0px, " + translateCount + "px)", });                            
+                    }                    
+                }
+
+
+                
             }
-            
             
         });
         
-        if(!anywhere){
-            $("#simpleHover .mouseOver").removeClass("mouseOver");       
-            
-            // check if there is an element with entercorrectly and then if getDistance to that has a negativeValue (that means under the border)
-            // then fire the fast animation
+        
+        
+        if(!anywhere){ // that removes the mouseOver if it is over nowhere
+            $(".mouseOver").removeClass("mouseOver");
         }
  
     });
