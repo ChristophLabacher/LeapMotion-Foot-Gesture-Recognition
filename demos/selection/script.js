@@ -199,23 +199,43 @@ $(document).ready(function()	{
                 if($(this).hasClass("switchTrigger") && distanceFromBottom != false){
                     //switchTrigger are the classes that have the possibility to be pulled down and toggled
                     
-                    if(distanceFromBottom > 10){
+                    if(distanceFromBottom > 30){
                         $(this).addClass("enteredCorrectly");
                     }
                     
-                    if(distanceFromBottom <= 30){
+                    if(distanceFromBottom <= 30 && $(this).hasClass("enteredCorrectly")){
                         $(this).addClass("activatedHold");
 
-                        translateCount++;
+
+                        //addingValue is to create a mapping that it feels dragged down
+
+                        var addingValue = Math.min(Math.max(map(translateCount, 0, 30, 1, 0), 0), 1)
+                        translateCount += addingValue;
+                        
+                        
+                        //create over jquery.animate different custom easing functions
                         $(this).css({"transform" : "translate(0px, " + translateCount + "px)", "-webkit-transform" : "translate(0px, " + translateCount + "px)", });
 
-                    }else if(distanceFromBottom > 30){
+                    }else if(distanceFromBottom > 30 && $(this).hasClass("enteredCorrectly")){
                         
                         if(translateCount > 0 && distanceFromBottom > 40){
-                            translateCount--;
+
+                            var subtractValue;
+
+                            if(distanceFromBottom > 70){
+                                subtractValue = Math.min(Math.max(map(translateCount, 0, 30, 0, 2), 0), 1);
+                            }else{
+                                subtractValue = Math.min(Math.max(map(translateCount, 0, 30, 0, 1), 0), 1);
+                            }
+
+                            translateCount -= subtractValue;
+                            
+                            //create over jquery.animate different custom easing functions                            
                             $(this).css({"transform" : "translate(0px, " + translateCount + "px)", "-webkit-transform" : "translate(0px, " + translateCount + "px)", });
-                        }else {
+                            
+                        }else {                            
                             $(this).removeClass("activatedHold");
+                            
                         }                            
                         
                     }
@@ -271,8 +291,42 @@ $(document).ready(function()	{
                         $(this).toggleClass("activated");                        
                     }
 
+                    // hier abhängig vom translate Count evtl noch zuvor eine animation nach unten schalten
+                    // die animation nach unten muss abhängig von der geschwindigkeit in dem moment sein.
+                    // - how to get velocity
+                    // 
+                    
+                    if(translateCount < 10){
+                        
+                        // pulledDown wird später noch abhängig von der geschwindigkeit zu diesem zeitpunkt ausgerechnet
+                        // es soll darstellen wie weit die elemente noch heruntergezogen werden, wenn man sie praktisch einfach nach unten geschmissen hat
+                        var pulledDown = Math.min(Math.max(map(Math.round(dataset.velocityXY), 1, 20, 5, 80), 5), 80);
+                        
+                        console.log(Math.round(dataset.velocityXY) + " // " + pulledDown);
+                        
+                        var transformString = 'translate(0px, ' + pulledDown + 'px)';
+                        
+                        
+                        $(this).css({"transform" : transformString, "-webkit-transform" : transformString });
+                        $(this).animate({transform: 'translate(0px, 0px)' }, 500, 'easeOutElastic');
+                        
+                        
+/*
+                        $(this).animate({transform: transformString }, 500, 'easeInQuint', function(){
+                            
+                        });
+*/
+                        
+                    
+                    
+                    }else{
+                        $(this).animate({transform: 'translate(0px, 0px)' }, 500, 'easeOutElastic');                        
+                    }
+
+
+
                     translateCount=0;
-                    $(this).css({"transform" : "translate(0px, " + translateCount + "px)", "-webkit-transform" : "translate(0px, " + translateCount + "px)", });                            
+//                    $(this).css({"transform" : "translate(0px, " + translateCount + "px)", "-webkit-transform" : "translate(0px, " + translateCount + "px)", });                            
                     
                         
                 }else{
