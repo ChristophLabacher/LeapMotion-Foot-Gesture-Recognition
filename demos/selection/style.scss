@@ -18,6 +18,11 @@ body{
     left: -100px;
 }
 
+#ball.white{
+    background-color: #b4b4b4;
+    border: 1px solid #fafafa;
+}
+
 #ball.hiddenOpacity{
     opacity: 0.6;
 }
@@ -86,6 +91,10 @@ body{
     background-position: center center;
 }
 
+#highHoverHide .bottomIntroduction{
+    color: white;
+}
+
 #simpleHover{
     width: 80vw;
 }
@@ -123,19 +132,18 @@ body{
     width: 80vw;
 }
 
-#highHoverHide .selectionWrapper{
+#highHoverHide .selectionWrapper, #ende .selectionWrapper{
     transform: translate(0px, -300px);
     transition: transform 0.2s cubic-bezier(.97,.45,.91,1.5);
 }
 
-#highHoverHide .selectionWrapper.dropDown{
+#highHoverHide .selectionWrapper.dropDown, #ende .selectionWrapper.dropDown{
     transform: translate(0px, 0px);
 }
 
 
 
-
-#highHover .selection{
+#highHover .selection, #ende .selection{
     width: 20%;
     height: 55%;
 }
@@ -146,23 +154,15 @@ body{
     color: white;
 }
 
+#nextLevel{
+    padding-left: 3em;
+    padding-right: 3em;
+}
 
 
-#highHoverHide .selection.activated, #highHover .selection.activated{
+
+#highHoverHide .selection.activated, #highHover .selection.activated, #ende .selection.activated{
     transform: translate(0px, 0px);
     background-color: white;
     color: black;
-}
-
-
-
-
-#ball.back{
-    z-index: 10;
-}
-
-.thin{
-    margin-bottom: 1em;
-    font-weight: 300;
-    width: 10em; 
 }
