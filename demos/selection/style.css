@@ -109,6 +109,10 @@ body {
   color: white;
 }
 
+#highHoverHide .selection.mouseOver {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
 .spacer {
   border-bottom: none;
   background-color: transparent !important;
@@ -140,9 +144,10 @@ body {
 #highHoverHide .selection {
   width: 20%;
   height: 55%;
+  color: white;
 }
 
-.selection.activated {
+#highHoverHide .selection.activated, #highHover .selection.activated {
   -webkit-transform: translate(0px, 0px);
       -ms-transform: translate(0px, 0px);
           transform: translate(0px, 0px);
