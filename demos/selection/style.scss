@@ -111,12 +111,21 @@ body{
     padding-top: 3em;
     text-align: center;
     border-bottom: 1px solid #b3b3b3;
-    transition: background 0.1s;
+    transition: background 0.2s;
+    
+    
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: 25% auto;
 }
 
 .selection.mouseOver{
     background-color: #b3b3b3;
     color: white;
+}
+
+.selection.switchTrigger.mouseOver{
+    background-image: url("handler.png");
 }
 
 #highHoverHide .selection.mouseOver{
@@ -155,8 +164,8 @@ body{
 }
 
 #nextLevel{
-    padding-left: 3em;
-    padding-right: 3em;
+    width: 400px;
+    text-align: center;
 }
 
 

@@ -31,7 +31,7 @@ $(document).ready(function()	{
                 "<div class='word' id='simpleHover'><div class='selection'>1</div><div class='selection'>2</div><div class='selection'>3</div><div class='selection'>4</div></div>" + 
                 "<div class='word' id='highHover'><div class='selectionWrapper switchTrigger multiSelect'><div class='selection switchTrigger'>3</div><div class='selection switchTrigger'>1</div><div class='selection spacer'>&nbsp;</div><div class='selection switchTrigger'>2</div><div class='selection switchTrigger'>4</div></div><div class='bottomIntroduction'>mehrere auswählbar</div></div>" +
                 "<div class='word' id='highHoverHide'><div class='selectionWrapper switchTrigger'><div class='selection switchTrigger'>3</div><div class='selection switchTrigger'>1</div><div class='selection spacer'>&nbsp;</div><div class='selection switchTrigger'>2</div><div class='selection switchTrigger'>4</div></div><div class='bottomIntroduction'>nur eins auswählbar</div></div>" + 
-            "<div class='word' id='ende'><div class='selectionWrapper switchTrigger'><div class='selection switchTrigger'>ja.</div></div><div class='wordText' id='nextLevel'>willst du mehr?</div></div></div>" + 
+            "<div class='word' id='ende'><div class='selectionWrapper switchTrigger'><div class='selection switchTrigger' id='nextLevel'>ja.</div></div><div class='wordText'>weiter zum nächsten?</div></div></div>" + 
         "</div>"
     );
     
