@@ -137,19 +137,17 @@ body{
 
 
 .selection.enteredCorrectly{
-    background-color: blue;
+
 }
 
 
 .selection.activatedHold{
-    background-color: red;
-    color: black;
 }
 
 
 
 .selection.activated{
-    transform: translate(0px, 0px) !important;
+    transform: translate(0px, 0px);
     background-color: white;
     color: black;
 }
