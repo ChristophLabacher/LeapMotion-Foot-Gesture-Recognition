@@ -140,7 +140,7 @@ function getSwipeVel()	{
 		
 		// SWIPE LEFT (DIRTY)
 		// If the last four movements were left, right, left, none.
-		if (movementXHistory[movementXHistoryLength - 1].direction == "left" && movementXHistory[movementXHistoryLength - 1].velocity > 1.5 && movementXHistory[movementXHistoryLength - 1].distance > 100
+		if (movementXHistory[movementXHistoryLength - 1].direction == "left" && movementXHistory[movementXHistoryLength - 1].velocity > swipeXVelocityBreakpoint && movementXHistory[movementXHistoryLength - 1].distance > swipeXDistanceBreakpoint
 		
 			&& movementXHistory[movementXHistoryLength - 1].startPosition < (width/2) + 100 && movementXHistory[movementXHistoryLength - 1].endPosition < width/2
 		)	{
@@ -161,7 +161,7 @@ function getSwipeVel()	{
 		
 		// SWIPE RIGHT
 		// If the last three movements were right, left, none.
-		} else if (movementXHistory[movementXHistoryLength - 1].direction == "right" && movementXHistory[movementXHistoryLength - 1].velocity > 1.5 && movementXHistory[movementXHistoryLength - 1].distance > 100
+		} else if (movementXHistory[movementXHistoryLength - 1].direction == "right" && movementXHistory[movementXHistoryLength - 1].velocity > swipeXVelocityBreakpoint && movementXHistory[movementXHistoryLength - 1].distance > swipeXDistanceBreakpoint
 		
 		&& movementXHistory[movementXHistoryLength - 1].startPosition > (width/2) - 100 && movementXHistory[movementXHistoryLength - 1].endPosition > width/2
 		
