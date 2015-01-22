@@ -18,8 +18,8 @@ var showFrames = false;
 var showCurrent = true;
 var showDatasets = true;
 var showCurrentMovementX = true;
-var showLastMovementX = false;
-var showCurrentMovementY = true;
+var showLastMovementX = true;
+var showCurrentMovementY = false;
 var showLastMovementY = false;
 var showGesture = true;
 
@@ -54,6 +54,10 @@ var movementYNoneCounter = 0;
 var gesture;
 var gestureHistory = [];
 var gestureCounter = 0;
+
+// Gesture Recognition
+var swipeXVelocityBreakpoint = 1.5;
+var swipeXDistanceBreakpoint = 100;
 
 // Selections
 var selectionSize = 0;
