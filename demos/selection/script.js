@@ -13,11 +13,6 @@ $(document).ready(function()	{
     
     var activeWord;
     
-    
-    var marginOffset = 0;
-
-
-    var translateCount = 0;
     //um zu zählen wie viele pixel das schon runtergeschoben wurde
 
 
@@ -26,7 +21,7 @@ $(document).ready(function()	{
     $("body").append(  
         "<div id='ball'></div>" + 
         "<div id='indicator'></div>" +
-        "<div id='borderwrapper'>" + 
+        "<div id='borderwrapper' class='tracking'>" + 
             "<div class='border' id='borderLeft'><div class='borderTop'></div><div class='borderBottom'></div></div>" + 
             "<div class='border' id='borderRight'><div class='borderTop'></div><div class='borderBottom'></div></div>" +
         "</div>" +
@@ -61,10 +56,22 @@ $(document).ready(function()	{
             "transform" : "translate(" + newPositionX + "px, " + newPositionY + "px)"
         });
 
-
+        var borderOffset = $("#borderwrapper").offset();
+        var borderWidth = $("#borderwrapper").outerWidth();
 
         //controls on the right and the left
         
+        if($("#borderwrapper").hasClass("tracking")){
+            var newBorderPosition = newPositionX-borderWidth/2;
+            $("#borderwrapper").css({
+                "-webkit-transform" : "translate(" + newBorderPosition + "px, 0px)",
+                "transform" : "translate(" + newBorderPosition + "px, 0px)"
+            });
+        }
+        
+        
+        
+/*
         if(newPositionX > width-width/4 && leapHandIsSet){
             
             if($("#ende").offset().left+$("#ende").outerWidth()-20 > width){
@@ -90,11 +97,7 @@ $(document).ready(function()	{
                 marginOffset = 0;
             }
         }
-
-        $("#wordwrapper").css({            
-            "-webkit-transform" : "translate(" + -marginOffset + "px, 0px)",
-            "transform" : "translate(" + -marginOffset + "px, 0px)"
-        });
+*/
 
 
 
@@ -120,6 +123,7 @@ $(document).ready(function()	{
         // eventuell muss man auch die anzeige der ball position da noch reinbringen, damit das dann noch dazu anpassen kann
     
         
+/*
         switch(activeWord){
             
             case "highHoverHide":
@@ -140,6 +144,7 @@ $(document).ready(function()	{
         }else{
             $("#ball").removeClass("white");
         }
+*/
         
 
         //showing the ball - veränderung muss über transform geschehn - prefixed!
@@ -161,6 +166,7 @@ $(document).ready(function()	{
         //correctEnter ist dazu da, um zu checken, dass man von oben ziehen will und nicht das man von unten gerade reingeht
 
         
+/*
         $(".active .selection").each(function( index ) {
 
         
@@ -255,7 +261,7 @@ $(document).ready(function()	{
                     }
 
                 }
-*/
+
 
                 
             }else{
@@ -301,11 +307,11 @@ $(document).ready(function()	{
                         $(this).animate({transform: 'translate(0px, 0px)' }, 500, 'easeOutElastic');
                         
                         
-/*
+
                         $(this).animate({transform: transformString }, 500, 'easeInQuint', function(){
                             
                         });
-*/
+
                         
                     
                     
@@ -316,7 +322,7 @@ $(document).ready(function()	{
 
 
                     translateCount=0;
-//                    $(this).css({"transform" : "translate(0px, " + translateCount + "px)", "-webkit-transform" : "translate(0px, " + translateCount + "px)", });                            
+              $(this).css({"transform" : "translate(0px, " + translateCount + "px)", "-webkit-transform" : "translate(0px, " + translateCount + "px)", });                            
                     
                         
                 }else{
@@ -340,6 +346,7 @@ $(document).ready(function()	{
         if(!anywhere){ // that removes the mouseOver if it is over nowhere
             $(".mouseOver").removeClass("mouseOver");
         }
+*/
  
     });
 
