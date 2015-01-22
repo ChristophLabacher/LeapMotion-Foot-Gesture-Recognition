@@ -11,7 +11,8 @@ $(document).ready(function()	{
 	showGestureVis = false;
 	showText = false;
     
-    var activeWord;
+    var swipeState = 0;
+    var trackingPause = false;
     
     //um zu zählen wie viele pixel das schon runtergeschoben wurde
 
@@ -59,7 +60,15 @@ $(document).ready(function()	{
         var borderOffset = $("#borderwrapper").offset();
         var borderWidth = $("#borderwrapper").outerWidth();
 
-        //controls on the right and the left
+        // begrenzungen folgen des fußes
+        
+        if(newPositionX > borderOffset.left && newPositionX < borderOffset.left + borderWidth){
+            if(!trackingPause){
+                $("#borderwrapper").addClass("tracking");
+                $(".open").removeClass("open");
+            }
+        }
+        
         
         if($("#borderwrapper").hasClass("tracking")){
             var newBorderPosition = newPositionX-borderWidth/2;
@@ -67,8 +76,94 @@ $(document).ready(function()	{
                 "-webkit-transform" : "translate(" + newBorderPosition + "px, 0px)",
                 "transform" : "translate(" + newBorderPosition + "px, 0px)"
             });
+            
+            var yPercentage = (newPositionY / height) * 100;
+            var yBottom = 100 - yPercentage;
+            $(".borderTop").css({"height" : yPercentage + "%"});
+            $(".borderBottom").css({"height" : yBottom + "%"});
+            
         }
         
+        
+    	$("#gesture").on("gesture", function (e, gesture)	{
+            if(!trackingPause){
+                if(gesture == "swipe right" || gesture == "swipe left"){
+                    
+                    swipeState++;
+                    if(swipeState > 5){
+                        swipeState = 0;
+                    }
+                    
+                    
+                    $("#borderwrapper").removeClass("tracking");
+                    trackingPause = true;
+                    setTimeout(function(){trackingPause = false;}, 300);
+                    
+                    
+                    
+                    // im folgenden kommen noch abhängig von der geschwindigkeit die animationssachen rein
+                    switch (gesture){
+                        case "swipe right":
+                                $("#borderRight").addClass("open");
+                            break;
+                            
+                        case "swipe left":
+                                $("#borderLeft").addClass("open");
+                            break;
+                        
+                    }
+                       
+                }                
+            }
+    	});
+    	
+    	switch (swipeState){
+        	case 0:
+                swipeXVelocityBreakpoint = 1.5;
+                swipeXDistanceBreakpoint = 100;
+                if($("#borderwrapper").hasClass("tracking")){
+                    $(".text").html("normal …");
+                    $(".border").css({"width" : "1px !important"});
+                }
+                    
+                break;
+            
+            case 1:
+                swipeXVelocityBreakpoint = 3;
+                if($("#borderwrapper").hasClass("tracking")){
+                    $(".text").html("faster");
+                    $(".border").css({"width" : "3px !important"});
+                }
+                break;
+
+            case 2:
+                swipeXVelocityBreakpoint = 4;
+                if($("#borderwrapper").hasClass("tracking")){
+                    $(".text").html("even faster");
+                    $(".border").css({"width" : "6px !important"});
+                }
+                break;
+
+            case 3:
+                swipeXVelocityBreakpoint = 5;
+                if($("#borderwrapper").hasClass("tracking")){
+                    $(".text").html("really flick your foot!");
+                    $(".border").css({"width" : "10px !important"});
+                }
+                    
+                break;
+
+            case 4:
+                swipeXDistanceBreakpoint = 250;
+                if($("#borderwrapper").hasClass("tracking")){
+                    $(".text").html("go further!");
+                    $(".border").css({"width" : "10px !important"});
+                }
+                break;
+
+
+    	}
+
         
         
 /*

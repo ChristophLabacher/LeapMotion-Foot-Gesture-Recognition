@@ -47,8 +47,7 @@ body{
     height: 100vh;
     top: 0px;
     left: 0px;
-    white-space: nowrap;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .border{
@@ -65,16 +64,39 @@ body{
 }
 
 .borderTop, .borderBottom{
-    width: 1px !important;
+    width: 100% !important;
     background-color: #525252;
 }
 
 .borderTop{
+    transform-origin: top center;
     height: 50%;
 }
 
 .borderBottom{
+    transform-origin: bottom center;
     height: 50%;
+}
+
+
+
+#borderLeft.border.open .borderBottom{
+    transform: rotate(-30deg);
+}
+#borderLeft.border.open .borderTop{
+    transform: rotate(30deg);
+}
+
+#borderRight.border.open .borderBottom{
+    transform: rotate(30deg);
+}
+#borderRight.border.open .borderTop{
+    transform: rotate(-30deg);    
+}
+
+
+#borderwrapper.tracking .borderBottom, #borderwrapper.tracking .borderTop{
+    transform: none !important;
 }
 
 #borderLeft{
