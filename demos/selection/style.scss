@@ -53,14 +53,14 @@ body{
 .border{
     display: block;
     position: absolute;
-    top: 0px;
+    top: -20px;
     left: 0px;
     font-weight: 800;
-    height: 100%;
+    height: 130%;
     z-index: 15;
     box-sizing: border-box;
     opacity: 1;
-    width: 1px !important;
+    width: 4px;
 }
 
 .borderTop, .borderBottom{
@@ -78,26 +78,10 @@ body{
     height: 50%;
 }
 
-
-
-#borderLeft.border.open .borderBottom{
-    transform: rotate(-30deg);
-}
-#borderLeft.border.open .borderTop{
-    transform: rotate(30deg);
+#borderwrapper.tracking .borderTop, #borderwrapper.tracking .borderBottom{
+    transform: rotate(0deg) !important;
 }
 
-#borderRight.border.open .borderBottom{
-    transform: rotate(30deg);
-}
-#borderRight.border.open .borderTop{
-    transform: rotate(-30deg);    
-}
-
-
-#borderwrapper.tracking .borderBottom, #borderwrapper.tracking .borderTop{
-    transform: none !important;
-}
 
 #borderLeft{
 

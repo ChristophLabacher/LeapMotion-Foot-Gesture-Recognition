@@ -44,12 +44,32 @@ $(document).ready(function()	{
     		$("#not-tracking").removeClass("active");
     	}
 
+        // das swipeState hier ist um das mapping anzupassen
+        switch (swipeState){
+            case 1:
+                newPositionX = map(dataset.position.x, 400, 975, 0, width);
+                break;
+
+            case 2:
+                newPositionX = map(dataset.position.x, 375, 1025, 0, width);
+                break;
+
+            case 3:
+                newPositionX = map(dataset.position.x, 300, 1050, 0, width);
+                break;
+
+                
+            default:
+                // basic-mapping for better usability
+                newPositionX = map(dataset.position.x, 475, 925, 0, width);
+    	}
+
+        // in this case only the x-position needs to be changed
+        newPositionY = map(dataset.position.y, 350, 550, 0, height);
 
 
 
-        // basic-mapping for better usability
-        newPositionX = map(dataset.position.x, 475, 925, 0, width);
-        newPositionY = map(dataset.position.y, 200, 600, 0, height);
+
 
 
         $("#indicator").css({
@@ -62,7 +82,12 @@ $(document).ready(function()	{
 
         // begrenzungen folgen des fußes
         
-        if(newPositionX > borderOffset.left && newPositionX < borderOffset.left + borderWidth){
+        if($("#borderRight").hasClass("open") && newPositionX < borderOffset.left + borderWidth){
+            if(!trackingPause){
+                $("#borderwrapper").addClass("tracking");
+                $(".open").removeClass("open");
+            }
+        }else if($("#borderLeft").hasClass("open") && newPositionX > borderOffset.left){
             if(!trackingPause){
                 $("#borderwrapper").addClass("tracking");
                 $(".open").removeClass("open");
@@ -85,12 +110,12 @@ $(document).ready(function()	{
         }
         
         
-    	$("#gesture").on("gesture", function (e, gesture)	{
+    	$("#gesture").on("gesture", function (e, gestureString)	{
             if(!trackingPause){
-                if(gesture == "swipe right" || gesture == "swipe left"){
+                if(gestureString == "swipe right" || gestureString == "swipe left"){
                     
                     swipeState++;
-                    if(swipeState > 5){
+                    if(swipeState > 4){
                         swipeState = 0;
                     }
                     
@@ -101,16 +126,33 @@ $(document).ready(function()	{
                     
                     
                     
-                    // im folgenden kommen noch abhängig von der geschwindigkeit die animationssachen rein
-                    switch (gesture){
+                    //clear all transforms                    
+                    $(".borderTop, .borderBottom").css({"transform" : "rotate(0deg)", "-webkit-transform" : "rotate(0deg)"});
+                    
+                    
+                    //berechne den grad der aufbiegung anhand der geschwindigkeit zum zeitpunkt des ausbruchs
+                    var changeToDegree = Math.min(Math.max(map(gesture.velocity, 0, 15, 5, 40), 5), 40);
+                    var rotateStringPos = "rotate(" + changeToDegree + "deg)";
+                    var rotateStringNeg = "rotate(-" + changeToDegree + "deg)";
+                    
+                    switch (gestureString){
                         case "swipe right":
                                 $("#borderRight").addClass("open");
+
+                                $("#borderRight .borderBottom").animate({transform: rotateStringPos }, 500, 'easeOutElastic');
+                                $("#borderRight .borderTop").animate({transform: rotateStringNeg }, 500, 'easeOutElastic');
+                                
+                                
                             break;
                             
                         case "swipe left":
                                 $("#borderLeft").addClass("open");
+
+                                $("#borderLeft .borderTop").animate({transform: rotateStringPos }, 500, 'easeOutElastic');
+                                $("#borderLeft .borderBottom").animate({transform: rotateStringNeg }, 500, 'easeOutElastic');
+                                
+
                             break;
-                        
                     }
                        
                 }                
@@ -122,8 +164,8 @@ $(document).ready(function()	{
                 swipeXVelocityBreakpoint = 1.5;
                 swipeXDistanceBreakpoint = 100;
                 if($("#borderwrapper").hasClass("tracking")){
-                    $(".text").html("normal …");
-                    $(".border").css({"width" : "1px !important"});
+                    $(".text").html("breche aus.");
+                    $(".border").css({"width" : "4px"});
                 }
                     
                 break;
@@ -131,37 +173,36 @@ $(document).ready(function()	{
             case 1:
                 swipeXVelocityBreakpoint = 3;
                 if($("#borderwrapper").hasClass("tracking")){
-                    $(".text").html("faster");
-                    $(".border").css({"width" : "3px !important"});
+                    $(".text").html("jetzt musst du etwas schneller sein");
+                    $(".border").css({"width" : "5px"});
                 }
                 break;
 
             case 2:
-                swipeXVelocityBreakpoint = 4;
+                swipeXVelocityBreakpoint = 5;
                 if($("#borderwrapper").hasClass("tracking")){
-                    $(".text").html("even faster");
-                    $(".border").css({"width" : "6px !important"});
+                    $(".text").html("sogar noch schneller …");
+                    $(".border").css({"width" : "8px"});
                 }
                 break;
 
             case 3:
-                swipeXVelocityBreakpoint = 5;
+                swipeXVelocityBreakpoint = 7;
                 if($("#borderwrapper").hasClass("tracking")){
-                    $(".text").html("really flick your foot!");
-                    $(".border").css({"width" : "10px !important"});
+                    $(".text").html("jetzt aber richtig, richtig schnell!");
+                    $(".border").css({"width" : "10px"});
                 }
                     
                 break;
 
             case 4:
-                swipeXDistanceBreakpoint = 250;
+                swipeXVelocityBreakpoint = .8;
+                swipeXDistanceBreakpoint = 75;
                 if($("#borderwrapper").hasClass("tracking")){
-                    $(".text").html("go further!");
-                    $(".border").css({"width" : "10px !important"});
+                    $(".text").html("jetzt sollte es sehr einfach gehen.");
+                    $(".border").css({"width" : "2px"});
                 }
                 break;
-
-
     	}
 
         
