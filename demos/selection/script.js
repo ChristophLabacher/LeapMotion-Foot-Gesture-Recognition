@@ -26,13 +26,11 @@ $(document).ready(function()	{
     $("body").append(  
         "<div id='ball'></div>" + 
         "<div id='indicator'></div>" +
-        "<div id='wordwrapper'>" + 
-            "<div class='word' id='introduction'><div class='wordText'>Erlebe verschiedene Auswahlmöglichkeiten</div></div>" + 
-                "<div class='word' id='simpleHover'><div class='selection'>1</div><div class='selection'>2</div><div class='selection'>3</div><div class='selection'>4</div></div>" + 
-                "<div class='word' id='highHover'><div class='selectionWrapper switchTrigger multiSelect'><div class='selection switchTrigger'>3</div><div class='selection switchTrigger'>1</div><div class='selection spacer'>&nbsp;</div><div class='selection switchTrigger'>2</div><div class='selection switchTrigger'>4</div></div><div class='bottomIntroduction'>mehrere auswählbar</div></div>" +
-                "<div class='word' id='highHoverHide'><div class='selectionWrapper switchTrigger'><div class='selection switchTrigger'>3</div><div class='selection switchTrigger'>1</div><div class='selection spacer'>&nbsp;</div><div class='selection switchTrigger'>2</div><div class='selection switchTrigger'>4</div></div><div class='bottomIntroduction'>nur eins auswählbar</div></div>" + 
-            "<div class='word' id='ende'><div class='selectionWrapper switchTrigger'><div class='selection switchTrigger' id='nextLevel'>ja.</div></div><div class='wordText'>weiter zum nächsten?</div></div></div>" + 
-        "</div>"
+        "<div id='borderwrapper'>" + 
+            "<div class='border' id='borderLeft'><div class='borderTop'></div><div class='borderBottom'></div></div>" + 
+            "<div class='border' id='borderRight'><div class='borderTop'></div><div class='borderBottom'></div></div>" +
+        "</div>" +
+        "<div class='text'>brich aus!</div>"
     );
     
     //variables needed for the visualisations
@@ -100,25 +98,6 @@ $(document).ready(function()	{
 
 
 
-        //later choose here which modification should happen with the values
-        //needs to be a very long offset-checking stuff
-
-
-        
-        $(".word").each(function(){
-            if(newPositionX < $(this).offset().left+$(this).outerWidth() && newPositionX > $(this).offset().left){
-                var newActiveWord = $(this).attr("id");
-                if(activeWord != newActiveWord){
-                    $(".active").removeClass("active");
-                }
-                $(this).addClass("active");
-                activeWord = newActiveWord;
-                if(activeWord == "ende"){
-                    activeWord = "highHoverHide";
-                }
-            }
-        });
-        
         
         
         
