@@ -23,6 +23,7 @@ $(document).ready(function()	{
 
     // Initializing the HTML-Structure
     //<div class='thin'>hier lernst du ein bisschen die steuerung und die feedbackmöglichkeiten kennen</div>
+    //besteht aus einem selectionWrapper und darin verschiedene generierte divs
     $("body").append(  
         "<div id='ball'></div>" + 
         "<div id='indicator'></div>" +
@@ -38,7 +39,6 @@ $(document).ready(function()	{
     //variables needed for the visualisations
 
     
-	//frame should be "hover" — something like "lift your foot to do something"
     $("#demo").on("frame", function (e){
 
         
@@ -65,8 +65,8 @@ $(document).ready(function()	{
 
 
 
-        //controls on the right and the left
-        
+        // controls on the right and the left
+        // nur um nach links und rechts zu steuern
         if(newPositionX > width-width/4 && leapHandIsSet){
             
             if($("#ende").offset().left+$("#ende").outerWidth()-20 > width){
@@ -100,11 +100,8 @@ $(document).ready(function()	{
 
 
 
-        //later choose here which modification should happen with the values
-        //needs to be a very long offset-checking stuff
 
-
-        
+        // hiermit wird ausgesucht welches wort gerade aktiv ist. ebenfalls unwichtig.
         $(".word").each(function(){
             if(newPositionX < $(this).offset().left+$(this).outerWidth() && newPositionX > $(this).offset().left){
                 var newActiveWord = $(this).attr("id");
@@ -120,12 +117,6 @@ $(document).ready(function()	{
         });
         
         
-        
-        
-
-
-        //these values can be modified in the switchcase activeWord script
-
 
 
         var ballsizeX = ballsizeDefault;
@@ -133,18 +124,14 @@ $(document).ready(function()	{
         
         
         
-
-        
-        // here the different pairs start
-        // ## todo:
-        // - how to change between the pairs
-        // eventuell muss man auch die anzeige der ball position da noch reinbringen, damit das dann noch dazu anpassen kann
     
         
         switch(activeWord){
             
             case "highHoverHide":
-
+                //das ist das einzige mal ein dropdown
+                //hier werde ich noch einen timeout einbauen, dass er nicht sofort, wenn man unter dem wert ist wieder hochgeht
+                //sollte als autoHideTimeout übertragen werden
                 if(!$(".active .selectionWrapper").hasClass("dropDown") && newPositionY < 330){
                     $(".active .selectionWrapper").addClass("dropDown");
                 }else if($(".active .selectionWrapper").hasClass("dropDown") && newPositionY > 450){
@@ -156,6 +143,7 @@ $(document).ready(function()	{
 
         }
         
+        // nur die darstellung des baldes für das letzte bild
         if(activeWord == "highHoverHide"){
             $("#ball").addClass("white");
         }else{
@@ -180,10 +168,10 @@ $(document).ready(function()	{
 
         var correctEnter = false;
         //correctEnter ist dazu da, um zu checken, dass man von oben ziehen will und nicht das man von unten gerade reingeht
-
+        
         
         $(".active .selection").each(function( index ) {
-
+        // jetzt wirds interessant
         
             var borders = $(this).offset();
             var thisWidth = $(this).outerWidth();
@@ -192,34 +180,40 @@ $(document).ready(function()	{
             if(newPositionX > borders.left && newPositionX < borders.left+thisWidth && newPositionY > borders.top && newPositionY < borders.top+thisHeight){
                 // this checks if the leapCoordinates are inside the selection
 
+
+                // wenn schonmal mouseOver getriggert wird, wird es gelöscht und dann neu hinzugefügt
+                
                 if(!$(this).hasClass("mouseOver")){
                     $(".active .mouseOver").removeClass("mouseOver");
                     $(this).addClass("mouseOver");
                 }
+
+                //dann ist es auch schon irgendwo drauf
+                //falls dieser code halt nie ausgeführt wird, werden unten alle hover classes gelöscht
                 anywhere = true;
+
                 
                 
-                
-                // somehow I have to create a function that checks it in the correct order
-                // I somewhere need to start a function that triggers the "now it is able to enter correctly"
-                // it has to come down from the top
-                // enter the second stage
-                
+                //distanceFromBottom gibt mir nur Werte wenn es innerhalb der breite des elementes ist.                
                 var distanceFromBottom = getDistanceFromBottom($(this));
                 
                 if($(this).hasClass("switchTrigger") && distanceFromBottom != false){
                     //switchTrigger are the classes that have the possibility to be pulled down and toggled
+                    //sollten in der zukunft dann alle haben. ist hier so, weil es am anfang auch nicht triggerbare elemente gibt
                     
+                    
+                    //über 30px ist enteredCorrectly, damit man das nicht direkt runterzieht, wenn man von unten reinfährt
                     if(distanceFromBottom > 30){
                         $(this).addClass("enteredCorrectly");
                     }
                     
+                    // nur wenn die distance kleiner gleich 30 ist, wird das ganze nach unten verschoben
                     if(distanceFromBottom <= 30 && $(this).hasClass("enteredCorrectly")){
                         $(this).addClass("activatedHold");
 
 
                         //addingValue is to create a mapping that it feels dragged down
-
+                        //damit es eben irgendwann auch stoppt
                         var addingValue = Math.min(Math.max(map(translateCount, 0, 30, 1, 0), 0), 1)
                         translateCount += addingValue;
                         
@@ -228,11 +222,15 @@ $(document).ready(function()	{
                         $(this).css({"transform" : "translate(0px, " + translateCount + "px)", "-webkit-transform" : "translate(0px, " + translateCount + "px)", });
 
                     }else if(distanceFromBottom > 30 && $(this).hasClass("enteredCorrectly")){
+                        //damit es auch wieder hochgeht, wenn ich zurückziehe
                         
+                        
+                        //verschiedene zurückzieh möglichkeiten
                         if(translateCount > 0 && distanceFromBottom > 40){
 
                             var subtractValue;
-
+                            
+                            //damit es schneller ist wenn es weiter enternt ist.
                             if(distanceFromBottom > 70){
                                 subtractValue = Math.min(Math.max(map(translateCount, 0, 30, 0, 2), 0), 1);
                             }else{
@@ -244,7 +242,8 @@ $(document).ready(function()	{
                             //create over jquery.animate different custom easing functions                            
                             $(this).css({"transform" : "translate(0px, " + translateCount + "px)", "-webkit-transform" : "translate(0px, " + translateCount + "px)", });
                             
-                        }else {                            
+                        }else {
+                            
                             $(this).removeClass("activatedHold");
                             
                         }                            
