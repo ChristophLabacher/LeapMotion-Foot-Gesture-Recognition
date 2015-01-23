@@ -32,7 +32,6 @@ $(document).ready(function()	{
     //variables needed for the visualisations
 
     
-	//frame should be "hover" — something like "lift your foot to do something"
     $("#demo").on("frame", function (e){
 
         
