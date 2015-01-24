@@ -14,23 +14,18 @@
 		<link rel="stylesheet" type="text/css" href="styles/style.css">
 
 		<!-------------------------<!--! LIBARIES ------------------------------>
-		<script src="scripts/libaries/jquery.js"></script>		
-		<script src="scripts/libaries/leap-0.6.4.min.js"></script>	
-		
-		<!-------------------------<!--! DEMOS ------------------------------>
-		<!-----------<!--! Demoname ----------->	
+		<script type="text/javascript" src="scripts/libaries/jquery.js"></script>		
+		<script type="text/javascript" src="scripts/libaries/leap-0.6.4.min.js"></script>	
+		<script type="text/javascript" src="scripts/libaries/tools.js"></script>
 
-			
-		<!-------------------------<!--! SCRIPTS ------------------------------>
+		<!-------------------------<!--! TRACKING ------------------------------>
 		<!-----------<!--! Objects ----------->
 		<script type="text/javascript" src="scripts/tracking/Dataset.js"></script>
 		<script type="text/javascript" src="scripts/tracking/Movement.js"></script>
 		<script type="text/javascript" src="scripts/tracking/Gesture.js"></script>
 
 		<!-----------<!--! Helpers ----------->		
-		<script type="text/javascript" src="scripts/tracking/tools.js"></script>
 		<script type="text/javascript" src="scripts/tracking/leap.js"></script>
-		<script type="text/javascript" src="scripts/tracking/selection.js"></script>
 
 		<!-----------<!--! Analysation ----------->	
 		<script type="text/javascript" src="scripts/tracking/getDataset.js"></script>
@@ -43,7 +38,14 @@
 		<script type="text/javascript" src="scripts/tracking/events.js"></script>
 	
 		<!-----------<!--! Run ----------->	
-		<script type="text/javascript" src="scripts/tracking/main.js"></script>
+		<script type="text/javascript" src="scripts/tracking/tracking.js"></script>
+		
+		<!-------------------------<!--! SELECTION ------------------------------>
+		<script type="text/javascript" src="scripts/selection/Selection.js"></script>
+		<script type="text/javascript" src="scripts/selection/SelectionField.js"></script>
+		
+		<!-------------------------<!--! MAIN ------------------------------>
+		<script type="text/javascript" src="scripts/main.js"></script>
 
 	</head>
 	
@@ -53,8 +55,7 @@
 		
 		<div id="gesture" class="fadeOut">No gesture</div>
 		
-		<div id="demo">
-		</div>
+		<div id="demo"></div>
 	
 		<div id="text"></div>
 		
