@@ -96,10 +96,10 @@ SelectionField.prototype.update = function()	{
 		this.self.css({"transform" : "translateY(" + this.translateCount + "px)", "-webkit-transform" : "translateY(" + this.translateCount + "px)", });
 	// If the cursor is too far away from the bottom pull it up
 	} else if (distanceFromBottom - this.translateCount < -this.threshold)	{
-		
+
 		this.self.removeClass("selecting");
-		this.selectable = false;
-				
+		//this.selectable = false;
+		//dadurch, dass selectable hier auf false gesetzt wird, ist es später nicht mehr möglich über ein schnelles runterdrücken des fußes zu selektieren, da er nicht mehr in die Abfage this.selectable && this.underneith rein geht.
 		var subtractValue = 0;
 		
 		if (distanceFromBottom < -this.threshold * 2)	{
