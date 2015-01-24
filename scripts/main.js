@@ -12,6 +12,7 @@ $(document).ready( function()	{
 
 function loop()	{
 	tracking();
+	selection.update();
 	
 	$("#demo").trigger("frame");
 	
