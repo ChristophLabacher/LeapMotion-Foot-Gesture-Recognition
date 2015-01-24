@@ -143,7 +143,7 @@ $(document).ready(function()	{
 
         }
         
-        // nur die darstellung des baldes für das letzte bild
+        // nur die darstellung des balles für das letzte bild
         if(activeWord == "highHoverHide"){
             $("#ball").addClass("white");
         }else{
@@ -218,7 +218,6 @@ $(document).ready(function()	{
                         translateCount += addingValue;
                         
                         
-                        //create over jquery.animate different custom easing functions
                         $(this).css({"transform" : "translate(0px, " + translateCount + "px)", "-webkit-transform" : "translate(0px, " + translateCount + "px)", });
 
                     }else if(distanceFromBottom > 30 && $(this).hasClass("enteredCorrectly")){
@@ -239,7 +238,6 @@ $(document).ready(function()	{
 
                             translateCount -= subtractValue;
                             
-                            //create over jquery.animate different custom easing functions                            
                             $(this).css({"transform" : "translate(0px, " + translateCount + "px)", "-webkit-transform" : "translate(0px, " + translateCount + "px)", });
                             
                         }else {
@@ -303,16 +301,16 @@ $(document).ready(function()	{
 
                     // hier abhängig vom translate Count evtl noch zuvor eine animation nach unten schalten
                     // die animation nach unten muss abhängig von der geschwindigkeit in dem moment sein.
-                    // - how to get velocity
                     // 
                     
+                    
+                    //abfrage für die animation
                     if(translateCount < 10){
                         
                         // pulledDown wird später noch abhängig von der geschwindigkeit zu diesem zeitpunkt ausgerechnet
                         // es soll darstellen wie weit die elemente noch heruntergezogen werden, wenn man sie praktisch einfach nach unten geschmissen hat
                         var pulledDown = Math.min(Math.max(map(Math.round(dataset.velocityXY), 1, 20, 5, 80), 5), 80);
                         
-                        console.log(Math.round(dataset.velocityXY) + " // " + pulledDown);
                         
                         var transformString = 'translate(0px, ' + pulledDown + 'px)';
                         
