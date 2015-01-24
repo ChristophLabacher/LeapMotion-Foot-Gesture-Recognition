@@ -132,6 +132,11 @@ SelectionField.prototype.select = function()	{
 		
 	if (this.stackable)	{		
 		$(".selection-" + this.parentId + " .selection-field").removeClass("selected");
+		//dadurch, dass du hier nur die class selected entfernst, setzt du ja nicht auch den wert this.selected wieder auf false, der in zeile 119 überprüft wird.
+		//das problem ist dadurch, dass er nicht richtig rausspringt.
+		//ich bin mir nicht sicher, wie ich von den anderen objekten die attribute selected auf false setze
+		//das muss hier bei stackable, aber auch beim rest geschehen, wo du über parentID bei anderen elementen die class löschst.
+		//das löschen der class reicht nicht, du musst auch den attribut selected des objektes ändern.
 		
 		for (var i = 0; i <= this.id; i++)	{
 			if (!$(".selection-" + this.parentId + " .selection-field-" + i).hasClass("spacer"))	{
