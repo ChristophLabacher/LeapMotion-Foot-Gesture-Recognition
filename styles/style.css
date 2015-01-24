@@ -128,10 +128,10 @@ p {
   border-bottom: none;
 }
 .selection-field.mouseOver {
-  background-color: #FFFF00;
+  background-color: rgba(0, 0, 0, 0.05);
 }
 .selection-field.selected {
-  background-color: #FF00FF;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 /************************

@@ -138,11 +138,11 @@ p	{
 	}
 	
 	&.mouseOver	{
-		background-color: #FFFF00;
+		background-color: rgba(0,0,0,.05);
 	}
 	
 	&.selected	{
-		background-color: #FF00FF;
+		background-color: rgba(0,0,0,.3);
 	}
 }
 

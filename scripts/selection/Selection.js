@@ -40,10 +40,10 @@ Selection.prototype.setup = function()	{
 		var target = $(".selection-" + this.id);
 		
 		if (i == ((this.selectionFieldCount - 1)/2) && this.spacer)	{
-			var selectionField = new SelectionField(i, this.id, target, false, this.selectionFieldCount, true);
+			var selectionField = new SelectionField(i, this.id, target, false, this.selectionFieldCount, true, this.multiSelect, this.stackable);
 			this.selectionFields.push(selectionField);
 		} else	{
-			var selectionField = new SelectionField(i, this.id, target, true, this.selectionFieldCount, false);
+			var selectionField = new SelectionField(i, this.id, target, true, this.selectionFieldCount, false, this.multiSelect, this.stackable);
 			this.selectionFields.push(selectionField);
 		}
 	}

@@ -3,7 +3,7 @@
 // One selectable slice of a selection
 ////////////////////////////////////////////////////////////////////
 
-function SelectionField(_id, _parentId, _target, _active, _selectionFieldCount, _iAmSpacer)	{
+function SelectionField(_id, _parentId, _target, _active, _selectionFieldCount, _iAmSpacer, _multipleSelect, _stackable)	{
 	this.id = _id;
 	this.parentId = _parentId;
 	this.target = _target;
@@ -13,15 +13,16 @@ function SelectionField(_id, _parentId, _target, _active, _selectionFieldCount, 
 	
 	this.selected = false;
 	this.mouseOver = true;
-	
 	this.underneith = false;
 	
 	this.selectable = false;
-	this.selecting = false;
 	
+	this.threshold = 40;
 	
 	this.selectionFieldCount = _selectionFieldCount;
 	this.iAmSpacer = _iAmSpacer;
+	this.multipleSelect = _multipleSelect;
+	this.stackable = _stackable;
 	
 	this.action = function()	{};
 	
@@ -59,11 +60,12 @@ SelectionField.prototype.getDimensions = function()	{
 // Check if a selection is being made
 SelectionField.prototype.update = function()	{
 	// Get the distance between the cursor and the bottom of the field
-	var distanceFromBottom = dataset.position.y - this.borderBottom;
+	var distanceFromBottom = dataset.position.y - this.borderBottom - this.translateCount;
 
 	// If the cursor is within the selection-field
 	if (leapHandIsSet && this.active && dataset.position.x > this.borderLeft && dataset.position.x < this.borderRight
-	&& dataset.position.y > this.borderTop && dataset.position.y < this.borderBottom)	{
+	&& dataset.position.y > this.borderTop && dataset.position.y < this.borderBottom + this.translateCount)	{
+		this.underneith = false;
 		this.mouseOver = true;
 		this.self.addClass("mouseOver");
 	// If the cursor is underneith the selection field
@@ -72,38 +74,40 @@ SelectionField.prototype.update = function()	{
 		this.mouseOver = false;
 		this.self.removeClass("mouseOver");	
 	} else {
+		this.underneith = false;
 		this.selectable = false;
 		this.mouseOver = false;
 		this.self.removeClass("mouseOver");			
 	}
 	
 	// If the curor was once high enough after it entered the field it is selectable
-	if (this.mouseOver && distanceFromBottom < -30 )	{
+	if (this.mouseOver && distanceFromBottom < -20)	{
 		this.selectable = true;
 	}
 	
-	// If the cursor is within die bottom 30px of the field move it down
-	if (this.selectable && distanceFromBottom > -30 && distanceFromBottom < 0 && movementY.direction == "down")	{
+	// The field is selectable, and the cursor is close to the bottom push it down until the threshold is reached
+	if (this.selectable && distanceFromBottom > -this.threshold && distanceFromBottom < 0)	{
 		this.self.addClass("selecting");
-		this.selecting = true;
 		
-		var addValue = map(this.translateCount, 0, 30, 2, 0);
-		addValue = constrain(addValue, 0, 2);
+		var addValue = map(this.translateCount, 0, this.threshold*2, 1, 0);
+		addValue = constrain(addValue, 0, 1);
 		this.translateCount += addValue;
 
 		this.self.css({"transform" : "translateY(" + this.translateCount + "px)", "-webkit-transform" : "translateY(" + this.translateCount + "px)", });
-	// If the cursor it of the bottom 30px of the field move it up		
-	} else if (distanceFromBottom < -30 && movementY.direction == "up")	{
-		this.self.removeClass("selecting");
+	// If the cursor is too far away from the bottom pull it up
+	} else if (distanceFromBottom - this.translateCount < -this.threshold)	{
 		
+		this.self.removeClass("selecting");
+		this.selectable = false;
+				
 		var subtractValue = 0;
 		
-		if (distanceFromBottom < - 70)	{
-			subtractValue = map(this.translateCount, 0, 30, 0, 4);
+		if (distanceFromBottom < -this.threshold * 2)	{
+			subtractValue = map(this.translateCount, 0, this.threshold*2, 0, 8);
 			subtractValue = constrain(subtractValue, 0, 4);
 
 		} else {
-			subtractValue = map(this.translateCount, 0, 30, 0, 2);
+			subtractValue = map(this.translateCount, 0, this.threshold*2, 0, 4);
 			subtractValue = constrain(subtractValue, 0, 2);
 		}
 		
@@ -111,7 +115,7 @@ SelectionField.prototype.update = function()	{
 
 		this.self.css({"transform" : "translateY(" + this.translateCount + "px)", "-webkit-transform" : "translateY(" + this.translateCount + "px)", });
 	// If the field is selectable and the cursor is underneith it select/unselect it.
-	} else if (this.selectable && distanceFromBottom - this.translateCount > 0)	{
+	} else if (this.selectable && this.underneith)	{
 		if (!this.selected)	{
 			this.select();
 		} else {
@@ -120,33 +124,62 @@ SelectionField.prototype.update = function()	{
 	}
 }
 
-// Select has been triggered
 SelectionField.prototype.select = function()	{
 	this.action();
 	
 	this.selected = true;
 	this.selectable = false;
+		
+	if (this.stackable)	{		
+		$(".selection-" + this.parentId + " .selection-field").removeClass("selected");
+		
+		for (var i = 0; i <= this.id; i++)	{
+			if (!$(".selection-" + this.parentId + " .selection-field-" + i).hasClass("spacer"))	{
+				$(".selection-" + this.parentId + " .selection-field-" + i).addClass("selected");	
+			}
+		}
+	} else if (this.multiselect)	{
+		this.self.removeClass("selecting");
+		this.self.addClass("selected");		
+	} else{
+		$(".selection-" + this.parentId + " .selection-field").removeClass("selected");
+		this.self.addClass("selected");		
+	}
 	
-	this.self.removeClass("selecting");
-	this.self.addClass("selected");
-	
-	this.translateCount = 0;
-	this.self.css({"transform" : "translateY(0px)", "-webkit-transform" : "translateY(0px)", });
-	
-	console.log(this.id + " selected");
+	this.resetTranslate();
 }
 
-// Unselect has been triggered
 SelectionField.prototype.unselect = function()	{	
 	
 	this.selected = false;
 	this.selectable = false;
 	
 	this.self.removeClass("selecting");
-	this.self.removeClass("selected");
+	
+	if (this.stackable)	{
+		
+		$(".selection-" + this.parentId + " .selection-field").removeClass("selected");
+		
+		for (var i = 0; i < this.id; i++)	{
+			if (!$(".selection-" + this.parentId + " .selection-field-" + i).hasClass("spacer"))	{
+				$(".selection-" + this.parentId + " .selection-field-" + i).addClass("selected");	
+			}
+		}
+	} else {
+		this.self.removeClass("selected");
+	}	
+	
+	this.resetTranslate();
+}
+
+SelectionField.prototype.resetTranslate = function()	{	
+
+
+	if (this.translateCount < this.threshold )	{
+		var pulledDown = constrain(map(Math.round(dataset.velocityXY), 1, 20, 5, this.threshold*2), 5, this.threshold*2);
+		this.self.css({"transform" : "translateY(" + pulledDown+ "px)", "-webkit-transform" : "translateY(" + pulledDown + "px)", });
+	}
 	
 	this.translateCount = 0;
-	this.self.css({"transform" : "translateY(0px)", "-webkit-transform" : "translateY(0px)", });
-	
-	console.log(this.id + " selected");
+	this.self.animate({transform: 'translate(0px, 0px)' }, 800, 'easeOutElastic');
 }
