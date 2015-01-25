@@ -27,7 +27,33 @@ function setup()	{
 	
 	var target = $("#demo");
 	selection = new Selection(0, target, false, 5, false, false, 2, true);
+		
 }
+
+// Initialize the sound players
+soundManager.onready(function() {
+	var newSoundID = "hover";
+	var newSoundURL = "/data/sounds/hover.mp3";
+	
+	hoverSound = soundManager.createSound({
+		id: newSoundID,
+		url: newSoundURL,
+		autoLoad: true,
+		autoPlay: false,
+		volume: 100
+	});
+	
+	var newSoundID = "select";
+	var newSoundURL = "/data/sounds/select.mp3";
+	
+	selectSound = soundManager.createSound({
+		id: newSoundID,
+		url: newSoundURL,
+		autoLoad: true,
+		autoPlay: false,
+		volume: 100
+	});
+});
 
 // When the browser is ready start the new run
 function queue()	{

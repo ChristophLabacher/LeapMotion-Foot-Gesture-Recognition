@@ -61,6 +61,10 @@ SelectionField.prototype.update = function()	{
 	// If the cursor is within the selection-field
 	if (leapHandIsSet && this.active && dataset.position.x > this.borderLeft && dataset.position.x < this.borderRight
 	&& dataset.position.y > this.borderTop && dataset.position.y < this.borderBottom + this.translateCount)	{
+		if (this.mouseOver == false)	{
+			hoverSound.play();
+		}
+		
 		this.underneith = false;
 		this.mouseOver = true;
 		this.self.addClass("mouseOver");
@@ -144,6 +148,9 @@ SelectionField.prototype.select = function()	{
 		this.self.addClass("selected");		
 	}
 	
+	selectSound.play();
+
+	
 	this.resetTranslate();
 }
 
@@ -165,6 +172,8 @@ SelectionField.prototype.unselect = function()	{
 	} else {
 		this.self.removeClass("selected");
 	}	
+	
+	selectSound.play();
 	
 	this.resetTranslate();
 }
