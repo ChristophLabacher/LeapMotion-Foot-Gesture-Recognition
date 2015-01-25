@@ -53,7 +53,7 @@ Selection.prototype.setup = function()	{
 Selection.prototype.update = function()	{
 	if (this.active)	{
 		
-		if (dataset.position.y > height*0.6)	{
+		if (dataset.position.y > height*0.7)	{
 			this.hide();
 		} else	{
 			this.show();
@@ -67,6 +67,11 @@ Selection.prototype.update = function()	{
 }
 
 Selection.prototype.show = function()	{
+	// Check if a selection is being made on any of the fields
+	for (var i = 0; i < this.selectionFields.length; i++)	{
+		this.selectionFields[i].getDimensions();
+	}		
+
 	this.self.removeClass("inactive");
 }
 

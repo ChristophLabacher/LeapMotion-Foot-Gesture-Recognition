@@ -43,12 +43,12 @@ soundManager.onready(function() {
 		volume: 100
 	});
 	
-	var newSoundID = "select";
-	var newSoundURL = "/data/sounds/select.mp3";
+	var newSoundIDSelect = "select";
+	var newSoundURLSelect = "/data/sounds/select.mp3";
 	
 	selectSound = soundManager.createSound({
-		id: newSoundID,
-		url: newSoundURL,
+		id: newSoundURLSelect,
+		url: newSoundURLSelect,
 		autoLoad: true,
 		autoPlay: false,
 		volume: 100
