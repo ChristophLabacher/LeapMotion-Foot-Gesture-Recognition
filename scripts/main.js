@@ -3,6 +3,9 @@ var time = 0;
 var lastFrameTime = 0;
 
 var selection;
+var selections = [];
+
+var getGestures = true;
 
 // Start the rundown
 $(document).ready( function()	{
@@ -12,7 +15,7 @@ $(document).ready( function()	{
 
 function loop()	{
 	tracking();
-	selection.update();
+	selections[0].update();
 	
 	$("#demo").trigger("frame");
 	
@@ -26,8 +29,8 @@ function setup()	{
 	setupTracking();
 	
 	var target = $("#demo");
-	selection = new Selection(0, target, false, 5, false, false, 2, true);
-		
+	selection = new Selection(0, target, false, 5, false, false, 6, false);
+	selections.push(selection);
 }
 
 // Initialize the sound players

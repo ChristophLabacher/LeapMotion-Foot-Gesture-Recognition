@@ -130,7 +130,8 @@ p	{
 
 .selection-field	{
 	float: left;
-	height: 55%;
+	height: 45%;
+	border-collapse: collapse;
 	border-bottom: 1px solid grey;
 	
 	&.spacer	{

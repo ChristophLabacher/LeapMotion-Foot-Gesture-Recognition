@@ -79,8 +79,10 @@ function tracking()	{
 	getMovementX();
 	getMovementY();
 	
-	// Find gestures in the movements
-	getGesture();
+	if (getGestures)	{
+		// Find gestures in the movements
+		getGesture();
+	}
 	
 	// Display the collected information	
 	printVisualisation();

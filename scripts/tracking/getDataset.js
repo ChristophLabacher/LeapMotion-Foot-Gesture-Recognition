@@ -8,8 +8,8 @@ function getDataset()	{
 
 	// Get data and reverse it
 	if (leapHandIsSet)	{
-		posX = Math.round(	map(leapHand.palmPosition[0], -150, 150, width, 0)	);
-		posY = Math.round(	map(leapHand.palmPosition[1], 0, 250, 0, height * .8)	);
+		posX = Math.round(	map(leapHand.palmPosition[0], -100, 100, width, 0)	);
+		posY = Math.round(	map(leapHand.palmPosition[1], 100, 250, 0, height)	);
 		posZ = Math.round(	leapHand.palmPosition[2]	);
 	}
 	

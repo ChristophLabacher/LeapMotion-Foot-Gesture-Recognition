@@ -53,7 +53,7 @@ Selection.prototype.setup = function()	{
 Selection.prototype.update = function()	{
 	if (this.active)	{
 		
-		if (dataset.position.y > height*0.7)	{
+		if (dataset.position.y > height*0.6)	{
 			this.hide();
 		} else	{
 			this.show();
@@ -71,10 +71,11 @@ Selection.prototype.show = function()	{
 	for (var i = 0; i < this.selectionFields.length; i++)	{
 		this.selectionFields[i].getDimensions();
 	}		
-
+	getGestures = false;
 	this.self.removeClass("inactive");
 }
 
 Selection.prototype.hide = function()	{
+	getGestures = true;
 	this.self.addClass("inactive");
 }
