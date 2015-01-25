@@ -135,7 +135,10 @@ $(document).ready(function()	{
                     var rotateStringNeg = "rotate(-" + changeToDegree + "deg)";
                     
                     
-                    //maybe change volume depending on speed
+                    var newVolume = Math.min(Math.max(map(gesture.velocity, 0, 8, 20, 100), 20), 100);
+                    
+                    console.log(newVolume);
+                    soundManager.setVolume('swipe', newVolume);
                     swipeSound.play();
                     
                     switch (gestureString){
