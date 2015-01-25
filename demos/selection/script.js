@@ -190,7 +190,7 @@ $(document).ready(function()	{
                     if(!$(this).hasClass("spacer") && activeWord == "simpleHover"){
                         var thisPlay = $(this).html();
                         hoverSounds[thisPlay].play();
-                    }else{
+                    }else if(!$(this).hasClass("spacer")){
                         hoverSounds[3].play();
                     }
                 }
@@ -338,7 +338,7 @@ $(document).ready(function()	{
                         $(this).animate({transform: 'translate(0px, 0px)' }, 500, 'easeOutElastic');                        
                     }
 
-
+                    selectSound.play();                    
 
                     translateCount=0;
 //                    $(this).css({"transform" : "translate(0px, " + translateCount + "px)", "-webkit-transform" : "translate(0px, " + translateCount + "px)", });                            
@@ -375,6 +375,9 @@ $(document).ready(function()	{
         for(i = 1; i <= 4; i++){
             initializeHoverSounds(i);
         }
+        
+        initializeSelectSound();
+        
     });
 
 	
@@ -382,6 +385,57 @@ $(document).ready(function()	{
 
 
 var hoverSounds = [];
+var selectSound;
+
+
+
+// ### SoundManager
+
+
+function initializeHoverSounds(newID){
+
+        
+    var newSoundID = "hover" + newID;
+    var newSoundURL = "/demos/selection/hoversound/hover_" + newID + ".mp3";
+
+    hoverSounds[newID] = soundManager.createSound({
+        id: newSoundID,
+        url: newSoundURL,
+        autoLoad: true,
+        autoPlay: false,
+        onload: function() {
+            console.log('The sound '+ newSoundID +' loaded!');
+        },
+        volume: 100
+    });
+        
+    
+}
+
+function initializeSelectSound(){
+
+        
+    var newSoundID = "select";
+    var newSoundURL = "/demos/selection/selectsound/select.mp3";
+
+    selectSound = soundManager.createSound({
+        id: newSoundID,
+        url: newSoundURL,
+        autoLoad: true,
+        autoPlay: false,
+        onload: function() {
+            console.log('The sound '+ newSoundID +' loaded!');
+        },
+        volume: 100
+    });
+        
+    
+}
+
+
+
+
+
 
 
 function getDistanceFromBottom(borderElement){
@@ -410,34 +464,3 @@ function getDistanceFromBottom(borderElement){
         return false;
     }
 }
-
-
-
-// ### SoundManager
-
-
-function initializeHoverSounds(newID){
-
-        
-    var newSoundID = "hover" + newID;
-    var newSoundURL = "/demos/selection/hoversound/hover_" + newID + ".mp3";
-
-    hoverSounds[newID] = soundManager.createSound({
-        id: newSoundID,
-        url: newSoundURL,
-        autoLoad: true,
-        autoPlay: false,
-        onload: function() {
-            console.log('The sound '+ newSoundID +' loaded!');
-        },
-        volume: 100
-    });
-        
-    
-}
-
-
-
-
-
-
