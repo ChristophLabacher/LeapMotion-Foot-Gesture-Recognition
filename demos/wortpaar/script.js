@@ -110,16 +110,7 @@ $(document).ready(function()	{
             $("#normal").addClass("active");
             activeWord = 1;
 
-        }/*
-else if(newPositionX < $("#langsam").offset().left+$("#langsam").outerWidth()){
-            if(activeWord != 2){
-                $(".active").removeClass("active");
-            }
-            $("#langsam").addClass("active");
-            activeWord = 2;
-            
-        }
-*/else if(newPositionX < $("#hektisch").offset().left+$("#hektisch").outerWidth()){
+        }else if(newPositionX < $("#hektisch").offset().left+$("#hektisch").outerWidth()){
             if(activeWord != 5){
                 $(".active").removeClass("active");
             }
@@ -179,17 +170,19 @@ else if(newPositionX < $("#langsam").offset().left+$("#langsam").outerWidth()){
         switch(activeWord){
             case 0:
                 $("#ball").removeClass();
+                muteEverything();
                 break;
             
             case 1:
                 $("#ball").removeClass();
+                muteEverything();
                 break;
             
             case 2:    
                 if(!$("#ball").hasClass("slow")){
                     $("#ball").removeClass();
                 }
-
+                muteEverything();
                 $("#ball").addClass("slow");
                 // funktioniert im prinzip, ist jedoch noch ungenau, da css-easings immer neustarten
                 
@@ -203,6 +196,8 @@ else if(newPositionX < $("#langsam").offset().left+$("#langsam").outerWidth()){
 
                 newPositionX = map(dataset.position.x, 300, 1100, -600, width+600);
                 newPositionY = map(dataset.position.y, 200, 600, 0, height);
+                
+                muteEverything();
 
                 break;
 
@@ -215,6 +210,8 @@ else if(newPositionX < $("#langsam").offset().left+$("#langsam").outerWidth()){
 
                 newPositionX = map(dataset.position.x, 300, 1100, 0+300, width-300);
                 newPositionY = map(dataset.position.y, 200, 600, 400, 500);
+                
+                muteEverything();
 
                 break;
 
@@ -231,12 +228,21 @@ else if(newPositionX < $("#langsam").offset().left+$("#langsam").outerWidth()){
                 
                 plusOrMinus = Math.random() < 0.5 ? -1 : 1;
                 newPositionY += posAdd*plusOrMinus;
+                
+
+                if (!hecticSound.playState) {
+                    muteEverything();
+                    hecticSound.play();
+                }
+                
+                
                     
                 break;
 
             
             case 6:
                 $("#ball").removeClass();
+                muteEverything();
                 //bei ruhig noch einen damper einbauen
                 //dadurch auch z.B. langsam abdecken
                 break;
@@ -260,6 +266,13 @@ else if(newPositionX < $("#langsam").offset().left+$("#langsam").outerWidth()){
                 
                 ballsizeX += sizeAdd;
                 ballsizeY += sizeAdd;
+                
+
+                if (!loudSound.playState) {
+                    muteEverything();
+                    loudSound.play();
+                }
+                
 
                 break;
 
@@ -285,13 +298,20 @@ else if(newPositionX < $("#langsam").offset().left+$("#langsam").outerWidth()){
                 ballsizeX += sizeAdd;
                 ballsizeY += sizeAdd;
 
+
+                if (!quietSound.playState) {
+                    muteEverything();
+                    quietSound.play();
+                }
+
+
                 break;
                 
                 
             case 9:
                 $("#ball").removeClass();
                 
-                
+                muteEverything();
                 
                 ballsizeX = map($("#ende").offset().left+$("#ende").outerWidth()-newPositionX, 200, 40, 50, 0);
                 ballsizeY = map($("#ende").offset().left+$("#ende").outerWidth()-newPositionX, 200, 40, 50, 0);
@@ -317,26 +337,101 @@ else if(newPositionX < $("#langsam").offset().left+$("#langsam").outerWidth()){
 
         
     });
-
+	
+   
+    soundManager.onready(function() {
+        soundManagerReady = true;
+        initializeHecticSound();
+        initializeLoudSound();
+        initializeQuietSound();
+        
+    });
 
 	
-/*
-	$("#demo").on("gesture", function (e, gesture)	{
-		var w = $(window).width();
-		var l = $(".img-container").offset().left;
-		
-		if (l != (count - 2) * w)	{
-			if (gesture == "swipe right" && leapHandIsSet)	{
-				l -= w;
-				$(".img-container").offset({left: l});			
-			}
-		}
-		if (l != 0)	{
-			if (gesture == "swipe left" && leapHandIsSet)	{
-				l += w;
-				$(".img-container").offset({left: l});			
-			}
-		}
-	})
-*/
 });
+
+var soundManagerReady;
+
+var hecticSound;
+var loudSound;
+var quietSound;
+
+function muteEverything(){
+
+    if(soundManagerReady){
+        soundManager.stopAll();
+/*
+        quietSound.pause();
+        hecticSound.pause();
+        loudSound.pause();
+*/
+    }
+    
+}
+
+// ### SoundManager
+
+
+function initializeHecticSound(){
+
+        
+    var newSoundID = "hectic";
+    var newSoundURL = "/demos/wortpaar/experiencesounds/hectic.mp3";
+
+    hecticSound = soundManager.createSound({
+        id: newSoundID,
+        url: newSoundURL,
+        autoLoad: true,
+        autoPlay: false,
+        onload: function() {
+            console.log('The sound '+ newSoundID +' loaded!');
+        },
+        volume: 100
+    });
+        
+    
+}
+
+function initializeLoudSound(newID){
+
+        
+    var newSoundID = "loud";
+    var newSoundURL = "/demos/wortpaar/experiencesounds/loud.mp3";
+    
+    loudSound = soundManager.createSound({
+        id: newSoundID,
+        url: newSoundURL,
+        autoLoad: true,
+        autoPlay: false,
+        onload: function() {
+            console.log('The sound '+ newSoundID +' loaded!');
+        },
+        volume: 100
+    });
+        
+    
+}
+
+function initializeQuietSound(newID){
+
+        
+    var newSoundID = "quiet";
+    var newSoundURL = "/demos/wortpaar/experiencesounds/quiet.mp3";
+
+    quietSound = soundManager.createSound({
+        id: newSoundID,
+        url: newSoundURL,
+        autoLoad: true,
+        autoPlay: false,
+        onload: function() {
+            console.log('The sound '+ newSoundID +' loaded!');
+        },
+        volume: 100
+    });
+        
+    
+}
+
+
+
+
