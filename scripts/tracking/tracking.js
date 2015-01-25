@@ -73,7 +73,7 @@ function tracking()	{
 	getLeapData();
 	
 	// Read the data from the Hand object and put it into a Dataset
-	getDataset();
+	getMoment();
 	
 	// Get the current movement in both dimensions
 	getMovementX();

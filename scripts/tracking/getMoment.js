@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////
-// GETDATASET
+// GETMOMENT
 // Read the data from the Hand object and put it into a Dataset
 ////////////////////////////////////////////////////////////////////
 
-function getDataset()	{
+function getMoment()	{
 	var posX = 0, posY = 0, posZ = 0;
 
 	// Get data and reverse it
@@ -14,7 +14,7 @@ function getDataset()	{
 	}
 	
 	// Create a new Dataset from the current data
-	dataset = new Dataset(leapHandIsSet, datasetCounter, time, posX, posY, posZ);
+	dataset = new Moment(leapHandIsSet, datasetCounter, time, posX, posY, posZ);
 	datasetCounter++;
 	
 	datasetHistory.push(dataset);
