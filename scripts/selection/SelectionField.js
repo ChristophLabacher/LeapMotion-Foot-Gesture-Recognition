@@ -11,7 +11,6 @@ function SelectionField(_id, _parentId, _target, _active, _selectionFieldCount, 
 	
 	this.active = _active;
 	
-	this.selected = false;
 	this.mouseOver = true;
 	this.underneith = false;
 	
@@ -98,8 +97,7 @@ SelectionField.prototype.update = function()	{
 	} else if (distanceFromBottom - this.translateCount < -this.threshold)	{
 
 		this.self.removeClass("selecting");
-		//this.selectable = false;
-		//dadurch, dass selectable hier auf false gesetzt wird, ist es später nicht mehr möglich über ein schnelles runterdrücken des fußes zu selektieren, da er nicht mehr in die Abfage this.selectable && this.underneith rein geht.
+
 		var subtractValue = 0;
 		
 		if (distanceFromBottom < -this.threshold * 2)	{
@@ -116,7 +114,7 @@ SelectionField.prototype.update = function()	{
 		this.self.css({"transform" : "translateY(" + this.translateCount + "px)", "-webkit-transform" : "translateY(" + this.translateCount + "px)", });
 	// If the field is selectable and the cursor is underneith it select/unselect it.
 	} else if (this.selectable && this.underneith)	{
-		if (!this.selected)	{
+		if (!this.self.hasClass("selected"))	{
 			this.select();
 		} else {
 			this.unselect();
@@ -126,17 +124,10 @@ SelectionField.prototype.update = function()	{
 
 SelectionField.prototype.select = function()	{
 	this.action();
-	
-	this.selected = true;
 	this.selectable = false;
 		
 	if (this.stackable)	{		
 		$(".selection-" + this.parentId + " .selection-field").removeClass("selected");
-		//dadurch, dass du hier nur die class selected entfernst, setzt du ja nicht auch den wert this.selected wieder auf false, der in zeile 119 überprüft wird.
-		//das problem ist dadurch, dass er nicht richtig rausspringt.
-		//ich bin mir nicht sicher, wie ich von den anderen objekten die attribute selected auf false setze
-		//das muss hier bei stackable, aber auch beim rest geschehen, wo du über parentID bei anderen elementen die class löschst.
-		//das löschen der class reicht nicht, du musst auch den attribut selected des objektes ändern.
 		
 		for (var i = 0; i <= this.id; i++)	{
 			if (!$(".selection-" + this.parentId + " .selection-field-" + i).hasClass("spacer"))	{
@@ -155,8 +146,6 @@ SelectionField.prototype.select = function()	{
 }
 
 SelectionField.prototype.unselect = function()	{	
-	
-	this.selected = false;
 	this.selectable = false;
 	
 	this.self.removeClass("selecting");
