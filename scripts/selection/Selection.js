@@ -8,6 +8,7 @@ function Selection(_id, _target, _autoHide, _autoHideTimeout, _multiSelect, _sta
 	this.target = _target;
 	this.self;
 	
+	this.active = true;
 	this.visible = true;
 	this.autoHide = _autoHide;
 	this.autoHideTimeout = _autoHideTimeout;
@@ -31,7 +32,7 @@ Selection.prototype.setup = function()	{
 	}
 	
 	// Append it to its target and make it get itself
-	var container = "<div class=\"selection selection-" + this.id + "\"></div>"
+	var container = "<div class=\"selection selection-" + this.id + " inactive \"></div>"
 	this.target.prepend(container);	
 	this.self = $(".selection-" + this.id);
 	
@@ -50,9 +51,18 @@ Selection.prototype.setup = function()	{
 }
 
 Selection.prototype.update = function()	{
-	// Check if a selection is being mad on any of the fields
-	for (var i = 0; i < this.selectionFields.length; i++)	{
-		this.selectionFields[i].update();
+	if (this.active)	{
+		
+		if (dataset.position.y > height*0.6)	{
+			this.hide();
+		} else	{
+			this.show();
+		}
+		
+		// Check if a selection is being made on any of the fields
+		for (var i = 0; i < this.selectionFields.length; i++)	{
+			this.selectionFields[i].update();
+		}		
 	}
 }
 
