@@ -10,12 +10,9 @@ function SelectionField(_id, _parentId, _target, _active, _selectionFieldCount, 
 	this.self;
 	
 	this.active = _active;
-	
 	this.mouseOver = true;
 	this.underneith = false;
-	
 	this.selectable = false;
-	
 	this.threshold = 40;
 	
 	this.selectionFieldCount = _selectionFieldCount;
@@ -125,18 +122,23 @@ SelectionField.prototype.update = function()	{
 SelectionField.prototype.select = function()	{
 	this.action();
 	this.selectable = false;
-		
+	
+	// If it should be stackable
 	if (this.stackable)	{		
+		// Remove selected from all silbings
 		$(".selection-" + this.parentId + " .selection-field").removeClass("selected");
 		
+		// Add selected to silbings left of self
 		for (var i = 0; i <= this.id; i++)	{
 			if (!$(".selection-" + this.parentId + " .selection-field-" + i).hasClass("spacer"))	{
 				$(".selection-" + this.parentId + " .selection-field-" + i).addClass("selected");	
 			}
 		}
+	// If it should be multiselectable add selected to self
 	} else if (this.multiselect)	{
 		this.self.removeClass("selecting");
 		this.self.addClass("selected");		
+	// If it is default remove selected from all silbings and add to self
 	} else{
 		$(".selection-" + this.parentId + " .selection-field").removeClass("selected");
 		this.self.addClass("selected");		
@@ -150,8 +152,8 @@ SelectionField.prototype.unselect = function()	{
 	
 	this.self.removeClass("selecting");
 	
+	// IF the selection is stackable remove selected from self and all silbings right of self
 	if (this.stackable)	{
-		
 		$(".selection-" + this.parentId + " .selection-field").removeClass("selected");
 		
 		for (var i = 0; i < this.id; i++)	{
@@ -159,6 +161,7 @@ SelectionField.prototype.unselect = function()	{
 				$(".selection-" + this.parentId + " .selection-field-" + i).addClass("selected");	
 			}
 		}
+	// If it is default reomve selected from self.
 	} else {
 		this.self.removeClass("selected");
 	}	
@@ -167,13 +170,13 @@ SelectionField.prototype.unselect = function()	{
 }
 
 SelectionField.prototype.resetTranslate = function()	{	
-
-
+	// If the movement was tpo fast to really be translated a lot set a translation corresponding to the velocity
 	if (this.translateCount < this.threshold )	{
 		var pulledDown = constrain(map(Math.round(dataset.velocityXY), 1, 20, 5, this.threshold*2), 5, this.threshold*2);
 		this.self.css({"transform" : "translateY(" + pulledDown+ "px)", "-webkit-transform" : "translateY(" + pulledDown + "px)", });
 	}
 	
+	// Snap back
 	this.translateCount = 0;
 	this.self.animate({transform: 'translate(0px, 0px)' }, 800, 'easeOutElastic');
 }
