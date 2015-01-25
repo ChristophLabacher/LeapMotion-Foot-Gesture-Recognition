@@ -30,8 +30,8 @@ $(document).ready(function()	{
         "<div id='wordwrapper'>" + 
             "<div class='word' id='introduction'><div class='wordText'>Erlebe verschiedene Auswahlmöglichkeiten</div></div>" + 
                 "<div class='word' id='simpleHover'><div class='selection'>1</div><div class='selection'>2</div><div class='selection'>3</div><div class='selection'>4</div></div>" + 
-                "<div class='word' id='highHover'><div class='selectionWrapper switchTrigger multiSelect'><div class='selection switchTrigger'>3</div><div class='selection switchTrigger'>1</div><div class='selection spacer'>&nbsp;</div><div class='selection switchTrigger'>2</div><div class='selection switchTrigger'>4</div></div><div class='bottomIntroduction'>mehrere auswählbar</div></div>" +
-                "<div class='word' id='highHoverHide'><div class='selectionWrapper switchTrigger'><div class='selection switchTrigger'>3</div><div class='selection switchTrigger'>1</div><div class='selection spacer'>&nbsp;</div><div class='selection switchTrigger'>2</div><div class='selection switchTrigger'>4</div></div><div class='bottomIntroduction'>nur eins auswählbar</div></div>" + 
+                "<div class='word' id='highHover'><div class='selectionWrapper switchTrigger multiSelect'><div class='selection switchTrigger'>Kat1</div><div class='selection switchTrigger'>Kat2</div><div class='selection spacer'>&nbsp;</div><div class='selection switchTrigger'>Kat3</div><div class='selection switchTrigger'>Kat4</div></div><div class='bottomIntroduction'>mehrere auswählbar</div></div>" +
+                "<div class='word' id='highHoverHide'><div class='selectionWrapper switchTrigger'><div class='selection switchTrigger'>X</div><div class='selection switchTrigger'>X</div><div class='selection spacer'>&nbsp;</div><div class='selection switchTrigger'>x</div><div class='selection switchTrigger'>X</div></div><div class='bottomIntroduction'>nur eins auswählbar</div></div>" + 
             "<div class='word' id='ende'><div class='selectionWrapper switchTrigger'><div class='selection switchTrigger' id='nextLevel'>ja.</div></div><div class='wordText'>weiter zum nächsten?</div></div></div>" + 
         "</div>"
     );
@@ -186,6 +186,13 @@ $(document).ready(function()	{
                 if(!$(this).hasClass("mouseOver")){
                     $(".active .mouseOver").removeClass("mouseOver");
                     $(this).addClass("mouseOver");
+                    
+                    if(!$(this).hasClass("spacer") && activeWord == "simpleHover"){
+                        var thisPlay = $(this).html();
+                        hoverSounds[thisPlay].play();
+                    }else{
+                        hoverSounds[3].play();
+                    }
                 }
 
                 //dann ist es auch schon irgendwo drauf
@@ -360,10 +367,21 @@ $(document).ready(function()	{
         }
  
     });
+	
+    soundManager.onready(function() {
+    // SM2 is ready to go!
+    
+
+        for(i = 1; i <= 4; i++){
+            initializeHoverSounds(i);
+        }
+    });
 
 	
 });
 
+
+var hoverSounds = [];
 
 
 function getDistanceFromBottom(borderElement){
@@ -395,7 +413,28 @@ function getDistanceFromBottom(borderElement){
 
 
 
+// ### SoundManager
 
+
+function initializeHoverSounds(newID){
+
+        
+    var newSoundID = "hover" + newID;
+    var newSoundURL = "/demos/selection/hoversound/hover_" + newID + ".mp3";
+
+    hoverSounds[newID] = soundManager.createSound({
+        id: newSoundID,
+        url: newSoundURL,
+        autoLoad: true,
+        autoPlay: false,
+        onload: function() {
+            console.log('The sound '+ newSoundID +' loaded!');
+        },
+        volume: 100
+    });
+        
+    
+}
 
 
 
