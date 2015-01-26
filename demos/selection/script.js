@@ -259,28 +259,6 @@ $(document).ready(function()	{
                 
                 
 
-/*
-                if(activeWord == "highHover" || activeWord == "highHoverHide" && !$(this).hasClass("spacer")){
-
-                    if(newPositionY - ballsizeDefault+10 < borders.top+thisHeight){
-                        correctEnter = true;
-                        $(this).addClass("activatedHold");
-                        $(this).removeClass("activated");
-                    }
-
-                    if(newPositionY + ballsizeDefault+10 > borders.top+thisHeight && correctEnter && translateCount < 30){
-                        console.log(translateCount);
-                        translateCount++;
-                        $(this).css({"transform" : "translate(0px, " + translateCount + "px)", "-webkit-transform" : "translate(0px, " + translateCount + "px)", });
-                    }
-                    
-                    if(translateCount>=30){
-                        $(this).toggleClass("activated");
-                        //sinnvolle animationen!! #todo
-                    }
-
-                }
-*/
 
                 
             }else{
