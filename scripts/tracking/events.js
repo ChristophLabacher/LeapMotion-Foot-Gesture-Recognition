@@ -9,7 +9,6 @@ $(document).ready(function()	{
 			}, 500);
 		});
 	}
-<<<<<<< HEAD
 	
 
 	$("#gesture").on("gesture", function (e, gesture)	{
@@ -18,6 +17,4 @@ $(document).ready(function()	{
 		}
 	});
 
-=======
->>>>>>> master
 })

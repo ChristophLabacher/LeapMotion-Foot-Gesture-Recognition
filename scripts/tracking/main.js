@@ -26,6 +26,9 @@ var showGesture = true;
 var showGestureVis = true;
 
 // General vars
+var frameCount = 0;
+var time = 0;
+var lastFrameTime = 0;
 var width;
 var height;
 
@@ -56,8 +59,21 @@ var gestureCounter = 0;
 var swipeXVelocityBreakpoint = 1.5;
 var swipeXDistanceBreakpoint = 100;
 
+// Selections
+var selectionSize = 0;
+var selectionHeight = 0;
+var hover = false;
 
-function setupTracking() {
+createSelection(4, 270);
+
+// Start the rundown
+$(document).ready( function()	{
+	setup();
+	loop();
+});
+
+
+function setup() {
 	// Setup the canvas
 	setupCanvas();
 	
@@ -65,7 +81,7 @@ function setupTracking() {
 	setupLeap();
 };
 
-function tracking()	{
+function loop()	{
 	// Clear the canvas
 	clear();
 	
@@ -73,17 +89,17 @@ function tracking()	{
 	getLeapData();
 	
 	// Read the data from the Hand object and put it into a Dataset
-	getMoment();
+	getDataset();
 	
 	// Get the current movement in both dimensions
 	getMovementX();
 	getMovementY();
 	
-	if (getGestures)	{
-		// Find gestures in the movements
-		getGesture();
-	}
+	// Find gestures in the movements
+	getGesture();
 	
+	checkSelection();
+
 	// Display the collected information	
 	//printVisualisation();
 	printText();
@@ -93,8 +109,15 @@ function tracking()	{
 		$("#demo").trigger("handIsSet");
 	}
 	
+	$("#demo").trigger("frame");	
+	
 	// Replace the previous dataset with this frames dataset for the next frame
 	datasetPrev = dataset;
+
+	// When the browser is ready start the new run
+	queue();
+	
+	lastFrameTime = time;
 };
 
 // Setup the canvas
@@ -113,3 +136,12 @@ function setupCanvas()	{
 function clear()	{
 	ctx.clearRect(0, 0, visualisation.width, visualisation.height);
 }
+
+// When the browser is ready start the new run
+function queue()	{
+	frameCount++;
+	window.requestAnimationFrame(loop);
+}
+
+// Setup the timer
+setInterval(function () {	time += 5	}, 5);
