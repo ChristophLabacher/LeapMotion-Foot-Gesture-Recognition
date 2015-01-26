@@ -320,8 +320,8 @@ $(document).ready(function()	{
 
 
                 if(dateNow - startEndTime > 3000){
-                    ballsizeX = 30;
-                    ballsizeY = 30;                    
+                    ballsizeX = 10;
+                    ballsizeY = 10;                    
                     $("#ende .wordText").html("Jetzt.")
                 }else if(dateNow - startEndTime > 2000){
                     ballsizeX = 15;
