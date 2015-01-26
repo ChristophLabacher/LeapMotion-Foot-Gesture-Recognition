@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////
-// DATASET
+// Moment
 // Information of the current movement within one frame
 ////////////////////////////////////////////////////////////////////
 
-function Dataset(_tracked, _id, _time, _posX, _posY, _posZ)	{
+function Moment(_tracked, _id, _time, _posX, _posY, _posZ)	{
 	this.tracked = _tracked;
 	this.id = _id;
 	this.time = _time;
