@@ -143,11 +143,12 @@ body{
 
 #highHoverHide .selectionWrapper, #ende .selectionWrapper{
     transform: translate(0px, -300px);
-    transition: transform 0.2s cubic-bezier(.97,.45,.91,1.5);
+    transition: transform 0.2s cubic-bezier(.97,.45,.91,1.5) 0.75s;
 }
 
 #highHoverHide .selectionWrapper.dropDown, #ende .selectionWrapper.dropDown{
     transform: translate(0px, 0px);
+    transition: transform 0.2s cubic-bezier(.97,.45,.91,1.5);
 }
 
 
