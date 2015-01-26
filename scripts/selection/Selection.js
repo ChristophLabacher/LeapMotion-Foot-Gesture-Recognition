@@ -11,6 +11,7 @@ function Selection(_id, _target, _autoHide, _autoHideTimeout, _multiSelect, _sta
 	this.active = true;
 	this.visible = true;
 	this.autoHide = _autoHide;
+	this.autoHideCounter = 0;
 	this.autoHideTimeout = _autoHideTimeout;
 
 	this.multiSelect = _multiSelect;
@@ -54,6 +55,10 @@ Selection.prototype.update = function()	{
 	if (this.active)	{
 		
 		if (dataset.position.y > height*0.6)	{
+			autoHideCounter++;
+		}
+		
+		if (autoHideCounter > autoHideTimeout)	{
 			this.hide();
 		} else	{
 			this.show();

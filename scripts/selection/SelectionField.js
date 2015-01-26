@@ -21,7 +21,8 @@ function SelectionField(_id, _parentId, _target, _active, _selectionFieldCount, 
 	this.multipleSelect = _multipleSelect;
 	this.stackable = _stackable;
 	
-	this.action = function()	{};
+	this.selectAction = function()	{};
+	this.unselectAction = function()	{};
 	
 	this.setup();
 	this.getDimensions();
@@ -162,7 +163,7 @@ SelectionField.prototype.select = function()	{
 	}
 	
 	selectSound.play();
-
+	this["selectAction"]();
 	
 	this.resetTranslate();
 }
@@ -189,6 +190,7 @@ SelectionField.prototype.unselect = function()	{
 	}	
 	
 	selectSound.play();
+	this["unselectAction"]();
 	
 	this.resetTranslate();
 }
@@ -199,7 +201,7 @@ SelectionField.prototype.resetTranslate = function()	{
 		var pulledDown = constrain(map(Math.round(dataset.velocityXY), 1, 20, 5, this.threshold*2), 5, this.threshold*2);
 		this.self.css({"transform" : "translateY(" + pulledDown+ "px)", "-webkit-transform" : "translateY(" + pulledDown + "px)", });
 	}
-	
+		
 	// Snap back
 	this.translateCount = 0;
 	this.self.animate({transform: 'translate(0px, 0px)' }, 800, 'easeOutElastic');
