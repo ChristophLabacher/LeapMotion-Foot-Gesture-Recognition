@@ -28,11 +28,11 @@ $(document).ready(function()	{
         "<div id='ball'></div>" + 
         "<div id='indicator'></div>" +
         "<div id='wordwrapper'>" + 
-            "<div class='word' id='introduction'><div class='wordText'>Erlebe verschiedene Auswahlmöglichkeiten</div></div>" + 
+            "<div class='word' id='introduction'><div class='wordText'>Erlebe verschiedene Auswahlmöglichkeiten.</div></div>" + 
                 "<div class='word' id='simpleHover'><div class='selection'>1</div><div class='selection'>2</div><div class='selection'>3</div><div class='selection'>4</div></div>" + 
-                "<div class='word' id='highHover'><div class='selectionWrapper switchTrigger multiSelect'><div class='selection switchTrigger'>Kat1</div><div class='selection switchTrigger'>Kat2</div><div class='selection spacer'>&nbsp;</div><div class='selection switchTrigger'>Kat3</div><div class='selection switchTrigger'>Kat4</div></div><div class='bottomIntroduction'>mehrere auswählbar</div></div>" +
-                "<div class='word' id='highHoverHide'><div class='selectionWrapper switchTrigger'><div class='selection switchTrigger'>X</div><div class='selection switchTrigger'>X</div><div class='selection spacer'>&nbsp;</div><div class='selection switchTrigger'>x</div><div class='selection switchTrigger'>X</div></div><div class='bottomIntroduction'>nur eins auswählbar</div></div>" + 
-            "<div class='word' id='ende'><div class='selectionWrapper switchTrigger'><div class='selection switchTrigger' id='nextLevel'>ja.</div></div><div class='wordText'>weiter zum nächsten?</div></div></div>" + 
+                "<div class='word' id='highHover'><div class='selectionWrapper switchTrigger multiSelect'><div class='selection switchTrigger'>A</div><div class='selection switchTrigger'>B</div><div class='selection spacer'>&nbsp;</div><div class='selection switchTrigger'>C</div><div class='selection switchTrigger'>D</div></div><div class='bottomIntroduction'>Mehrere auswählbar</div></div>" +
+                "<div class='word' id='highHoverHide'><div class='selectionWrapper switchTrigger'><div class='selection switchTrigger'>a</div><div class='selection switchTrigger'>b</div><div class='selection spacer'>&nbsp;</div><div class='selection switchTrigger'>c</div><div class='selection switchTrigger'>d</div></div><div class='bottomIntroduction'>Nur eins auswählbar</div></div>" + 
+            "<div class='word' id='ende'><div class='selectionWrapper switchTrigger'><div class='selection switchTrigger' id='nextLevel'>ja.</div></div><div class='wordText'>Weiter zum nächsten Bereich?</div></div></div>" + 
         "</div>"
     );
     
