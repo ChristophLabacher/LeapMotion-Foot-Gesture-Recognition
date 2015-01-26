@@ -12,6 +12,8 @@ $(document).ready(function()	{
     
     
     var marginOffset = 0;
+    
+    var startEndTime = 0;
 
 
     // Initializing the HTML-Structure
@@ -27,7 +29,7 @@ $(document).ready(function()	{
             "<div class='word' id='ruhig'><div class='wordText'>ruhig</div></div>" +
             "<div class='word' id='laut'><div class='wordText'>laut</div></div>" +
             "<div class='word' id='leise'><div class='wordText'>leise</div></div>" +
-            "<div class='word' id='ende'><div class='wordText'>ende</div></div>" + 
+            "<div class='word' id='ende'><div class='wordText'>Ende des ersten Teils</div></div>" + 
         "</div>"
     );
     
@@ -141,6 +143,7 @@ $(document).ready(function()	{
         }else if(newPositionX < $("#ende").offset().left+$("#ende").outerWidth()){
             if(activeWord != 9){
                 $(".active").removeClass("active");
+                startEndTime = Date.now();
             }
             $("#ende").addClass("active");
             activeWord = 9;
@@ -303,7 +306,8 @@ $(document).ready(function()	{
                     muteEverything();
                     quietSound.play();
                 }
-
+                
+                $("#ende .wordText").html("Ende des ersten Teils");
 
                 break;
                 
@@ -312,10 +316,29 @@ $(document).ready(function()	{
                 $("#ball").removeClass();
                 
                 muteEverything();
-                
-                ballsizeX = map($("#ende").offset().left+$("#ende").outerWidth()-newPositionX, 200, 40, 50, 0);
-                ballsizeY = map($("#ende").offset().left+$("#ende").outerWidth()-newPositionX, 200, 40, 50, 0);
+                var dateNow = Date.now();
 
+
+                if(dateNow - startEndTime > 3000){
+                    ballsizeX = 30;
+                    ballsizeY = 30;                    
+                    $("#ende .wordText").html("Jetzt.")
+                }else if(dateNow - startEndTime > 2000){
+                    ballsizeX = 15;
+                    ballsizeY = 15;
+                    $("#ende .wordText").html("Ende des ersten Teils in 3, 2, 1")
+                }else if(dateNow - startEndTime > 1000){
+                    ballsizeX = 25;
+                    ballsizeY = 25;
+                    
+                    $("#ende .wordText").html("Ende des ersten Teils in 3, 2,");
+                    
+                }else{
+                    ballsizeX = ballsizeDefault;
+                    ballsizeY = ballsizeDefault;
+                    
+                    $("#ende .wordText").html("Ende des ersten Teils in 3,");
+                }
                 break;
 
         }
