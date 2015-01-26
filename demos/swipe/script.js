@@ -12,6 +12,7 @@ $(document).ready(function()	{
 	showText = false;
     
     var swipeState = 0;
+    var count = 0;
     var trackingPause = false;
     
     //um zu zählen wie viele pixel das schon runtergeschoben wurde
@@ -46,15 +47,15 @@ $(document).ready(function()	{
         // das swipeState hier ist um das mapping anzupassen
         switch (swipeState){
             case 1:
-                newPositionX = map(dataset.position.x, 400, 975, 0, width);
+                newPositionX = map(dataset.position.x, 475, 925, 100, width-100);
                 break;
 
             case 2:
-                newPositionX = map(dataset.position.x, 375, 1025, 0, width);
+                newPositionX = map(dataset.position.x, 475, 925, 150, width-150);
                 break;
 
             case 3:
-                newPositionX = map(dataset.position.x, 300, 1050, 0, width);
+                newPositionX = map(dataset.position.x, 475, 925, 250, width-250);
                 break;
 
                 
@@ -62,6 +63,7 @@ $(document).ready(function()	{
                 // basic-mapping for better usability
                 newPositionX = map(dataset.position.x, 475, 925, 0, width);
     	}
+    	
 
         // in this case only the x-position needs to be changed
         newPositionY = map(dataset.position.y, 350, 550, 0, height);
@@ -113,9 +115,26 @@ $(document).ready(function()	{
             if(!trackingPause){
                 if(gestureString == "swipe right" || gestureString == "swipe left"){
                     
-                    swipeState++;
-                    if(swipeState > 4){
-                        swipeState = 0;
+                    count++;
+                    if(count > 2){
+                        swipeState++;
+                        
+                        if(swipeState > 4){
+                            swipeState = 5;
+                        }
+                        
+                        count = 0;
+                                                
+                        if(swipeState == 2){
+                            count++;
+                        }
+
+                        if(swipeState == 3){
+                            count++;
+                            count++;                            
+                        }
+                        
+
                     }
                     
                     
@@ -177,7 +196,7 @@ $(document).ready(function()	{
                 break;
             
             case 1:
-                swipeXVelocityBreakpoint = 3;
+                swipeXVelocityBreakpoint = 2.5;
                 if($("#borderwrapper").hasClass("tracking")){
                     $(".text").html("jetzt musst du etwas schneller sein");
                     $(".border").css({"width" : "5px"});
@@ -185,7 +204,7 @@ $(document).ready(function()	{
                 break;
 
             case 2:
-                swipeXVelocityBreakpoint = 5;
+                swipeXVelocityBreakpoint = 4;
                 if($("#borderwrapper").hasClass("tracking")){
                     $(".text").html("sogar noch schneller …");
                     $(".border").css({"width" : "8px"});
@@ -193,7 +212,7 @@ $(document).ready(function()	{
                 break;
 
             case 3:
-                swipeXVelocityBreakpoint = 7;
+                swipeXVelocityBreakpoint = 5;
                 if($("#borderwrapper").hasClass("tracking")){
                     $(".text").html("jetzt aber richtig, richtig schnell!");
                     $(".border").css({"width" : "10px"});
@@ -205,8 +224,15 @@ $(document).ready(function()	{
                 swipeXVelocityBreakpoint = .8;
                 swipeXDistanceBreakpoint = 75;
                 if($("#borderwrapper").hasClass("tracking")){
-                    $(".text").html("jetzt sollte es sehr einfach gehen.");
+                    $(".text").html("Zur Entspannung etwas einfaches.");
                     $(".border").css({"width" : "2px"});
+                }
+                break;
+
+            case 5:
+                if($("#borderwrapper").hasClass("tracking")){
+                    $(".text").html("Vielen Dank fürs Testen. Nun folgt ein Anwendungsbeispiel.");
+                    $(".border").css({"width" : "0px"});
                 }
                 break;
     	}
