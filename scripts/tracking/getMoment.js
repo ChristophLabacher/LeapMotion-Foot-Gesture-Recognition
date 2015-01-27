@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////
 // GETMOMENT
-// Read the data from the Hand object and put it into a Dataset
+// Read the data from the Hand object and put it into a Moment
 ////////////////////////////////////////////////////////////////////
 
 function getMoment()	{
@@ -13,12 +13,12 @@ function getMoment()	{
 		posZ = Math.round(	leapHand.palmPosition[2]	);
 	}
 	
-	// Create a new Dataset from the current data
-	dataset = new Moment(leapHandIsSet, datasetCounter, time, posX, posY, posZ);
-	datasetCounter++;
+	// Create a new Moment from the current data
+	moment = new Moment(leapHandIsSet, momentCounter, time, posX, posY, posZ);
+	momentCounter++;
 	
-	datasetHistory.push(dataset);
+	momentHistory.push(moment);
 
-	// Delete old Datasets
-	if (datasetHistory.length > 250) { datasetHistory.splice(0,1) };
+	// Delete old Moments
+	if (momentHistory.length > 250) { momentHistory.splice(0,1) };
 }

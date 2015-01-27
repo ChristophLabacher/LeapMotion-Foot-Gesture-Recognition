@@ -58,11 +58,11 @@ SelectionField.prototype.getDimensions = function()	{
 // Check if a selection is being made
 SelectionField.prototype.update = function()	{
 	// Get the distance between the cursor and the bottom of the field
-	var distanceFromBottom = dataset.position.y - this.borderBottom - this.translateCount;
+	var distanceFromBottom = moment.position.y - this.borderBottom - this.translateCount;
 
 	// If the cursor is within the selection-field
-	if (leapHandIsSet && this.active && dataset.position.x > this.borderLeft && dataset.position.x < this.borderRight
-	&& dataset.position.y > this.borderTop && dataset.position.y < this.borderBottom )	{
+	if (leapHandIsSet && this.active && moment.position.x > this.borderLeft && moment.position.x < this.borderRight
+	&& moment.position.y > this.borderTop && moment.position.y < this.borderBottom )	{
 		if (!this.mouseOver)	{
 			hoverSound.play();
 			this.self.addClass("mouseOver");
@@ -70,7 +70,7 @@ SelectionField.prototype.update = function()	{
 			this.mouseOver = true;
 		}		
 	// If the cursor is underneith the selection field
-	} else if (leapHandIsSet && this.active && dataset.position.x > this.borderLeft && dataset.position.x < this.borderRight)	{
+	} else if (leapHandIsSet && this.active && moment.position.x > this.borderLeft && moment.position.x < this.borderRight)	{
 		if (!this.underneith)	{
 			this.underneith = true;
 			this.mouseOver = false;
@@ -131,10 +131,9 @@ SelectionField.prototype.update = function()	{
 	}
 }
 
-SelectionField.prototype.select = function()	{
-	this.action();
+SelectionField.prototype.select = function(){
 	this.selectable = false;
-	
+	this.selected = true;
 	// If it should be stackable
 	if (this.stackable)	{		
 		// Remove selected from all silbings
@@ -168,9 +167,9 @@ SelectionField.prototype.select = function()	{
 	this.resetTranslate();
 }
 
-SelectionField.prototype.unselect = function()	{	
+SelectionField.prototype.unselect = function(){
 	this.selectable = false;
-	
+	this.selected = false;
 	this.self.removeClass("selecting");
 	
 	// IF the selection is stackable remove selected from self and all silbings right of self
@@ -198,7 +197,7 @@ SelectionField.prototype.unselect = function()	{
 SelectionField.prototype.resetTranslate = function()	{	
 	// If the movement was tpo fast to really be translated a lot set a translation corresponding to the velocity
 	if (this.translateCount < this.threshold )	{
-		var pulledDown = constrain(map(Math.round(dataset.velocityXY), 1, 20, 5, this.threshold*2), 5, this.threshold*2);
+		var pulledDown = constrain(map(Math.round(moment.velocityXY), 1, 20, 5, this.threshold*2), 5, this.threshold*2);
 		this.self.css({"transform" : "translateY(" + pulledDown+ "px)", "-webkit-transform" : "translateY(" + pulledDown + "px)", });
 	}
 		

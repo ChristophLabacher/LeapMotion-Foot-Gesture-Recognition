@@ -22,20 +22,20 @@ function printText()	{
 	
 	if (showCurrent)	{
 		text.append("<h2>Current</2>");
-		text.append("<p>x: " + dataset.position.x + "</p>");
-		text.append("<p>y: " + dataset.position.y + "</p>");
-		text.append("<p>distance: " + Math.round(dataset.distanceXY) + "</p>");
-		text.append("<p>velocity: " + Math.round(dataset.velocityXY) + "</p>");
-		text.append("<p>movementX: " + dataset.movementXDirection + "</p>");
-		text.append("<p>movementY: " + dataset.movementYDirection + "</p>");
+		text.append("<p>x: " + moment.position.x + "</p>");
+		text.append("<p>y: " + moment.position.y + "</p>");
+		text.append("<p>distance: " + Math.round(moment.distanceXY) + "</p>");
+		text.append("<p>velocity: " + Math.round(moment.velocityXY) + "</p>");
+		text.append("<p>movementX: " + moment.movementXDirection + "</p>");
+		text.append("<p>movementY: " + moment.movementYDirection + "</p>");
 	}
 	
-	if (showDatasets)	{	
-		text.append("<h2>Datasets</2>");
-		text.append("<p>length: " + datasetHistory.length + "</p>");
-		text.append("<p>first.time: " + datasetHistory[0].time + "</p>");
-		text.append("<p>last.time: " + datasetHistory[datasetHistory.length - 1].time + "</p>");
-		text.append("<p>time.delta: " + (datasetHistory[datasetHistory.length - 1].time - datasetHistory[0].time)  + "</p>");
+	if (showMoments)	{	
+		text.append("<h2>Moments</2>");
+		text.append("<p>length: " + momentHistory.length + "</p>");
+		text.append("<p>first.time: " + momentHistory[0].time + "</p>");
+		text.append("<p>last.time: " + momentHistory[momentHistory.length - 1].time + "</p>");
+		text.append("<p>time.delta: " + (momentHistory[momentHistory.length - 1].time - momentHistory[0].time)  + "</p>");
 	}
 	
 	if (showCurrentMovementX)	{

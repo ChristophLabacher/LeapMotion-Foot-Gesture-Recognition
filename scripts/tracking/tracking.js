@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////
 // readData
-// Read the data from the Hand object and put it into a Dataset
+// Read the data from the Hand object and put it into a Moment
 ////////////////////////////////////////////////////////////////////
 
 // Leap vars
@@ -16,7 +16,7 @@ var showText = true;
 
 var showFrames = false;
 var showCurrent = true;
-var showDatasets = true;
+var showMoments = true;
 var showCurrentMovementX = true;
 var showLastMovementX = true;
 var showCurrentMovementY = false;
@@ -29,11 +29,11 @@ var showGestureVis = true;
 var width;
 var height;
 
-// Datasets
-var dataset;
-var datasetPrev;
-var datasetHistory = [];
-var datasetCounter = 0;
+// Moments
+var moment;
+var momentPrev;
+var momentHistory = [];
+var momentCounter = 0;
 
 // MovementsX
 var movementX;
@@ -72,7 +72,7 @@ function tracking()	{
 	// Get the Hand object from the leap motion
 	getLeapData();
 	
-	// Read the data from the Hand object and put it into a Dataset
+	// Read the data from the Hand object and put it into a Moment
 	getMoment();
 	
 	// Get the current movement in both dimensions
@@ -93,8 +93,8 @@ function tracking()	{
 		$("#demo").trigger("handIsSet");
 	}
 	
-	// Replace the previous dataset with this frames dataset for the next frame
-	datasetPrev = dataset;
+	// Replace the previous moment with this frames moment for the next frame
+	momentPrev = moment;
 };
 
 // Setup the canvas

@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////
 // MOVEMENT
-// Information about a continius movement within varius Datasets
+// Information about a continius movement within varius Moments
 ////////////////////////////////////////////////////////////////////
 
 function Movement(_id, _direction, _startPosition)	{

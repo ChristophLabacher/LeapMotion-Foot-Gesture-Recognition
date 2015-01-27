@@ -16,24 +16,24 @@ function Moment(_tracked, _id, _time, _posX, _posY, _posZ)	{
 	this.movementXDirection;
 	this.movementYDirection;
 	
-	if (datasetHistory.length > 1)	{
+	if (momentHistory.length > 1)	{
 		this.getDistanceXY();		
 		this.getVelocityXY();
 		this.getMovementXYDirection();
 	}
 }
 
-Dataset.prototype.getDistanceXY = function()	{
-	this.distanceXY = dist(this.position.x, this.position.y, datasetPrev.position.x, datasetPrev.position.y);
+Moment.prototype.getDistanceXY = function()	{
+	this.distanceXY = dist(this.position.x, this.position.y, momentPrev.position.x, momentPrev.position.y);
 }
 
-Dataset.prototype.getVelocityXY = function()	{
-	var timeDifference = this.time - datasetPrev.time;
+Moment.prototype.getVelocityXY = function()	{
+	var timeDifference = this.time - momentPrev.time;
 	this.velocityXY = this.distanceXY / timeDifference;}
 
-Dataset.prototype.getMovementXYDirection = function()	{
-	var differenceX = datasetPrev.position.x - this.position.x;
-	var differenceY = datasetPrev.position.y - this.position.y;
+Moment.prototype.getMovementXYDirection = function()	{
+	var differenceX = momentPrev.position.x - this.position.x;
+	var differenceY = momentPrev.position.y - this.position.y;
 	
 	var sensitvity = 4;
 	

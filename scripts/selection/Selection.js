@@ -54,7 +54,7 @@ Selection.prototype.setup = function()	{
 Selection.prototype.update = function()	{
 	if (this.active)	{
 		
-		if (dataset.position.y > height*0.6)	{
+		if (moment.position.y > height*0.6)	{
 			this.autoHideCounter++;
 		}
 		
@@ -62,7 +62,7 @@ Selection.prototype.update = function()	{
 			this.hide();
 		}
 		
-		if (dataset.position.y < height*0.6 && this.hidden == true)	{
+		if (moment.position.y < height*0.6 && this.hidden == true)	{
 			this.show();
 		}
 		
@@ -75,9 +75,13 @@ Selection.prototype.update = function()	{
 
 Selection.prototype.show = function()	{
 	// Check if a selection is being made on any of the fields
-	for (var i = 0; i < this.selectionFields.length; i++)	{
-		this.selectionFields[i].getDimensions();
-	}
+    
+    var saveElement = this;
+    setTimeout(function(){
+    	for (var i = 0; i < saveElement.selectionFields.length; i++)	{
+    		saveElement.selectionFields[i].getDimensions();
+    	}
+	}, 520);
 	
 	getGestures = false;
 	this.self.removeClass("inactive");
