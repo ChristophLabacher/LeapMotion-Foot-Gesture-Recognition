@@ -7,10 +7,13 @@ var selections = [];
 
 var getGestures = true;
 
+
 // Start the rundown
 $(document).ready( function()	{
 	setup();
 	loop();
+
+
 });
 
 function loop()	{
@@ -34,6 +37,13 @@ function setup()	{
 }
 
 // Initialize the sound players
+
+
+soundManager.setup({
+    debugMode : false
+})
+
+
 soundManager.onready(function() {
 	var newSoundID = "hover";
 	var newSoundURL = "/data/sounds/hover.mp3";
