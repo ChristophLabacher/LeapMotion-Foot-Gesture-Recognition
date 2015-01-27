@@ -81,7 +81,7 @@ Selection.prototype.show = function()	{
     	for (var i = 0; i < saveElement.selectionFields.length; i++)	{
     		saveElement.selectionFields[i].getDimensions();
     	}
-	}, 520);
+	}, 550);
 	
 	getGestures = false;
 	this.self.removeClass("inactive");

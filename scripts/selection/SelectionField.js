@@ -65,7 +65,7 @@ SelectionField.prototype.update = function()	{
 
 	// If the cursor is within the selection-field
 	if (leapHandIsSet && this.active && moment.position.x > this.borderLeft && moment.position.x < this.borderRight
-	&& moment.position.y > this.borderTop && moment.position.y < this.borderBottom )	{
+	&& moment.position.y > this.borderTop && distanceFromBottom < 0)	{
 		if (!this.mouseOver)	{
 			hoverSound.play();
 			this.self.addClass("mouseOver");
@@ -134,7 +134,7 @@ SelectionField.prototype.update = function()	{
 
 SelectionField.prototype.select = function(){
 	this.selectable = false;
-	this.selected = true;
+	
 	// If it should be stackable
 	if (this.stackable)	{		
 		// Remove selected from all silbings
@@ -144,7 +144,7 @@ SelectionField.prototype.select = function(){
 		for (var i = 0; i <= this.id; i++)	{
 			if (!$(".selection-" + this.parentId + " .selection-field-" + i).hasClass("spacer"))	{
 				selections[this.parentId].selectionFields[i].selected = true;
-				selections[this.parentId].selectionFields[i].html(selections[this.parentId].selectionFields[i].selectedContent);
+				selections[this.parentId].selectionFields[i].self.html(selections[this.parentId].selectionFields[i].selectedContent);
 				$(".selection-" + this.parentId + " .selection-field-" + i).addClass("selected");	
 			}
 		}
@@ -153,15 +153,17 @@ SelectionField.prototype.select = function(){
 		this.self.removeClass("selecting");
 		this.self.html(this.selectedContent);
 		this.self.addClass("selected");		
+		this.selected = true;
 	// If it is default remove selected from all silbings and add to self
 	} else{
 		$(".selection-" + this.parentId + " .selection-field").removeClass("selected");
 		
-		for (var i = 0; i <= selections[this.parentId].length; i++)	{
+		for (var i = 0; i < selections[this.parentId].selectionFields.length; i++)	{
 			selections[this.parentId].selectionFields[i].selected = false;
-			selections[this.parentId].selectionFields[i].html(selections[this.parentId].selectionFields[i].unselectedContent);
+			selections[this.parentId].selectionFields[i].self.html(selections[this.parentId].selectionFields[i].unselectedContent);
 		}
 		
+		this.selected = true;
 		this.self.html(this.selectedContent);
 		this.self.addClass("selected");		
 	}
@@ -174,18 +176,18 @@ SelectionField.prototype.select = function(){
 
 SelectionField.prototype.unselect = function(){
 	this.selectable = false;
-	this.selected = false;
 	this.self.removeClass("selecting");
 	
 	
 	// IF the selection is stackable remove selected from self and all silbings right of self
 	if (this.stackable)	{
 		$(".selection-" + this.parentId + " .selection-field").removeClass("selected");
+		this.self.html(this.unselectedContent);
 		
 		for (var i = 0; i < this.id; i++)	{
 			if (!$(".selection-" + this.parentId + " .selection-field-" + i).hasClass("spacer"))	{
 				selections[this.parentId].selectionFields[i].selected = false;
-				selections[this.parentId].selectionFields[i].html(selections[this.parentId].selectionFields[i].unselectedContent);
+				selections[this.parentId].selectionFields[i].self.html(selections[this.parentId].selectionFields[i].unselectedContent);
 				$(".selection-" + this.parentId + " .selection-field-" + i).removeClass("selected");	
 			}
 		}
@@ -215,8 +217,10 @@ SelectionField.prototype.resetTranslate = function()	{
 }
 
 SelectionField.prototype.setUnselectedContent = function(_content){
-	this.unselectedContent = _content;
-
+	if (!this.iAmSpacer)	{
+		this.unselectedContent = _content;
+	}
+	
 	if (!this.selected)	{
 		this.self.html(this.unselectedContent);
 	}
@@ -224,10 +228,10 @@ SelectionField.prototype.setUnselectedContent = function(_content){
 
 
 SelectionField.prototype.setSelectedContent = function(_content){
-	this.selectedContent = _content;
-	
-	console.log(this.selectedContent);
-	
+	if (!this.iAmSpacer)	{
+		this.selectedContent = _content;
+	}
+		
 	if (this.selected)	{
 		this.self.html(this.selectedContent);
 	}

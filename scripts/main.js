@@ -32,7 +32,7 @@ function setup()	{
 	setupTracking();
 	
 	var target = $("#demo");
-	selection = new Selection(0, target, false, 30, false, false, 6, false);
+	selection = new Selection(0, target, false, 30, false, false, 4, true);
 	selections.push(selection);
 	
 	for (var i = 0; i < selections[0].selectionFields.length; i++)	{
