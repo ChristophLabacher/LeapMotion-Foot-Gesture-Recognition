@@ -1,7 +1,38 @@
-.img-container	{
-	position: fixed;
+.selection	{
+	z-index: 9;
+	position: absolute;
 	left: 0;
 	top: 0;
+}
+
+.selection-field	{
+	border-color: white;
+	border-width: 2px;
+	background-color: rgba(255,255,255,.3);
+	
+	text-align: center;
+	color: black;
+	font-size: 30px;
+	padding-top: 100px;
+}
+
+.selection-field.spacer	{
+	background-color: transparent;
+}
+
+.selection-field.mouseOver	{
+	background-color: rgba(255,255,255,.6);
+}
+
+.selection-field.selected	{
+	background-color: rgba(255,255,255,.8);
+}
+
+.img-container	{
+	position: absolute;
+	left: 0;
+	top: 0;
+
 	
 	transition: left 0.8s;
 }
@@ -9,6 +40,15 @@
 img	{
 	float: left;
 	background-size: cover;
+	transition: width .5s;
+}
+
+img.favorite	{
+	opacity: .2 !important;
+}
+
+img.delete	{
+	width: 0 !important;
 }
 
 img:nth-child(1)	{
@@ -33,28 +73,4 @@ img:nth-child(5)	{
 
 img:nth-child(6)	{
 	background-image: url(imgs/img6.jpg);
-}
-
-img:nth-child(7)	{
-	background-image: url(imgs/img7.jpg);
-}
-
-img:nth-child(8)	{
-	background-image: url(imgs/img8.jpg);
-}
-
-img:nth-child(9)	{
-	background-image: url(imgs/img9.jpg);
-}
-
-img:nth-child(10)	{
-	background-image: url(imgs/img10.jpg);
-}
-
-img:nth-child(11)	{
-	background-image: url(imgs/img11.jpg);
-}
-
-img:nth-child(12)	{
-	background-image: url(imgs/img12.jpg);
 }

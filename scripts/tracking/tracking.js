@@ -86,7 +86,7 @@ function tracking()	{
 	
 	// Display the collected information	
 	printVisualisation();
-	printText();
+	//printText();
 	
 	
 	if (leapHandIsSet)	{

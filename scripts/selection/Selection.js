@@ -62,7 +62,7 @@ Selection.prototype.update = function()	{
 			this.hide();
 		}
 		
-		if (moment.position.y < height*0.6 && this.hidden == true)	{
+		if (moment.position.y < height*0.5 && this.hidden == true)	{
 			this.show();
 		}
 		

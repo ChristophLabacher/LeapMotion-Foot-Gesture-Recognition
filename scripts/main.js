@@ -12,14 +12,12 @@ var getGestures = true;
 $(document).ready( function()	{
 	setup();
 	loop();
-
-
 });
 
 function loop()	{
 	tracking();
 	
-	//selections[0].update();
+	selections[0].update();
 	
 	$("#demo").trigger("frame");
 	
