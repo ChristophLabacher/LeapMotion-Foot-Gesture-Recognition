@@ -97,9 +97,7 @@ SelectionField.prototype.update = function()	{
 	// The field is selectable, and the cursor is close to the bottom push it down until the threshold is reached
 	if (this.selectable && distanceFromBottom > -this.threshold && distanceFromBottom < 0)	{
 		this.self.addClass("selecting");
-		console.log("DB: " + distanceFromBottom);
 
-		console.log(this.translateCount);
 		var addValue = map(this.translateCount, 0, this.threshold, 1, 0);
 		addValue = constrain(addValue, 0, 1);
 		this.translateCount += addValue;
@@ -216,7 +214,7 @@ SelectionField.prototype.resetTranslate = function()	{
 	this.self.animate({transform: 'translate(0px, 0px)' }, 800, 'easeOutElastic');
 }
 
-SelectionField.prototype.setUnselectedContent(_content)	{
+SelectionField.prototype.setUnselectedContent = function(_content){
 	this.unselectedContent = _content;
 
 	if (!this.selected)	{
@@ -225,8 +223,10 @@ SelectionField.prototype.setUnselectedContent(_content)	{
 }
 
 
-SelectionField.prototype.setSelectedContent(_content)	{
+SelectionField.prototype.setSelectedContent = function(_content){
 	this.selectedContent = _content;
+	
+	console.log(this.selectedContent);
 	
 	if (this.selected)	{
 		this.self.html(this.selectedContent);

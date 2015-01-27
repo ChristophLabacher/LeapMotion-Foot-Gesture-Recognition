@@ -35,7 +35,7 @@ function setup()	{
 	selection = new Selection(0, target, false, 30, false, false, 6, false);
 	selections.push(selection);
 	
-	for (var i = 0; i < selections[0].length; i++)	{
+	for (var i = 0; i < selections[0].selectionFields.length; i++)	{
 		selections[0].selectionFields[i].setUnselectedContent("Unselected");
 		selections[0].selectionFields[i].setSelectedContent("Selected");
 	}
