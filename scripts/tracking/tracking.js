@@ -85,7 +85,7 @@ function tracking()	{
 	}
 	
 	// Display the collected information	
-	printVisualisation();
+	//printVisualisation();
 	//printText();
 	
 	

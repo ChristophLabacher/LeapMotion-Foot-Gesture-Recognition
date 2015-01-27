@@ -1,3 +1,7 @@
+body	{
+	background-color: black;
+}
+
 .selection	{
 	z-index: 9;
 	position: absolute;
@@ -40,16 +44,19 @@
 img	{
 	float: left;
 	background-size: cover;
-	transition: width .5s;
+	transition: all 1s;
+	opacity: 1;
+	background-color: black;
 }
 
 img.favorite	{
-	opacity: .2 !important;
 }
 
 img.delete	{
 	width: 0 !important;
+	opacity: 0;
 }
+/*
 
 img:nth-child(1)	{
 	background-image: url(imgs/img1.jpg);
@@ -74,3 +81,4 @@ img:nth-child(5)	{
 img:nth-child(6)	{
 	background-image: url(imgs/img6.jpg);
 }
+*/
