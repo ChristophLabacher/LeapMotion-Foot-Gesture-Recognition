@@ -9,7 +9,7 @@ function Selection(_id, _target, _autoHide, _autoHideTimeout, _multiSelect, _sta
 	this.self;
 	
 	this.active = true;
-	this.visible = true;
+	this.hidden = true;
 	this.autoHide = _autoHide;
 	this.autoHideCounter = 0;
 	this.autoHideTimeout = _autoHideTimeout;
@@ -55,12 +55,14 @@ Selection.prototype.update = function()	{
 	if (this.active)	{
 		
 		if (dataset.position.y > height*0.6)	{
-			autoHideCounter++;
+			this.autoHideCounter++;
 		}
 		
-		if (autoHideCounter > autoHideTimeout)	{
+		if (this.autoHideCounter > this.autoHideTimeout)	{
 			this.hide();
-		} else	{
+		}
+		
+		if (dataset.position.y < height*0.6 && this.hidden == true)	{
 			this.show();
 		}
 		
@@ -75,12 +77,17 @@ Selection.prototype.show = function()	{
 	// Check if a selection is being made on any of the fields
 	for (var i = 0; i < this.selectionFields.length; i++)	{
 		this.selectionFields[i].getDimensions();
-	}		
+	}
+	
 	getGestures = false;
 	this.self.removeClass("inactive");
+	
+	this.autoHideCounter = 0;
+	this.hidden = false;
 }
 
 Selection.prototype.hide = function()	{
 	getGestures = true;
 	this.self.addClass("inactive");
+	this.hidden = true;
 }

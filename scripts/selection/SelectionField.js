@@ -58,7 +58,7 @@ SelectionField.prototype.getDimensions = function()	{
 // Check if a selection is being made
 SelectionField.prototype.update = function()	{
 	// Get the distance between the cursor and the bottom of the field
-	var distanceFromBottom = dataset.position.y - this.borderBottom ;
+	var distanceFromBottom = dataset.position.y - this.borderBottom - this.translateCount;
 
 	// If the cursor is within the selection-field
 	if (leapHandIsSet && this.active && dataset.position.x > this.borderLeft && dataset.position.x < this.borderRight
