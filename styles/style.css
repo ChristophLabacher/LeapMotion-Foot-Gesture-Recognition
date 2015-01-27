@@ -105,8 +105,8 @@ p {
 
 .selection {
   height: 100%;
-  width: 90%;
-  margin: 0 5%;
+  width: 80%;
+  margin: 0 10%;
   -webkit-transform: translateY(0);
       -ms-transform: translateY(0);
           transform: translateY(0);

@@ -61,6 +61,17 @@ soundManager.onready(function() {
 		autoPlay: false,
 		volume: 100
 	});
+	
+	var newSoundIDUnselect = "Unselect";
+	var newSoundURLUnselect = "/data/sounds/unselect.mp3";
+	
+	unselectSound = soundManager.createSound({
+		id: newSoundURLUnselect,
+		url: newSoundURLUnselect,
+		autoLoad: true,
+		autoPlay: false,
+		volume: 100
+	});
 });
 
 // When the browser is ready start the new run

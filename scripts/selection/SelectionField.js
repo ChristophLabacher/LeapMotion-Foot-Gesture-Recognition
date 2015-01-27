@@ -125,14 +125,14 @@ SelectionField.prototype.update = function()	{
 	// If the field is selectable and the cursor is underneith it select/unselect it.
 	} else if (this.selectable && this.underneith)	{
 		if (!this.selected)	{
-			this.select();
+			this.select(true);
 		} else {
-			this.unselect();
+			this.unselect(true);
 		}
 	}
 }
 
-SelectionField.prototype.select = function(){
+SelectionField.prototype.select = function(_playSound){
 	this.selectable = false;
 	
 	// If it should be stackable
@@ -168,13 +168,16 @@ SelectionField.prototype.select = function(){
 		this.self.addClass("selected");		
 	}
 	
-	selectSound.play();
+	if (_playSound)	{
+		selectSound.play();
+	}
+	
 	this["selectAction"]();
 	
 	this.resetTranslate();
 }
 
-SelectionField.prototype.unselect = function(){
+SelectionField.prototype.unselect = function(_playSound){
 	this.selectable = false;
 	this.self.removeClass("selecting");
 	
@@ -198,7 +201,10 @@ SelectionField.prototype.unselect = function(){
 		this.self.html(this.unselectedContent);
 	}	
 	
-	selectSound.play();
+	if (_playSound)	{
+		unselectSound.play();		
+	}
+	
 	this["unselectAction"]();
 	
 	this.resetTranslate();
