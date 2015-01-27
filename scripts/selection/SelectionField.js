@@ -24,6 +24,9 @@ function SelectionField(_id, _parentId, _target, _active, _selectionFieldCount, 
 	this.selectAction = function()	{};
 	this.unselectAction = function()	{};
 	
+	this.unselectedContent;
+	this.selectedContent;
+	
 	this.setup();
 	this.getDimensions();
 	
@@ -143,12 +146,14 @@ SelectionField.prototype.select = function(){
 		for (var i = 0; i <= this.id; i++)	{
 			if (!$(".selection-" + this.parentId + " .selection-field-" + i).hasClass("spacer"))	{
 				selections[this.parentId].selectionFields[i].selected = true;
+				selections[this.parentId].selectionFields[i].html(selections[this.parentId].selectionFields[i].selectedContent);
 				$(".selection-" + this.parentId + " .selection-field-" + i).addClass("selected");	
 			}
 		}
 	// If it should be multiselectable add selected to self
 	} else if (this.multiselect)	{
 		this.self.removeClass("selecting");
+		this.self.html(this.selectedContent);
 		this.self.addClass("selected");		
 	// If it is default remove selected from all silbings and add to self
 	} else{
@@ -156,8 +161,10 @@ SelectionField.prototype.select = function(){
 		
 		for (var i = 0; i <= selections[this.parentId].length; i++)	{
 			selections[this.parentId].selectionFields[i].selected = false;
+			selections[this.parentId].selectionFields[i].html(selections[this.parentId].selectionFields[i].unselectedContent);
 		}
 		
+		this.self.html(this.selectedContent);
 		this.self.addClass("selected");		
 	}
 	
@@ -172,6 +179,7 @@ SelectionField.prototype.unselect = function(){
 	this.selected = false;
 	this.self.removeClass("selecting");
 	
+	
 	// IF the selection is stackable remove selected from self and all silbings right of self
 	if (this.stackable)	{
 		$(".selection-" + this.parentId + " .selection-field").removeClass("selected");
@@ -179,13 +187,15 @@ SelectionField.prototype.unselect = function(){
 		for (var i = 0; i < this.id; i++)	{
 			if (!$(".selection-" + this.parentId + " .selection-field-" + i).hasClass("spacer"))	{
 				selections[this.parentId].selectionFields[i].selected = false;
-				$(".selection-" + this.parentId + " .selection-field-" + i).addClass("selected");	
+				selections[this.parentId].selectionFields[i].html(selections[this.parentId].selectionFields[i].unselectedContent);
+				$(".selection-" + this.parentId + " .selection-field-" + i).removeClass("selected");	
 			}
 		}
 	// If it is default reomve selected from self.
 	} else {
 		this.selected = false;
 		this.self.removeClass("selected");
+		this.self.html(this.unselectedContent);
 	}	
 	
 	selectSound.play();
@@ -204,4 +214,21 @@ SelectionField.prototype.resetTranslate = function()	{
 	// Snap back
 	this.translateCount = 0;
 	this.self.animate({transform: 'translate(0px, 0px)' }, 800, 'easeOutElastic');
+}
+
+SelectionField.prototype.setUnselectedContent(_content)	{
+	this.unselectedContent = _content;
+
+	if (!this.selected)	{
+		this.self.html(this.unselectedContent);
+	}
+}
+
+
+SelectionField.prototype.setSelectedContent(_content)	{
+	this.selectedContent = _content;
+	
+	if (this.selected)	{
+		this.self.html(this.selectedContent);
+	}
 }
