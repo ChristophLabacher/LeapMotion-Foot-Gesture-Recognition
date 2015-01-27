@@ -12,7 +12,7 @@ var visualisation;
 var visualisationCtx;
 
 // Debugging vars
-var showText = true;
+var showText = false;
 
 var showFrames = false;
 var showCurrent = true;
@@ -23,7 +23,7 @@ var showCurrentMovementY = false;
 var showLastMovementY = false;
 var showGesture = true;
 
-var showGestureVis = true;
+var showGestureVis = false;
 
 // General vars
 var width;
