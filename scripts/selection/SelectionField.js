@@ -41,11 +41,11 @@ SelectionField.prototype.setup = function()	{
 	if (!this.selectionHasSpacer)	{
 		width = 100 / this.selectionFieldCount;
 	} else {
-		width = 94 / (this.selectionFieldCount - 1);
+		width = 85 / (this.selectionFieldCount - 1);
 	}
 	
 	if (this.iAmSpacer)	{
-		width = 6;
+		width = 15;
 	}
 	
 	
