@@ -1,5 +1,5 @@
 body	{
-	background-color: black;
+	background-color: #676767;
 }
 
 .selection	{
@@ -44,7 +44,7 @@ body	{
 img	{
 	float: left;
 	background-size: cover;
-	transition: all 1s;
+	transition: all 0.7s cubic-bezier(0.55, 0.085, 0.68, 0.53);
 	opacity: 1;
 	background-color: black;
 }

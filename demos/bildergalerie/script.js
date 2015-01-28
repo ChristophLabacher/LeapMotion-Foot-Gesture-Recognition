@@ -21,7 +21,7 @@ $(document).ready(function()	{
 		})
 		
 		if (l > - (count-1) * w)	{
-			if (gesture == "swipe right" && leapHandIsSet)	{
+			if (gesture == "swipe left" && leapHandIsSet)	{
 				pos++;
 				l -= w;
 				$(".img-container").offset({left: l});	
@@ -36,7 +36,7 @@ $(document).ready(function()	{
 			}
 		}
 		if (l != 0)	{
-			if (gesture == "swipe left" && leapHandIsSet)	{
+			if (gesture == "swipe right" && leapHandIsSet)	{
 				pos--;
 				l += w;
 				$(".img-container").offset({left: l});		

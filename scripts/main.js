@@ -23,8 +23,15 @@ function loop()	{
 	
 	// When the browser is ready start the new run
 	queue();
-	
+	drawBall();
 	lastFrameTime = time;
+
+	if (!leapHandIsSet)	{
+		$("#not-tracking").addClass("active");
+	} else	{
+		$("#not-tracking").removeClass("active");
+	}
+	
 }
 
 function setup()	{

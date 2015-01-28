@@ -36,3 +36,12 @@ function printVisualisation()	{
 		ctx.fill();
 	}
 }
+
+function drawBall(){
+    
+    $("#ball").css({
+        "-webkit-transform" : "translate(" + moment.position.x + "px, " + moment.position.y + "px)",
+        "transform" : "translate(" + moment.position.x + "px, " + moment.position.y + "px)",
+    });
+
+}
