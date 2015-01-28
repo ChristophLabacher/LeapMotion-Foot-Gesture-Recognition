@@ -3,7 +3,7 @@
 // One selectable slice of a selection
 ////////////////////////////////////////////////////////////////////
 
-function SelectionField(_id, _parentId, _target, _active, _selectionFieldCount, _iAmSpacer, _multipleSelect, _stackable)	{
+function SelectionField(_id, _parentId, _target, _active, _selectionFieldCount, _iAmSpacer, _multipleSelect, _stackable, _hasSpacer)	{
 	this.id = _id;
 	this.parentId = _parentId;
 	this.target = _target;
@@ -17,6 +17,7 @@ function SelectionField(_id, _parentId, _target, _active, _selectionFieldCount, 
 	this.threshold = 40;
 	
 	this.selectionFieldCount = _selectionFieldCount;
+	this.selectionHasSpacer = _hasSpacer;
 	this.iAmSpacer = _iAmSpacer;
 	this.multipleSelect = _multipleSelect;
 	this.stackable = _stackable;
@@ -35,7 +36,19 @@ function SelectionField(_id, _parentId, _target, _active, _selectionFieldCount, 
 
 // Setup the selection field
 SelectionField.prototype.setup = function()	{
-	var width = 100 / this.selectionFieldCount;
+	var width;
+	
+	if (!this.selectionHasSpacer)	{
+		width = 100 / this.selectionFieldCount;
+	} else {
+		width = 94 / (this.selectionFieldCount - 1);
+	}
+	
+	if (this.iAmSpacer)	{
+		width = 6;
+	}
+	
+	
 	var container = $("<div class=\"selection-field selection-field-" + this.id + "\" style=\"width: " + width + "%\"></div>")
 	
 	if (this.iAmSpacer)	{
@@ -243,3 +256,4 @@ SelectionField.prototype.setSelectedContent = function(_content){
 		this.self.html(this.selectedContent);
 	}
 }
+	
