@@ -44,7 +44,7 @@ body	{
 img	{
 	float: left;
 	background-size: cover;
-	transition: all 0.7s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+	transition: all 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
 	opacity: 1;
 	background-color: black;
 }

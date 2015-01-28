@@ -167,14 +167,15 @@ SelectionField.prototype.select = function(_playSound){
 		this.self.html(this.selectedContent);
 		this.self.addClass("selected");		
 	}
+
+	this["selectAction"]();
 	
 	if (_playSound)	{
 		selectSound.play();
+        this.resetTranslate();
 	}
+
 	
-	this["selectAction"]();
-	
-	this.resetTranslate();
 }
 
 SelectionField.prototype.unselect = function(_playSound){
@@ -200,14 +201,14 @@ SelectionField.prototype.unselect = function(_playSound){
 		this.self.removeClass("selected");
 		this.self.html(this.unselectedContent);
 	}	
-	
+
+	this["unselectAction"]();	
+
 	if (_playSound)	{
 		unselectSound.play();		
+        this.resetTranslate();
 	}
-	
-	this["unselectAction"]();
-	
-	this.resetTranslate();
+
 }
 
 SelectionField.prototype.resetTranslate = function()	{	
