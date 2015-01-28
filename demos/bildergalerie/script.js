@@ -20,6 +20,28 @@ $(document).ready(function()	{
 			count++;
 		})
 		
+		if(l == 0 && gesture == "swipe right"){
+            
+            $(".img-container").animate({
+                transform: 'translateX(50px)'
+            }, 100, function(){
+                $(".img-container").animate({
+                    transform: 'translateX(0px)'
+                }, 200);
+            });
+            
+		}else if(l <= - (count-1) * w  && gesture == "swipe left"){
+            
+            $(".img-container").animate({
+                transform: 'translateX(-50px)'
+            }, 100, function(){
+                $(".img-container").animate({
+                    transform: 'translateX(0px)'
+                }, 200);
+            });            
+            
+		}
+		
 		if (l > - (count-1) * w)	{
 			if (gesture == "swipe left" && leapHandIsSet)	{
 				pos++;
@@ -90,7 +112,7 @@ function selectionSetup()	{
 		if (pos != count)	{
 			$(".img-container img.visible:nth-child(" + pos + ")").addClass("delete");	
 			setTimeout(function()	{ $(".img-container img.visible:nth-child(" + pos + ")").remove()}, 500);		
-				
+			selections[0].selectionFields[0].unselect(false);	
 			//	pos++;
 				$(".img-container img.visible").removeClass("active");
 				$(".img-container img.visible:nth-child(" + pos + ")").addClass("active");		
