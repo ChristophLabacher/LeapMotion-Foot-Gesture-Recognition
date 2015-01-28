@@ -56,29 +56,60 @@ img.delete	{
 	width: 0 !important;
 	opacity: 0;
 }
-/*
 
-img:nth-child(1)	{
-	background-image: url(imgs/img1.jpg);
+.icon{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    transition: background 0.3s;
+    -webkit-transition: background 0.3s;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    opacity: 0.75;
 }
 
-img:nth-child(2)	{
-	background-image: url(imgs/img2.jpg);
+.icon.delete{
+    background-image: url(imgs/trash.png);    
 }
 
-img:nth-child(3)	{
-	background-image: url(imgs/img3.jpg);
+
+.icon.fav{
+    background-image: url(imgs/heart.png);
+
+    -webkit-animation: blinkBroken 0.3s; /* Chrome, Safari, Opera */
+    animation: blinkBroken 0.3s;
+
 }
 
-img:nth-child(4)	{
-	background-image: url(imgs/img4.jpg);
+.icon.fav.hearted{
+    background-image: url(imgs/heart_red.png);
+
+    -webkit-animation: blink 0.3s; /* Chrome, Safari, Opera */
+    animation: blink 0.3s;
 }
 
-img:nth-child(5)	{
-	background-image: url(imgs/img5.jpg);
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes blink {
+    from {-webkit-transform: scale(2, 2);}
+    to   {-webkit-transform: scale(1, 1);}
 }
 
-img:nth-child(6)	{
-	background-image: url(imgs/img6.jpg);
+/* Standard syntax */
+@keyframes blink {
+    from {-webkit-transform: scale(2, 2);}
+    to   {-webkit-transform: scale(1, 1);}
 }
-*/
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes blinkBroken {
+    from {-webkit-transform: scale(2, 2); background-image: url(imgs/heart_broken.png);}
+    to   {-webkit-transform: scale(1, 1); background-image: url(imgs/heart.png);
+}
+
+/* Standard syntax */
+@keyframes blinkBroken {
+    from {-webkit-transform: scale(2, 2); background-image: url(imgs/heart_broken.png);}
+    to   {-webkit-transform: scale(1, 1); background-image: url(imgs/heart.png);
+}

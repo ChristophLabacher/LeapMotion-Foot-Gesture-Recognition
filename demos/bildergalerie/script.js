@@ -95,13 +95,13 @@ function selectionSetup()	{
 	selection = new Selection(0, target, false, 30, false, false, 2, true);
 	selections.push(selection);
 	
-	selections[0].selectionFields[0].setUnselectedContent("Favorisieren");
-	selections[0].selectionFields[0].setSelectedContent("Favorisiert");
+	selections[0].selectionFields[0].setUnselectedContent("<div class='icon fav'></div>");
+	selections[0].selectionFields[0].setSelectedContent("<div class='icon fav hearted'></div>");
 	selections[0].selectionFields[0].selectAction = function()	{ $(".img-container img.visible:nth-child(" + pos + ")").addClass("favorite"); }
 	selections[0].selectionFields[0].unselectAction = function()	{ $(".img-container img.visible:nth-child(" + pos + ")").removeClass("favorite"); }
 		
-	selections[0].selectionFields[2].setUnselectedContent("Löschen");
-	selections[0].selectionFields[2].setSelectedContent("Äh, das sollte man gar nicht mehr sehen");
+	selections[0].selectionFields[2].setUnselectedContent("<div class='icon delete'></div>");
+	selections[0].selectionFields[2].setSelectedContent("<div class='icon delete'></div>");
 	selections[0].selectionFields[2].selectAction = function()	{
 		
 		var count = 0;
