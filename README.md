@@ -2,7 +2,9 @@
 
 This library was created by [Nikolas Klein](https://github.com/nikolasklein) and [Christoph Labacher](https://github.com/ChristophLabacher) during an Invention Design course by Prof. Jörg Beck and [Prof. David Oswald](http://www.david-oswald.de) at [Hochschule für Gestaltung Schwäbisch Gmünd](http://www.hfg-gmuend.de). The project included tactile feeback with sound design by Werner Schäfner.
 
-We used a LeapMotion in order to track a foot for an experiment on foot-based interaction. Since the LeapMotion library is optimised for tracking hands and hand gestures we wrote our own library on top of it, in order to have as much control as possible about how gestures were recognized. The libary is written in JavaScript and has a dependency on the LeapMotion-JS- and SoundManager2-Libraries. It is able to track a foot and recognise swipes and includes a reusable selection interface with audio driven tactile feedback. The whole library is thoroughly commented.
+We used a LeapMotion in order to track a foot for an experiment on foot-based interaction. Since the LeapMotion library is optimised for tracking hands and hand gestures we wrote our own library on top of it, in order to have as much control as possible about how gestures were recognized. The library is written in JavaScript and has a dependency on the LeapMotion-JS- and SoundManager2-Libraries. It is able to track a foot and recognise swipes and includes a reusable selection interface with audio driven tactile feedback. The whole library is thoroughly commented.
+
+*Disclaimer: We didn't go into the actual LeapMotion-Library code. Since the LeapMotion is obviously optimised for tracking hands, tracking a foot is not working properly often times. Most times we sticked a cut-out hand to the foot: It looks a bit weird, but it works great!*
 
 ## Structure
 
