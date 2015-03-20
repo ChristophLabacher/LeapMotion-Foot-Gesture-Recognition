@@ -4,6 +4,8 @@ This library was created by [Nikolas Klein](https://github.com/nikolasklein) and
 
 We used a LeapMotion in order to track a foot for an experiment on foot-based interaction. Since the LeapMotion library is optimised for tracking hands and hand gestures we wrote our own library on top of it, in order to have as much control as possible about how gestures were recognized. The library is written in JavaScript and has a dependency on the LeapMotion-JS- and SoundManager2-Libraries. It is able to track a foot and recognise swipes and includes a reusable selection interface with audio driven tactile feedback. The whole library is thoroughly commented.
 
+![](/readme/setting.png)
+
 *Disclaimer: We didn't go into the actual LeapMotion-Library code. Since the LeapMotion is obviously optimised for tracking hands, tracking a foot is not working properly often times. Most times we stuck a cut-out hand to the foot: It looks a bit weird, but it works great!*
 
 ## Structure
@@ -23,3 +25,9 @@ A selection interface is abstracted into an object, so it can be reused. There a
 ### Frontend
 
 Multiple demos are included in various branches: more abstract ones, like a presentation of different visualisations for the position and movement of the foot, an visualisation in order to teach useres how to trigger a swipe and various examples of selections; but also an image gallery, that is controlled by swipes and includes a selection to favorite or delete images.
+
+## Applications
+
+![](/readme/macbook.gif)
+
+We developed several applications to introduce the user to using his feet to controll a digital interface. They can be found in the various brachnes of the project.
