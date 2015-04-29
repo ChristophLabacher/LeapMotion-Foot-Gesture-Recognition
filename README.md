@@ -6,9 +6,26 @@ We used a LeapMotion in order to track a foot for an experiment on foot-based in
 
 ![](/readme/setting.png)
 
-*Disclaimer: We didn't go into the actual LeapMotion-Library code. Since the LeapMotion is obviously optimised for tracking hands, tracking a foot is not working properly often times. Most times we stuck a cut-out hand to the foot: It looks a bit weird, but it works great!*
+## Results
+
+We wrote two high-length Medium articles about our process and results.
+
+### [Part 1](https://medium.com/@ChristophLabacher/feet-a-study-on-foot-based-interaction-part-1-c3f8e7b436ba):
+- Historical application of foot-based interaction
+- Possible contexts of use in a modern, digital space
+- Research
+
+### [Part 2](https://medium.com/@ChristophLabacher/feet-a-study-on-foot-based-interaction-part-2-8bc684a07a48):
+- Defining the focus of our development
+- Technology
+- User-centered introduction
+- Observations
+- A look ahead
+- Closing thoughts
 
 ## Structure
+
+*Disclaimer: We didn't go into the actual LeapMotion-Library code. Since the LeapMotion is obviously optimised for tracking hands, tracking a foot is not working properly often times. Most times we stuck a cut-out hand to the foot: It looks a bit weird, but it works great!*
 
 ### Backend
 
